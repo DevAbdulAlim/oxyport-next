@@ -1,8 +1,6 @@
 "use client";
-
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { read } from "fs";
-import { useEffect, useState } from "react";
 
 type User = {
   id: number;
@@ -14,7 +12,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const apiUrl = "users";
+    const apiUrl = "/api/users";
 
     axios
       .get<User[]>(apiUrl)
@@ -26,6 +24,7 @@ export default function Home() {
       .catch((error) => {
         console.error("Error fetching users:", error);
         setLoading(false);
+        // You can set an error state here for better error handling
       });
   }, []);
 
