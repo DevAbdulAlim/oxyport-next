@@ -1,6 +1,3 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -16,36 +13,24 @@ type Product = {
   createdAt: number;
 };
 
-export default function Page() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+async function getData() {
+  const res = await fetch("http://localhost:5000/api/products");
 
-  useEffect(() => {
-    const apiUrl = "/api/products";
-
-    axios
-      .get<Product[]>(apiUrl)
-      .then((response) => {
-        setProducts(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching users:", error);
-        setLoading(false);
-        // You can set an error state here for better error handling
-      });
-  }, []);
-
-  if (loading) {
-    return <p>Loading Products...</p>;
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
   }
 
+  return res.json();
+}
+
+export default async function Page() {
+  const products = await getData();
   return (
     <section className="py-8">
       <h3 className="text-center text-4xl">Featured Products</h3>
       <div className="container mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map((item) => (
+          {products.map((item: Product) => (
             <div className="shadow-md" key={item.id}>
               <div className="p-4">
                 {/* <Image
