@@ -2,14 +2,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export default function Navbar() {
+export default function MobileNav() {
   const pathname = usePathname();
+
   return (
-    <nav className="flex justify-between">
-      <div>
-        <Link href="/">LoGo</Link>
-      </div>
-      <ul className="flex space-x-4">
+    <nav className="bg-gray-900 py-4 shadow-lg fixed bottom-0 z-40 w-full md:hidden">
+      <ul className="flex justify-evenly w-full space-x-4 text-blue-50">
         <li>
           <Link
             className={`${pathname === "/" ? "text-blue-200" : ""}`}
