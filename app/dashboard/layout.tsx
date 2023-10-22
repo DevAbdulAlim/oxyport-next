@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "../globals.css";
+import SideNav from "./components/SideNav";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -16,16 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header>
-          <ul className="flex">
-            <li>
-              <Link href="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-              <Link href="/dashboard">Categories</Link>
-            </li>
-          </ul>
+          <SideNav />
         </header>
-        <main>{children}</main>
+        <main className="ms-56 p-4">{children}</main>
         <footer></footer>
       </body>
     </html>
