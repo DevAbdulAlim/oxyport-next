@@ -22,7 +22,7 @@ export default function RootLayout({
           </div>
         </header>
         <main className="grow">{children}</main>
-        <footer className="py-16 bg-blue-950 text-blue-50 text-center">
+        <footer className="py-16 bg-blue-900 text-blue-50 text-center">
           <p>&copy; 2023 Abdul Alim | All Rights Reserved</p>
         </footer>
         <MobileNav />

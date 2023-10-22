@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FcPaid } from "react-icons/fc";
 
 export default function Cart() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,7 +27,12 @@ export default function Cart() {
         </ul>
       </div>
 
-      <button onClick={toggleMenu}>Cart</button>
+      <button onClick={toggleMenu} className="flex mr-2">
+        <span className="text-2xl mr-1">
+          <FcPaid />
+        </span>
+        Cart
+      </button>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { FcGrid } from "react-icons/fc";
 
 const categories = [
   "Category 1",
@@ -25,12 +26,15 @@ export default function CategoryDropdown() {
         <button
           type="button"
           id="options-menu"
-          className="hover:bg-blue-900 p-2 rounded-full focus:bg-blue-800"
+          className="hover:bg-blue-900 p-2 flex rounded-full focus:bg-blue-800"
           onClick={toggleDropdown}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
         >
-          Categories
+          <span className="text-2xl">
+            <FcGrid />
+          </span>
+          <span>Categories</span>
         </button>
       </div>
 
