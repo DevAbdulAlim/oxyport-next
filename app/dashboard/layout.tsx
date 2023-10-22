@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import "../globals.css";
-import SideNav from "./components/SideNav";
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -17,9 +17,9 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <header>
-          <SideNav />
+          <Navbar />
         </header>
-        <main className="ms-56 p-4">{children}</main>
+        <main className="md:ms-56 p-4">{children}</main>
         <footer></footer>
       </body>
     </html>
