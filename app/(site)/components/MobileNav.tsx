@@ -26,10 +26,10 @@ export default function MobileNav() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/about" ? "text-blue-200" : ""}`}
-            href="/about"
+            className={`${pathname === "/categories" ? "text-blue-200" : ""}`}
+            href="/categories"
           >
-            About Us
+            Categories
           </Link>
         </li>
         <li>
@@ -37,7 +37,15 @@ export default function MobileNav() {
             className={`${pathname === "/contact" ? "text-blue-200" : ""}`}
             href="/contact"
           >
-            Contact Us
+            Cart
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`${pathname === "/contact" ? "text-blue-200" : ""}`}
+            href="/contact"
+          >
+            Profile
           </Link>
         </li>
       </ul>

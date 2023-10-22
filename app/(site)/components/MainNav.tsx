@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cart from "./Cart";
+import CategoryDropdown from "./CategoryDropdown";
 
 export default function MainNav() {
   const pathname = usePathname();
@@ -11,42 +12,21 @@ export default function MainNav() {
         LoGo
       </Link>
 
-      <ul className="hidden md:flex space-x-4">
-        <li>
-          <Link
-            className={`${pathname === "/" ? "text-blue-200" : ""}`}
-            href="/"
-          >
-            Home
-          </Link>
-        </li>
-        <li>
-          <Link
-            className={`${pathname === "/products" ? "text-blue-200" : ""}`}
-            href="/products"
-          >
-            Products
-          </Link>
-        </li>
-        <li>
-          <Link
-            className={`${pathname === "/about" ? "text-blue-200" : ""}`}
-            href="/about"
-          >
-            About Us
-          </Link>
-        </li>
-        <li>
-          <Link
-            className={`${pathname === "/contact" ? "text-blue-200" : ""}`}
-            href="/contact"
-          >
-            Contact Us
-          </Link>
-        </li>
-      </ul>
+      <CategoryDropdown />
+
+      <form action="" className="grow mx-8 flex">
+        <input
+          className="h-full w-full rounded-full p-2"
+          type="text"
+          name="search"
+          placeholder="Search"
+        />
+        <button type="submit">Search</button>
+      </form>
 
       <Cart />
+
+      <button className="hidden md:block">Profile</button>
     </nav>
   );
 }

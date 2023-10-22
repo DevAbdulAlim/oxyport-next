@@ -11,7 +11,7 @@ export default function Cart() {
 
   return (
     // Off-canvas menu container
-    <div className="m-2">
+    <div className="m-2 hidden md:block">
       <div
         className={`fixed right-0 w-full sm:w-96 bg-blue-900 p-4 inset-y-0 ${
           menuOpen ? "" : "translate-x-full"
