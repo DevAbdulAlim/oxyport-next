@@ -52,7 +52,7 @@ export default async function Page() {
                 <p>{item.inStock}</p>
                 <p className="mb-4">{item.rating}</p>
                 <Link
-                  className="bg-blue-500 text-white py-2 px-8"
+                  className="bg-blue-800 text-white py-2 px-8"
                   href={`/products/${item.id}`}
                 >
                   Buy Now

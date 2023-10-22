@@ -21,7 +21,7 @@ export default function CategoryDropdown() {
   };
 
   return (
-    <div className="relative ">
+    <div className="relative hidden md:block">
       <div>
         <button
           type="button"

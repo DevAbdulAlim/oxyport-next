@@ -3,14 +3,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cart from "./Cart";
 import CategoryDropdown from "./CategoryDropdown";
-import { FcSearch } from "react-icons/fc";
+import { FcSearch, FcManager, FcDoughnutChart } from "react-icons/fc";
 
 export default function MainNav() {
   const pathname = usePathname();
   return (
     <nav className="flex justify-between">
-      <Link className="m-2" href="/">
-        LoGo
+      <Link className="m-2 flex" href="/">
+        <span className="text-2xl">
+          <FcDoughnutChart />
+        </span>
+        Oxyport
       </Link>
 
       <CategoryDropdown />
@@ -32,7 +35,12 @@ export default function MainNav() {
 
       <Cart />
 
-      <button className="hidden md:block">Profile</button>
+      <button className="hidden m-2 md:flex">
+        <span className="text-2xl mr-1">
+          <FcManager />
+        </span>
+        Profile
+      </button>
     </nav>
   );
 }
