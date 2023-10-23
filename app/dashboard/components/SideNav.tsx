@@ -24,7 +24,7 @@ export function SideNav({ isOpen, toggleOpen }: SideNavProps) {
     <div
       className={`fixed left-0 top-0 h-full w-56 bg-blue-950 text-blue-50 ${
         isOpen ? "shadow-2xl" : "-translate-x-full"
-      } transition-all duration-300 ease-in-out md:-translate-x-0 z-30 md:shadow-none `}
+      } transition-all duration-300 ease-in-out md:-translate-x-0 z-30  md:shadow-none `}
     >
       <div className="flex p-4 justify-between mb-2">
         <Link href="/dashboard" className="flex text-2xl">

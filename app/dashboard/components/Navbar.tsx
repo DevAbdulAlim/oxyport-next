@@ -15,7 +15,7 @@ export default function Navbar() {
     <>
       <SideNav isOpen={isOpen} toggleOpen={toggleOpen} />
 
-      <nav className="md:ms-56 bg-blue-100 px-2 flex py-2 justify-between">
+      <nav className="md:ms-56 bg-blue-100 px-2 flex py-2 shadow-md justify-between">
         <button className="md:hidden m-2 text-2xl" onClick={toggleOpen}>
           <FcMenu />
         </button>

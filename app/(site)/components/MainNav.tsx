@@ -9,8 +9,8 @@ export default function MainNav() {
   const pathname = usePathname();
   return (
     <nav className="flex justify-between">
-      <Link className="m-2 flex" href="/">
-        <span className="text-2xl">
+      <Link className="m-1 text-xl flex" href="/">
+        <span className="text-3xl">
           <FcDoughnutChart />
         </span>
         Oxyport
