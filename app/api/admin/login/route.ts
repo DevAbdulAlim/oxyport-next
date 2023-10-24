@@ -22,10 +22,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { message: "Invalid email or password" },
-        { status: 401 }
-      );
+      return NextResponse.json({ message: "User Not Found" }, { status: 401 });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
