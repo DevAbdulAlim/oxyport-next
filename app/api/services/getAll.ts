@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { sendResponse } from "../utils/sendResponse";
+import { sendJsonResponse } from "../utils/sendJsonResponse";
 
 const prisma = new PrismaClient();
 
@@ -13,14 +13,16 @@ const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
   user: () => prisma.user.findMany(),
 };
 
-export async function getAll(item: ValidModelNames) {
+export async function getAll(item: ValidModelNames, client: string = "api") {
   try {
     // Retrieve the appropriate 'findManay' method based on 'item'
     const findMany = modelMethods[item];
 
     // Check if the 'item' is not found in 'modelMethods'
     if (!findMany) {
-      return sendResponse(404, false, { message: `${item} table not found` });
+      return sendJsonResponse(404, false, {
+        message: `${item} table not found`,
+      });
     }
 
     // Find and return the unique item using the selected 'findManay' method
@@ -28,15 +30,20 @@ export async function getAll(item: ValidModelNames) {
 
     // Check if the item is not found
     if (!foundItems) {
-      return sendResponse(404, false, { message: `${item} not found` });
+      return sendJsonResponse(404, false, { message: `${item} not found` });
+    }
+
+    // Check if the request client is web
+    if (client === "web") {
+      return foundItems;
     }
 
     // Send a successful response with the found item
-    return sendResponse(200, true, foundItems);
+    return sendJsonResponse(200, true, foundItems);
   } catch (error) {
     // Log and handle any errors that occur
     console.log(error);
-    return sendResponse(500, false, { message: "Internal Server Error" });
+    return sendJsonResponse(500, false, { message: "Internal Server Error" });
   } finally {
     // Ensure proper disconnection from the Prisma client
     await prisma.$disconnect();

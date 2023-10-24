@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { sendResponse } from "../utils/sendResponse";
+import { sendJsonResponse } from "../utils/sendJsonResponse";
 
 const prisma = new PrismaClient();
 
@@ -13,11 +13,15 @@ const modelMethods: Record<ValidModelNames, (args: any) => Promise<any>> = {
   user: (args) => prisma.user.delete(args),
 };
 
-export async function removeOne(item: ValidModelNames, id: string) {
+export async function removeOne(
+  item: ValidModelNames,
+  id: string,
+  client: string = "api"
+) {
   try {
     // Check if the 'id' is missing
     if (!id) {
-      return sendResponse(400, false, { message: `${item} ID is missing` });
+      return sendJsonResponse(400, false, { message: `${item} ID is missing` });
     }
 
     // Retrieve the appropriate 'findUnique' method based on 'item'
@@ -25,7 +29,9 @@ export async function removeOne(item: ValidModelNames, id: string) {
 
     // Check if the 'item' is not found in 'modelMethods'
     if (!deleteItem) {
-      return sendResponse(404, false, { message: `${item} table not found` });
+      return sendJsonResponse(404, false, {
+        message: `${item} table not found`,
+      });
     }
 
     // Find and return the unique item using the selected 'findUnique' method
@@ -37,15 +43,20 @@ export async function removeOne(item: ValidModelNames, id: string) {
 
     // Check if the item is not found
     if (!deletedItem) {
-      return sendResponse(404, false, { message: `${item} not found` });
+      return sendJsonResponse(404, false, { message: `${item} not found` });
+    }
+
+    // Check if the request client is web
+    if (client === "web") {
+      return deletedItem;
     }
 
     // Send a successful response with the found item
-    return sendResponse(200, true, deletedItem);
+    return sendJsonResponse(200, true, deletedItem);
   } catch (error) {
     // Log and handle any errors that occur
     console.log(error);
-    return sendResponse(500, false, { message: "Internal Server Error" });
+    return sendJsonResponse(500, false, { message: "Internal Server Error" });
   } finally {
     // Ensure proper disconnection from the Prisma client
     await prisma.$disconnect();

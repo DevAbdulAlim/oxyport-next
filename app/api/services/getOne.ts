@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { sendResponse } from "../utils/sendResponse";
+import { sendJsonResponse } from "../utils/sendJsonResponse";
 
 const prisma = new PrismaClient();
 
@@ -17,7 +17,7 @@ export async function getOne(item: ValidModelNames, id: string) {
   try {
     // Check if the 'id' is missing
     if (!id) {
-      return sendResponse(400, false, { message: `${item} ID is missing` });
+      return sendJsonResponse(400, false, { message: `${item} ID is missing` });
     }
 
     // Retrieve the appropriate 'findUnique' method based on 'item'
@@ -25,7 +25,9 @@ export async function getOne(item: ValidModelNames, id: string) {
 
     // Check if the 'item' is not found in 'modelMethods'
     if (!findUnique) {
-      return sendResponse(404, false, { message: `${item} table not found` });
+      return sendJsonResponse(404, false, {
+        message: `${item} table not found`,
+      });
     }
 
     // Find and return the unique item using the selected 'findUnique' method
@@ -37,15 +39,15 @@ export async function getOne(item: ValidModelNames, id: string) {
 
     // Check if the item is not found
     if (!foundItem) {
-      return sendResponse(404, false, { message: `${item} not found` });
+      return sendJsonResponse(404, false, { message: `${item} not found` });
     }
 
     // Send a successful response with the found item
-    return sendResponse(200, true, foundItem);
+    return sendJsonResponse(200, true, foundItem);
   } catch (error) {
     // Log and handle any errors that occur
     console.log(error);
-    return sendResponse(500, false, { message: "Internal Server Error" });
+    return sendJsonResponse(500, false, { message: "Internal Server Error" });
   } finally {
     // Ensure proper disconnection from the Prisma client
     await prisma.$disconnect();

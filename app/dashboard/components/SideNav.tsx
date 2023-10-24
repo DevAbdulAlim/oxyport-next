@@ -64,7 +64,7 @@ export function SideNav({ isOpen, toggleOpen }: SideNavProps) {
         <li className="mb-1 hover:bg-blue-900">
           <Link
             className="hover:bg-blue-900 p-2 rounded flex w-full"
-            href="categories"
+            href="/dashboard/categories"
           >
             <span className="text-2xl mr-1">
               <FcGrid />

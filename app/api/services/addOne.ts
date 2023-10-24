@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { sendResponse } from "../utils/sendResponse";
+import { sendJsonResponse } from "../utils/sendJsonResponse";
 
 const prisma = new PrismaClient();
 
@@ -24,15 +24,15 @@ export async function addOne(item: ValidModelNames, data: Record<string, any>) {
 
     // Check if the item is not found
     if (!newData) {
-      return sendResponse(404, false, { message: `Adding ${item} failed` });
+      return sendJsonResponse(404, false, { message: `Adding ${item} failed` });
     }
 
     // Send a successful response with the found item
-    return sendResponse(200, true, newData);
+    return sendJsonResponse(200, true, newData);
   } catch (error) {
     // Log and handle any errors that occur
     console.log(error);
-    return sendResponse(500, false, { message: "Internal Server Error" });
+    return sendJsonResponse(500, false, { message: "Internal Server Error" });
   } finally {
     // Ensure proper disconnection from the Prisma client
     await prisma.$disconnect();
