@@ -1,4 +1,3 @@
-import { addOne } from "@/app/api/services/addOne";
 import { editOne } from "@/app/api/services/editOne";
 import { getOne, ValidModelNames } from "@/app/api/services/getOne";
 import { removeOne } from "@/app/api/services/removeOne";
@@ -17,15 +16,6 @@ export async function GET(
 
   // Call the 'getOne' function to retrieve the item based on the model and ID
   return getOne(model, id);
-}
-
-// ADD CATEGORY
-export async function POST(req: NextRequest) {
-  // Retrieve data from the request
-  const data = await req.json();
-
-  // Call the 'addOne' function to retrieve the item based on the model and ID
-  return addOne(model, data);
 }
 
 // UPDATE CATEGORY

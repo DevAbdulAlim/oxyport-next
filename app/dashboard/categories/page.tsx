@@ -8,11 +8,7 @@ const client = "web";
 
 // Function to fetch data
 export default async function getData() {
-  const data = await getAll(model, client);
+  const data = await getAll(model);
 
-  return (
-    <>
-      <ListData data={data} />
-    </>
-  );
+  return <>{/* <ListData data={data} /> */}</>;
 }

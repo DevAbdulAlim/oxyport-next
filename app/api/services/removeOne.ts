@@ -13,11 +13,7 @@ const modelMethods: Record<ValidModelNames, (args: any) => Promise<any>> = {
   user: (args) => prisma.user.delete(args),
 };
 
-export async function removeOne(
-  item: ValidModelNames,
-  id: string,
-  client: string = "api"
-) {
+export async function removeOne(item: ValidModelNames, id: string) {
   try {
     // Check if the 'id' is missing
     if (!id) {
@@ -44,11 +40,6 @@ export async function removeOne(
     // Check if the item is not found
     if (!deletedItem) {
       return sendJsonResponse(404, false, { message: `${item} not found` });
-    }
-
-    // Check if the request client is web
-    if (client === "web") {
-      return deletedItem;
     }
 
     // Send a successful response with the found item

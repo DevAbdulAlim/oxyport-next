@@ -13,7 +13,7 @@ const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
   user: () => prisma.user.findMany(),
 };
 
-export async function getAll(item: ValidModelNames, client: string = "api") {
+export async function getAll(item: ValidModelNames) {
   try {
     // Retrieve the appropriate 'findManay' method based on 'item'
     const findMany = modelMethods[item];
@@ -31,11 +31,6 @@ export async function getAll(item: ValidModelNames, client: string = "api") {
     // Check if the item is not found
     if (!foundItems) {
       return sendJsonResponse(404, false, { message: `${item} not found` });
-    }
-
-    // Check if the request client is web
-    if (client === "web") {
-      return foundItems;
     }
 
     // Send a successful response with the found item
