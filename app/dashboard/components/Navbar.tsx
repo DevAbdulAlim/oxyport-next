@@ -16,7 +16,11 @@ export default function Navbar() {
       <SideNav isOpen={isOpen} toggleOpen={toggleOpen} />
 
       <nav className="md:ms-56 bg-blue-100 px-2 flex py-2 shadow-md justify-between">
-        <button className="md:hidden m-2 text-2xl" onClick={toggleOpen}>
+        <button
+          className="md:hidden m-2 text-2xl"
+          onClick={toggleOpen}
+          aria-label="Menu"
+        >
           <FcMenu />
         </button>
 
@@ -30,6 +34,7 @@ export default function Navbar() {
           <button
             className="absolute  right-2 text-black top-2 text-2xl"
             type="submit"
+            aria-label="Search"
           >
             <FcSearch />
           </button>
