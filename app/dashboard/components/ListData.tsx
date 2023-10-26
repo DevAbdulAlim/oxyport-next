@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { fetchAll } from "../services/fetchAll";
+import { getAll } from "../services/getAll";
 
 type ItemType = {
   [key: string]: any;
@@ -15,8 +15,8 @@ export function ListData({ data, model }: ListDataProps) {
   const [items, setItems] = useState<ItemType[]>(data);
 
   const fetchData = async (modelName: string) => {
-    const fetchDataItem = await fetchAll(modelName);
-    setItems(fetchDataItem.data);
+    const fetchedData = await getAll(modelName);
+    setItems(fetchedData.data);
   };
 
   const handleDelete = async (itemId: number) => {

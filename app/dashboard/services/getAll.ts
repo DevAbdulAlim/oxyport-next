@@ -1,6 +1,8 @@
-export const fetchAll = async (model: string) => {
+export const getAll = async (model: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/admin/${model}`);
+    const response = await fetch(`http://localhost:3000/api/admin/${model}`, {
+      next: { revalidate: 0 },
+    });
 
     if (!response.ok) {
       // Handle non-200 HTTP status codes
