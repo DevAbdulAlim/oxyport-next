@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { getAll } from "../services/getAll";
+import { removeOne } from "../services/removeOne";
 
 type ItemType = {
   [key: string]: any;
@@ -14,28 +15,10 @@ type ListDataProps = {
 export function ListData({ data, model }: ListDataProps) {
   const [items, setItems] = useState<ItemType[]>(data);
 
-  const fetchData = async (modelName: string) => {
-    const fetchedData = await getAll(modelName);
+  const handleDelete = async (model: string, item: number) => {
+    await removeOne(model, item);
+    const fetchedData = await getAll(model);
     setItems(fetchedData.data);
-  };
-
-  const handleDelete = async (itemId: number) => {
-    try {
-      const response = await fetch(
-        `http://localhost:3000/api/admin/${model}/${itemId}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (response.ok) {
-        fetchData(model); // Update the state with the new data
-      } else {
-        console.error("Failed to delete item");
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
 
   useEffect(() => {}, [items]);
@@ -69,10 +52,7 @@ export function ListData({ data, model }: ListDataProps) {
                     </td>
                   ))}
                   <td>
-                    <button
-                      className="text-green-500 text-center"
-                      onClick={() => handleDelete(item.id)}
-                    >
+                    <button className="text-green-500 text-center">
                       Update
                     </button>
                   </td>
@@ -80,7 +60,7 @@ export function ListData({ data, model }: ListDataProps) {
                   <td>
                     <button
                       className="text-red-500 text-center"
-                      onClick={() => handleDelete(item.id)}
+                      onClick={() => handleDelete(model, item.id)}
                     >
                       Delete
                     </button>
