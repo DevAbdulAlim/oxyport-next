@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   FcPrevious,
   FcHome,
@@ -17,14 +17,16 @@ import {
 type SideNavProps = {
   isOpen: boolean;
   toggleOpen: () => void;
+  sideNavRef: React.RefObject<HTMLDivElement>;
 };
 
-export function SideNav({ isOpen, toggleOpen }: SideNavProps) {
+export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
   return (
     <div
       className={`fixed left-0 top-0 h-full w-56 bg-blue-950 text-blue-50 ${
         isOpen ? "shadow-2xl" : "-translate-x-full"
       } transition-all duration-300 ease-in-out md:-translate-x-0 z-30  md:shadow-none `}
+      ref={sideNavRef}
     >
       <div className="flex p-4 justify-between mb-2">
         <Link href="/dashboard" className="flex text-2xl">

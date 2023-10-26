@@ -1,6 +1,8 @@
 "use client";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { addOne } from "../../services/addOne";
+import { useState } from "react";
 
 const validateSchema = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -10,16 +12,37 @@ const initialValues = {
   name: "",
 };
 
-const onSubmit = (values: typeof initialValues) => {
-  console.log("Form values:", values);
-};
-
 export default function Page() {
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [formData, setFormData] = useState(initialValues);
+
+  const onSubmit = async (values: typeof initialValues) => {
+    try {
+      await addOne("categories", values);
+      setSuccessMessage("Added Successfully");
+      setIsSubmitted(true);
+      setFormData(initialValues);
+
+      setTimeout(() => {
+        setSuccessMessage("");
+        setIsSubmitted(false);
+      }, 1000);
+    } catch (error) {
+      console.error("Error:", error);
+      setSuccessMessage("Failed to submit");
+      setIsSubmitted(false);
+    }
+  };
+
   return (
     <section>
       <h1>Add Category</h1>
+      {isSubmitted && (
+        <p className="bg-green-500 text-white inline-block">{successMessage}</p>
+      )}
       <Formik
-        initialValues={initialValues}
+        initialValues={formData}
         validationSchema={validateSchema}
         onSubmit={onSubmit}
       >

@@ -1,25 +1,55 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SideNav } from "./SideNav";
 import Link from "next/link";
 import { FcDoughnutChart, FcSearch, FcManager, FcMenu } from "react-icons/fc";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const sideNavRef = useRef<HTMLDivElement | null>(null);
+  const navButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const toggleOpen = () => {
     setIsOpen(!isOpen);
   };
 
+  const toggleClose = () => {
+    setIsOpen(false);
+  };
+
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      if (sideNavRef.current) {
+        if (
+          navButtonRef.current &&
+          !navButtonRef.current.contains(e.target as Node)
+        ) {
+          toggleClose();
+        }
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
+
   return (
     <>
-      <SideNav isOpen={isOpen} toggleOpen={toggleOpen} />
+      <SideNav
+        isOpen={isOpen}
+        toggleOpen={toggleOpen}
+        sideNavRef={sideNavRef}
+      />
 
       <nav className="md:ms-56 bg-blue-100 px-2 flex py-2 shadow-md justify-between">
         <button
           className="md:hidden m-2 text-2xl"
           onClick={toggleOpen}
           aria-label="Menu"
+          ref={navButtonRef}
         >
           <FcMenu />
         </button>

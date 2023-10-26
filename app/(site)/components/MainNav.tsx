@@ -28,6 +28,7 @@ export default function MainNav() {
         <button
           className="absolute  right-2 text-black top-2 text-2xl"
           type="submit"
+          aria-label="Search"
         >
           <FcSearch />
         </button>
