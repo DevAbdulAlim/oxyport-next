@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 const prisma = new PrismaClient();
 const SECRET_KEY = process.env.NEXT_PUBLIC_JWT_SECRET;
@@ -36,6 +37,11 @@ export async function POST(req: NextRequest) {
 
     const token = jwt.sign({ userId: user.id }, SECRET_KEY, {
       expiresIn: "1h",
+    });
+
+    cookies().set("token", token, {
+      maxAge: 3600,
+      httpOnly: true,
     });
 
     return NextResponse.json({ token }, { status: 200 });

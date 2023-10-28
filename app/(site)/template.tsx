@@ -1,3 +1,3 @@
 export default function template({ children }: { children: React.ReactNode }) {
-  return <div>{children}</div>;
+  return <div className="bg-green-500">{children}</div>;
 }
