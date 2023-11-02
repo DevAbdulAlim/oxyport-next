@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { getAll } from "../services/getAll";
 import { removeOne } from "../services/removeOne";
+import Link from "next/link";
 
 type ItemType = {
   [key: string]: any;
@@ -26,20 +27,18 @@ export function ListData({ data, model }: ListDataProps) {
   const tableHeaders = Object.keys(items[0]);
 
   return (
-    <section>
-      <div className="container mx-auto">
-        <h1 className="text-4xl">Product List</h1>
-        <div className="my-4 shadow-md overflow-auto p-4 md:p-8">
+    <>
+      <div className="my-4  overflow-auto">
           <table className="min-w-full border">
             <thead className="text-left bg-blue-100 text-blue-950">
               <tr className="border hover:bg-blue-50">
                 {tableHeaders.map((header, index) => (
                   <th className="py-2 px-4" key={index}>
-                    {header}
+                    {header.toUpperCase()}
                   </th>
                 ))}
                 <th className="text-center" colSpan={2}>
-                  Actions
+                  ACTIONS
                 </th>
               </tr>
             </thead>
@@ -52,9 +51,9 @@ export function ListData({ data, model }: ListDataProps) {
                     </td>
                   ))}
                   <td>
-                    <button className="text-green-500 text-center">
-                      Update
-                    </button>
+                    <Link href={`${model}/edit/${item.id}`} className="text-green-500 text-center">
+                      Edit
+                    </Link>
                   </td>
 
                   <td>
@@ -78,7 +77,6 @@ export function ListData({ data, model }: ListDataProps) {
             <li className="py-2 px-4 border">3</li>
           </ul>
         </nav>
-      </div>
-    </section>
+    </>    
   );
 }

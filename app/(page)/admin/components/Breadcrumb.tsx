@@ -9,11 +9,11 @@ const Breadcrumb = () => {
     console.log(pathSegments)
 
     return (
-        <nav className="flex" aria-label="Breadcrumb">
+        <nav className="flex text-blue-500" aria-label="Breadcrumb">
             {pathSegments.map((segment, index) => (
                 <>
-                 <a href={'/' + pathSegments.slice(0, index + 1).join('/')} key={index}>{segment}</a>
-                {index < pathSegments.length - 1 && <span>/</span>}
+                 <a href={'/' + pathSegments.slice(0, index + 1).join('/')} className={`hover:underline  ${index < pathSegments.length - 1 && 'text-gray-400'}`} key={index}>{segment}</a>
+                {index < pathSegments.length - 1 && <span className="mx-2 text-gray-400">&gt;</span>}
                 </>
                
             ))}
