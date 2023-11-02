@@ -1,17 +1,32 @@
-import { request } from "http";
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export function middleware(req: NextRequest) {
-  const token = req.cookies.get("token");
+export async function middleware(req: NextRequest) {
+  const token = req.cookies.get('token');
   if (token) {
-    console.log("token", token);
+    console.log('token', token);
   }
-  console.log("hi");
+  console.log('hi');
 
-  // return NextResponse.redirect(new URL("/", req.url));
+  const url = new URL(req.url, `http://${req.headers.get('host')}`);
+  
+  if (url.pathname === '/admin') {
+    // Construct an absolute URL for redirection
+    const absoluteURL = `http://${req.headers.get('host')}/admin/dashboard`;
+    return NextResponse.redirect(absoluteURL);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  matcher: "/api/:path*",
+  api: {
+    matcher: '/api/:path*',
+  },
+  rewrites: () => [
+    {
+      source: '/admin',
+      destination: '/admin/dashboard',
+    },
+  ],
 };

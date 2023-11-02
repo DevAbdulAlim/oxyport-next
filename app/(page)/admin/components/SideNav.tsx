@@ -57,7 +57,7 @@ export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
           </Link>
         </li>
         <li className="mb-1">
-          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="">
+          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="/admin/dashboard">
             <span className="text-2xl mr-1">
               <FcAreaChart />
             </span>
@@ -67,7 +67,7 @@ export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
         <li className="mb-1 hover:bg-blue-900">
           <Link
             className="hover:bg-blue-900 p-2 rounded flex w-full"
-            href="/dashboard/categories"
+            href="/admin/categories"
           >
             <span className="text-2xl mr-1">
               <FcGrid />
@@ -78,7 +78,7 @@ export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
         <li className="mb-1 hover:bg-blue-900">
           <Link
             className="hover:bg-blue-900 p-2 rounded flex w-full"
-            href="/dashboard/products"
+            href="/admin/products"
           >
             <span className="text-2xl mr-1">
               <FcShop />
@@ -88,7 +88,7 @@ export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
         </li>
 
         <li className="mb-1 hover:bg-blue-900">
-          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="">
+          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="/admin/orders">
             <span className="text-2xl mr-1">
               <FcShipped />
             </span>
@@ -98,7 +98,7 @@ export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
         <li className="mb-1 hover:bg-blue-900">
           <Link
             className="hover:bg-blue-900 p-2 rounded flex w-full"
-            href="/dashboard/users"
+            href="/admin/users"
           >
             <span className="text-2xl mr-1">
               <FcAssistant />
@@ -107,7 +107,7 @@ export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
           </Link>
         </li>
         <li className="mb-1 hover:bg-blue-900">
-          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="">
+          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="/admin/settings">
             <span className="text-2xl mr-1">
               <FcSettings />
             </span>
@@ -115,7 +115,7 @@ export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
           </Link>
         </li>
         <li className="mb-1 hover:bg-blue-900">
-          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="">
+          <Link className="hover:bg-blue-900 p-2 rounded flex w-full" href="/admin/logout">
             <span className="text-2xl mr-1">
               <FcLock />
             </span>

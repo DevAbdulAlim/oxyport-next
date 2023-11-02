@@ -6,10 +6,12 @@ import { useState } from "react";
 
 const validateSchema = Yup.object({
   name: Yup.string().required("Name is required"),
+  description: Yup.string().required("Description is required"),
 });
 
 const initialValues = {
   name: "",
+  description: "",
 };
 
 export default function Page() {
@@ -39,7 +41,7 @@ export default function Page() {
     <section>
       <h1>Add Category</h1>
       {isSubmitted && (
-        <p className="bg-green-500 text-white inline-block">{successMessage}</p>
+        <p className="bg-green-500 absolute text-white inline-block">{successMessage}</p>
       )}
       <Formik
         initialValues={formData}
@@ -57,6 +59,17 @@ export default function Page() {
               component="div"
               className="text-red-500"
             />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="description" className="mr-4">Category Description</label>
+            <Field type="text" id="description" className="border p-1" name="description" />
+            <ErrorMessage
+            name="description"
+            component="div"
+            className="text-red-500"
+            />
+
           </div>
 
           <div className="mb-3">
