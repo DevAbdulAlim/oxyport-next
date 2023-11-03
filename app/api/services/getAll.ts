@@ -6,14 +6,25 @@ const prisma = new PrismaClient();
 // Define valid model names
 export type ValidModelNames = "category" | "product" | "user";
 
-// Map model names to their corresponding Prisma methods
+
+
+export async function getAll(item: ValidModelNames, currentPage:number,itemsPerPage:number) {
+  // Map model names to their corresponding Prisma methods
 const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
-  category: () => prisma.category.findMany(),
-  product: () => prisma.product.findMany(),
-  user: () => prisma.user.findMany(),
+  category: () => prisma.category.findMany({
+    skip: (currentPage - 1) * itemsPerPage, 
+    take: itemsPerPage,
+  }),
+  product: () => prisma.product.findMany({
+    skip: (currentPage - 1) * itemsPerPage, 
+    take: itemsPerPage,
+  }),
+  user: () => prisma.user.findMany({
+    skip: (currentPage - 1) * itemsPerPage, 
+    take: itemsPerPage,
+  }),
 };
 
-export async function getAll(item: ValidModelNames) {
   try {
     // Retrieve the appropriate 'findManay' method based on 'item'
     const findMany = modelMethods[item];

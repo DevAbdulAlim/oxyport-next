@@ -18,7 +18,7 @@ export function ListData({ data, model }: ListDataProps) {
 
   const handleDelete = async (model: string, item: number) => {
     await removeOne(model, item);
-    const fetchedData = await getAll(model);
+    const fetchedData = await getAll(model, '1', '7');
     setItems(fetchedData.data);
   };
 

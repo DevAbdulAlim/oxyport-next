@@ -6,7 +6,7 @@ import { FcPlus } from "react-icons/fc";
 
 export default async function Page() {
   const model = "categories";
-  const data = await getAll(model);
+  const data = await getAll(model, '1', '7');
   return (
     <>
       <div className="container mx-auto">

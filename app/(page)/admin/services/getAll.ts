@@ -1,6 +1,6 @@
-export const getAll = async (model: string) => {
+export const getAll = async (model: string, currentPage:string, itemsPerPage:string) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/admin/${model}`, {
+    const response = await fetch(`http://localhost:3000/api/admin/${model}?currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`, {
       next: { revalidate: 0 },
     });
 
