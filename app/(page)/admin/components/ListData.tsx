@@ -75,7 +75,7 @@ export function ListData({ data, model, pages }: ListDataProps) {
                 <td>
                   <Link
                     href={`${model}/edit/${item.id}`}
-                    className="text-green-500 text-center"
+                    className="text-green-500 hover:underline text-center"
                   >
                     Edit
                   </Link>
@@ -83,7 +83,7 @@ export function ListData({ data, model, pages }: ListDataProps) {
 
                 <td>
                   <button
-                    className="text-red-500 text-center"
+                    className="text-red-500 hover:underline text-center"
                     onClick={() => handleDelete(model, item.id)}
                   >
                     Delete
