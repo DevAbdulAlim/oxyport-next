@@ -36,6 +36,13 @@ const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
       });
     }
 
+    const totalRecords = await (prisma[item] as any).count(); // get total records to count pages
+    const totalPages = Math.ceil(totalRecords / itemsPerPage); // count total page
+
+    if(currentPage > totalPages) {
+      currentPage = totalPages
+    }
+
     // Find and return the unique item using the selected 'findManay' method
     const foundItems = await findMany();
 
@@ -45,7 +52,7 @@ const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
     }
 
     // Send a successful response with the found item
-    return sendJsonResponse(200, true, foundItems);
+    return sendJsonResponse(200, true, foundItems, totalRecords, totalPages);
   } catch (error) {
     // Log and handle any errors that occur
     console.log(error);

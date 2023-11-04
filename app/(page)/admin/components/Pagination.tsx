@@ -46,7 +46,7 @@ export default function Pagination({
   }
 
   return (
-    <nav className="flex justify-center my-8">
+    <nav className="flex flex-wrap justify-center my-8">
       {hasFirst && (
         <button
           type="button"
@@ -76,7 +76,7 @@ export default function Pagination({
 
       {pageNumbers.map((pageNumber) => (
            <button type="button" className={`py-2 px-4 border${
-            pageNumber === currentPage ? " bg-blue-500 text-white" : ""
+            pageNumber === currentPage ? " bg-blue-900 text-white" : ""
            }`} key={pageNumber}
            onClick={() => onPageChange(pageNumber)}
            >{pageNumber}</button>

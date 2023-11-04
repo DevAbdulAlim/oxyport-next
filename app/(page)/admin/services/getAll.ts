@@ -1,4 +1,4 @@
-export const getAll = async (model: string, currentPage:string, itemsPerPage:string) => {
+export const getAll = async (model: string, currentPage:number, itemsPerPage:number) => {
   try {
     const response = await fetch(`http://localhost:3000/api/admin/${model}?currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`, {
       next: { revalidate: 0 },

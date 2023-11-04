@@ -6,7 +6,7 @@ import { FcPlus } from "react-icons/fc";
 
 export default async function Page() {
   const model = "categories";
-  const data = await getAll(model, '1', '7');
+  const data = await getAll(model, 1, 5);
   return (
     <>
       <div className="container mx-auto">
@@ -16,7 +16,7 @@ export default async function Page() {
       <Link href="/admin/categories/new" className="bg-blue-900 flex  text-white py-2 px-3">
       <span className="text-2xl mr-2"><FcPlus /></span>Add Category</Link>
       </div>
-      <ListData data={data.data} model={model} />
+      <ListData data={data.data} model={model} pages={data.totalPages} />
       </div>
       
     </>

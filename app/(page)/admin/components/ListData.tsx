@@ -12,25 +12,40 @@ type ItemType = {
 type ListDataProps = {
   data: ItemType[];
   model: string;
+  pages: number;
 };
 
-export function ListData({ data, model }: ListDataProps) {
+export function ListData({ data, model, pages }: ListDataProps) {
   const [items, setItems] = useState<ItemType[]>(data);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [totalPages, setTotalPages] = useState(20)
+  const [totalPages, setTotalPages] = useState(pages)
+
+  const fetchData = async (page:number) => {
+    const fetchedData = await getAll(model, page, itemsPerPage);
+    setTotalPages(fetchedData.totalPages);
+    setItems(fetchedData.data);
+  };
 
   const onPageChange = (page:number) => {
+    if(currentPage > totalPages) {
+      page = totalPages
+    }
     setCurrentPage(page);
+    (async () => {
+      await fetchData(page);
+    })();
+    
   }
 
   const handleDelete = async (model: string, item: number) => {
     await removeOne(model, item);
-    const fetchedData = await getAll(model, "1", "7");
-    setItems(fetchedData.data);
+    await fetchData(currentPage);
   };
 
-  useEffect(() => {}, [items]);
+  useEffect(() => {
+  }, [items]);
+  
 
   const tableHeaders = Object.keys(items[0]);
   return (

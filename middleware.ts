@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
   if (token) {
     console.log('token', token);
   }
-  console.log('hi');
+
 
   const url = new URL(req.url, `http://${req.headers.get('host')}`);
   
@@ -21,12 +21,7 @@ export async function middleware(req: NextRequest) {
 
 export const config = {
   api: {
-    matcher: '/api/:path*',
+    bodyParser: false,
+    matcher: ['/api/:path*', '/admin'],
   },
-  rewrites: () => [
-    {
-      source: '/admin',
-      destination: '/admin/dashboard',
-    },
-  ],
 };

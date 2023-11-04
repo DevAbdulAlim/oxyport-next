@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { SideNav } from "./SideNav";
-import Link from "next/link";
-import { FcDoughnutChart, FcSearch, FcManager, FcMenu } from "react-icons/fc";
+import { FcSearch, FcManager, FcMenu } from "react-icons/fc";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
