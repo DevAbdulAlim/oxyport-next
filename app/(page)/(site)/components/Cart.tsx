@@ -64,7 +64,7 @@ export default function Cart() {
         </div>
 
         <Link
-          href=""
+          href="/checkout"
           className="block py-2 my-2 w-full rounded bg-red-500 text-white text-center"
         >
           Checkout Now <span>($4494)</span>
