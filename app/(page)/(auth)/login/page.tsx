@@ -111,14 +111,14 @@ export default function Login() {
               Continue With Google
             </button>
             <p className="text-center my-4">
-              Already have account?{" "}
-              <Link href="" className="underline font-semibold">
-                Login
+              {"Don't Have Account?"}{" "}
+              <Link href="/register" className="underline font-semibold">
+                Register
               </Link>
             </p>
             <p className="text-center bg-gray-100 px-4 py-3 my-4 rounded-md">
               Forgot your password{" "}
-              <Link href="" className="underline font-semibold">
+              <Link href="/forgot-password" className="underline font-semibold">
                 Reset It
               </Link>
             </p>
