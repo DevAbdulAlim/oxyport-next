@@ -21,7 +21,7 @@ export default function RootLayout({
             <MainNav />
           </div>
         </header>
-        <main className="grow px-2">{children}</main>
+        <main className="grow px-3">{children}</main>
         <footer className="py-16 bg-blue-900 text-blue-50 text-center">
           <p>&copy; 2023 Abdul Alim | All Rights Reserved</p>
         </footer>
