@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
       service: "Gmail",
       auth: {
         user: "aa.abdulalim13@gmail.com",
-        pass: "mckz rbdl oytw kuwl",
+        pass: process.env.NEXT_MAIL_SECRET,
       },
       tls: {
         rejectUnauthorized: false, // Set this to false to bypass SSL verification
