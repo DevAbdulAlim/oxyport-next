@@ -11,6 +11,8 @@ CREATE TABLE "User" (
     "birthdate" DATETIME,
     "gender" TEXT,
     "status" TEXT NOT NULL,
+    "resetToken" TEXT,
+    "resetTokenExpires" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );
