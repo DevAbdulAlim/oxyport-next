@@ -19,33 +19,30 @@ export function ListData({ data, model, pages }: ListDataProps) {
   const [items, setItems] = useState<ItemType[]>(data);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [totalPages, setTotalPages] = useState(pages)
+  const [totalPages, setTotalPages] = useState(pages);
 
-  const fetchData = async (page:number) => {
+  const fetchData = async (page: number) => {
     const fetchedData = await getAll(model, page, itemsPerPage);
     setTotalPages(fetchedData.totalPages);
     setItems(fetchedData.data);
   };
 
-  const onPageChange = (page:number) => {
-    if(currentPage > totalPages) {
-      page = totalPages
+  const onPageChange = (page: number) => {
+    if (currentPage > totalPages) {
+      page = totalPages;
     }
     setCurrentPage(page);
     (async () => {
       await fetchData(page);
     })();
-    
-  }
+  };
 
   const handleDelete = async (model: string, item: number) => {
     await removeOne(model, item);
     await fetchData(currentPage);
   };
 
-  useEffect(() => {
-  }, [items]);
-  
+  useEffect(() => {}, [items]);
 
   const tableHeaders = Object.keys(items[0]);
   return (
@@ -68,7 +65,7 @@ export function ListData({ data, model, pages }: ListDataProps) {
             {items.map((item, itemIndex) => (
               <tr key={itemIndex} className="border hover:bg-blue-50">
                 {tableHeaders.map((header, index) => (
-                  <td key={index} className="py-2 px-4">
+                  <td key={index} className="py-2 px-4 whitespace-nowrap">
                     {item[header]}
                   </td>
                 ))}
@@ -95,10 +92,10 @@ export function ListData({ data, model, pages }: ListDataProps) {
         </table>
       </div>
 
-     <Pagination
-     currentPage={currentPage}
-     totalPages={totalPages}
-     onPageChange={onPageChange}
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={onPageChange}
       />
     </>
   );

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-import crypto from "crypto";
 import { sendJsonResponse } from "../../utils/sendJsonResponse";
+import { generateResetToken } from "../../utils/resetToken";
 
 export async function POST(req: NextRequest) {
   try {
@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     console.log(email);
 
     // Generate reset token
-    const resetToken = generateResetToken();
+    const resetToken = await generateResetToken(email);
 
     // Create nodemailer transporter
     const transporter = nodemailer.createTransport({
@@ -27,9 +27,8 @@ export async function POST(req: NextRequest) {
       from: "aa.abdulalim13@gmail.com",
       to: email,
       subject: "Password Reset Request",
-      text: `Click the following link to reset your password: http://${process.env.HOST_URL}/reset-password?token=${resetToken}`,
+      text: `Click the following link to reset your password: http://${process.env.NEXT_HOST}/reset-password?token=${resetToken}`,
     };
-
     try {
       // Send the password reset email
       await transporter.sendMail(mailOptions);
@@ -48,9 +47,4 @@ export async function POST(req: NextRequest) {
       error: "An error occurred while processing your request",
     });
   }
-}
-
-// Reset token generator
-function generateResetToken(): string {
-  return crypto.randomBytes(32).toString("hex");
 }
