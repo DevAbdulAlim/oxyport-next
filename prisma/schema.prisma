@@ -11,25 +11,27 @@ datasource db {
 }
 
 model User {
-  id                Int       @id @default(autoincrement())
-  email             String    @unique
-  name              String
-  password          String
-  role              String
-  avatar            String?
-  bio               String?
-  address           Address[]
-  phone             String?
-  birthdate         DateTime?
-  gender            String?
-  status            String
-  products          Product[]
-  carts             Cart[]
-  orders            Order[]
-  resetToken        String?
-  resetTokenExpires DateTime?
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
+  id                 Int       @id @default(autoincrement())
+  name               String
+  email              String    @unique
+  password           String
+  role               String    @default("user")
+  avatar             String?
+  bio                String?
+  address            Address[]
+  phone              String?
+  birthdate          DateTime?
+  gender             String?
+  active             Boolean   @default(false)
+  products           Product[]
+  carts              Cart[]
+  orders             Order[]
+  resetToken         String?
+  resetTokenExpires  DateTime?
+  verifyToken        String?
+  verifyTokenExpires DateTime?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 }
 
 model Address {

@@ -1,17 +1,19 @@
 -- database: e:\abdulalim-client\prisma\dev.db
 
 -- Insert 10 dummy data entries into the User table with a default updatedAt value
-INSERT INTO User (email, name, password, role, avatar, bio, phone, birthdate, gender, status, updatedAt) VALUES
-  ('user1@example.com', 'User 1', 'password1', 'admin', NULL, 'Bio for User 1', '123-456-7890', '1990-01-15 00:00:00', 'Male', 'active', CURRENT_TIMESTAMP),
-  ('user2@example.com', 'User 2', 'password2', 'user', NULL, 'Bio for User 2', '234-567-8901', '1991-02-20 00:00:00', 'Female', 'active', CURRENT_TIMESTAMP),
-  ('user3@example.com', 'User 3', 'password3', 'admin', NULL, 'Bio for User 3', '345-678-9012', '1992-03-25 00:00:00', 'Male', 'inactive', CURRENT_TIMESTAMP),
-  ('user4@example.com', 'User 4', 'password4', 'user', NULL, 'Bio for User 4', '456-789-0123', '1993-04-30 00:00:00', 'Female', 'active', CURRENT_TIMESTAMP),
-  ('user5@example.com', 'User 5', 'password5', 'admin', NULL, 'Bio for User 5', '567-890-1234', '1994-05-10 00:00:00', 'Male', 'inactive', CURRENT_TIMESTAMP),
-  ('user6@example.com', 'User 6', 'password6', 'user', NULL, 'Bio for User 6', '678-901-2345', '1995-06-20 00:00:00', 'Female', 'active', CURRENT_TIMESTAMP),
-  ('user7@example.com', 'User 7', 'password7', 'admin', NULL, 'Bio for User 7', '789-012-3456', '1996-07-25 00:00:00', 'Male', 'inactive', CURRENT_TIMESTAMP),
-  ('user8@example.com', 'User 8', 'password8', 'user', NULL, 'Bio for User 8', '890-123-4567', '1997-08-30 00:00:00', 'Female', 'active', CURRENT_TIMESTAMP),
-  ('user9@example.com', 'User 9', 'password9', 'admin', NULL, 'Bio for User 9', '901-234-5678', '1998-09-15 00:00:00', 'Male', 'inactive', CURRENT_TIMESTAMP),
-  ('user10@example.com', 'User 10', 'password10', 'user', NULL, 'Bio for User 10', '012-345-6789', '1999-10-20 00:00:00', 'Female', 'active', CURRENT_TIMESTAMP);
+INSERT INTO User (name, email, password, updatedAt)
+VALUES
+  ('John Doe', 'john.doe@example.com', 'password123', CURRENT_TIMESTAMP),
+  ('Jane Smith', 'jane.smith@example.com', 'password456', CURRENT_TIMESTAMP),
+  ('Bob Johnson', 'bob.johnson@example.com', 'password789', CURRENT_TIMESTAMP),
+  ('Alice Brown', 'alice.brown@example.com', 'passwordabc', CURRENT_TIMESTAMP),
+  ('Charlie Davis', 'charlie.davis@example.com', 'passworddef', CURRENT_TIMESTAMP),
+  ('Eva White', 'eva.white@example.com', 'passwordeg', CURRENT_TIMESTAMP),
+  ('David Miller', 'david.miller@example.com', 'passwordhij', CURRENT_TIMESTAMP),
+  ('Grace Wilson', 'grace.wilson@example.com', 'passwordklm',  CURRENT_TIMESTAMP),
+  ('Samuel Jones', 'samuel.jones@example.com', 'passwordnop', CURRENT_TIMESTAMP),
+  ('Olivia Lee', 'olivia.lee@example.com', 'passwordqrs', CURRENT_TIMESTAMP);
+
 
 
 

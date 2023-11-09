@@ -1,18 +1,20 @@
 -- CreateTable
 CREATE TABLE "User" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "email" TEXT NOT NULL,
     "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "role" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'user',
     "avatar" TEXT,
     "bio" TEXT,
     "phone" TEXT,
     "birthdate" DATETIME,
     "gender" TEXT,
-    "status" TEXT NOT NULL,
+    "active" BOOLEAN NOT NULL DEFAULT false,
     "resetToken" TEXT,
     "resetTokenExpires" DATETIME,
+    "verifyToken" TEXT,
+    "verifyTokenExpires" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );

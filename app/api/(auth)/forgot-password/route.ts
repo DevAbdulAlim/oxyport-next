@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { sendJsonResponse } from "../../utils/sendJsonResponse";
 import { generateResetToken } from "../../utils/resetToken";
+import { transporter } from "../../utils/transporter";
 
 export async function POST(req: NextRequest) {
   try {
@@ -10,18 +10,6 @@ export async function POST(req: NextRequest) {
 
     // Generate reset token
     const resetToken = await generateResetToken(email);
-
-    // Create nodemailer transporter
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: "aa.abdulalim13@gmail.com",
-        pass: process.env.NEXT_MAIL_SECRET,
-      },
-      tls: {
-        rejectUnauthorized: false, // Set this to false to bypass SSL verification
-      },
-    });
 
     const mailOptions = {
       from: "aa.abdulalim13@gmail.com",
