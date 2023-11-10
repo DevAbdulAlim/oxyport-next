@@ -1,7 +1,7 @@
 export default function orders() {
   const headers = ["Product", "Order", "Date", "Items", "Status", "Amount"];
   return (
-    <>
+    <div>
       <h2 className="text-2xl">Your Orders</h2>
       <div className="overflow-x-auto my-4">
         <table className="min-w-full divide-y divide-gray-200">
@@ -29,7 +29,7 @@ export default function orders() {
                 <td className="px-6 py-4 whitespace-nowrap">Processing</td>
                 <td className="px-6 py-4 whitespace-nowrap">$15.00</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <a href="" className="text-teal-600 hover:text-teal-900 mr-2">
+                  <a href="" className="text-blue-600 hover:text-blue-900 mr-2">
                     View
                   </a>
                 </td>
@@ -38,6 +38,6 @@ export default function orders() {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }

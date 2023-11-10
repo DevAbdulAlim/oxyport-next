@@ -17,7 +17,7 @@ export default function Cart() {
       <div
         className={`fixed flex flex-col right-0 w-full sm:w-96 bg-white shadow-2xl text-black p-4 inset-y-0 ${
           menuOpen ? "" : "translate-x-full"
-        } transition-all duration-500 ease-in-out `}
+        } transition-all duration-500 z-30 ease-in-out `}
       >
         <button onClick={toggleMenu} className="flex my-2">
           <span className="text-2xl">
@@ -70,7 +70,7 @@ export default function Cart() {
           Checkout Now <span>($4494)</span>
         </Link>
         <Link
-          href=""
+          href="/cart"
           className="block py-2 my-2 w-full border rounded border-red-500 text-red-500 text-center"
         >
           View Cart

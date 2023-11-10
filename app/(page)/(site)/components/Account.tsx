@@ -14,7 +14,7 @@ export default function Account() {
       <ul className="hidden group-hover:block text-gray-600 shadow-lg rounded-sm bg-white absolute  right-0 space-y-2">
         {[
           { title: "Orders", link: "/orders" },
-          { title: "Settings", link: "/Settings" },
+          { title: "Settings", link: "settings" },
           { title: "Address", link: "/address" },
           { title: "Payment Methods", link: "/payment-methods" },
           { title: "Notification", link: "/notification" },
