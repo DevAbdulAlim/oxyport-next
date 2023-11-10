@@ -10,15 +10,23 @@ export default async function Page() {
   return (
     <>
       <div className="container mx-auto">
-      <Breadcrumb />
-      <div className="flex mt-4 justify-between">
-      <h1 className="text-blue-950 font-semibold  text-2xl">Category List</h1>
-      <Link href="/admin/categories/new" className="bg-blue-900 flex  text-white py-2 px-3">
-      <span className="text-2xl mr-2"><FcPlus /></span>Add Category</Link>
+        <Breadcrumb />
+        <div className="flex mt-4 justify-between">
+          <h1 className="text-blue-950 font-semibold  text-2xl">
+            Category List
+          </h1>
+          <Link
+            href="/admin/categories/new"
+            className="bg-blue-900 flex  text-white py-2 px-3"
+          >
+            <span className="text-2xl mr-2">
+              <FcPlus />
+            </span>
+            Add Category
+          </Link>
+        </div>
+        <ListData data={data.data} model={model} pages={data.totalPages} />
       </div>
-      <ListData data={data.data} model={model} pages={data.totalPages} />
-      </div>
-      
     </>
   );
 }

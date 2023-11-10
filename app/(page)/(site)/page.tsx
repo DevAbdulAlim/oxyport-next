@@ -1,36 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getAll } from "./services/getAll";
 
-type Product = {
-  id: number;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  image: string;
-  inStock: string;
-  rating: number;
-  createdAt: number;
+type ItemType = {
+  [key: string]: any;
 };
 
-async function getData() {
-  const res = await fetch("http://localhost:5000/api/products");
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
-
 export default async function Page() {
-  const products = await getData();
+  const products = await getAll("products", 1, 5);
   return (
     <section className="py-8">
       <h3 className="text-center text-4xl">Featured Products</h3>
       <div className="container mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {products.map((item: Product) => (
+          {products.data.map((item: ItemType) => (
             <div className="shadow-md" key={item.id}>
               <div className="p-4">
                 {/* <Image

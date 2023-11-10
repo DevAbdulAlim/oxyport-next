@@ -3,7 +3,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cart from "./Cart";
 import CategoryDropdown from "./CategoryDropdown";
-import { FcSearch, FcManager, FcDoughnutChart } from "react-icons/fc";
+import { FcSearch, FcDoughnutChart } from "react-icons/fc";
+import Account from "./Account";
 
 export default function MainNav() {
   const pathname = usePathname();
@@ -36,12 +37,7 @@ export default function MainNav() {
 
       <Cart />
 
-      <button className="hidden m-2 md:flex">
-        <span className="text-2xl mr-1">
-          <FcManager />
-        </span>
-        Profile
-      </button>
+      <Account />
     </nav>
   );
 }
