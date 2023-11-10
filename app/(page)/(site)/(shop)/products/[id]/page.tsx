@@ -1,6 +1,6 @@
 async function getSingleItem(product_id: number) {
   const response = await fetch(
-    `http://localhost:5000/api/products/${product_id}`
+    `http://localhost:3000/api/site/products/${product_id}`
   );
 
   if (!response.ok) {

@@ -49,7 +49,12 @@ export default function Cart() {
                 </button>
               </div>
               <div className="mr-2 border">
-                <img src="" alt="Image Not Found" height="40px" width="70px" />
+                <img
+                  src="https://bazaar.ui-lib.com/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png"
+                  alt="Image Not Found"
+                  height="40px"
+                  width="70px"
+                />
               </div>
               <div className="grow">
                 <h6>Silver High Neck Sweater</h6>
