@@ -57,17 +57,6 @@ export default function page() {
               ))}
             </form>
             <hr className="my-4" />
-            <form action="">
-              {[...Array(3)].map((_, index) => (
-                <div className="mb-3" key={index}>
-                  <input type="checkbox" id="macc" name="option" value="Macc" />
-                  <label htmlFor="macc" className="ms-2">
-                    Macc
-                  </label>
-                </div>
-              ))}
-            </form>
-            <hr className="my-4" />
             <h6>Rating</h6>
             <form action="">
               {[...Array(5)].map((_, index) => (

@@ -22,7 +22,7 @@ export async function GET(
     });
 
     if (product) {
-      return NextResponse.json(product, { status: 404 });
+      return NextResponse.json(product, { status: 200 });
     } else {
       return NextResponse.json(
         { message: "Product not found" },
