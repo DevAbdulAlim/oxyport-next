@@ -3,7 +3,7 @@ import { addOne } from "@/app/api/services/addOne";
 import { NextRequest } from "next/server";
 
 // Define the model
-const model: ValidModelNames = "product";
+const model: ValidModelNames = "order";
 
 // GET CATEGORY
 export async function GET(req: NextRequest) {

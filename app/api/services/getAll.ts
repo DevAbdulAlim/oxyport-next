@@ -4,26 +4,36 @@ import { sendJsonResponse } from "../utils/sendJsonResponse";
 const prisma = new PrismaClient();
 
 // Define valid model names
-export type ValidModelNames = "category" | "product" | "user";
+export type ValidModelNames = "category" | "product" | "user" | "order";
 
-
-
-export async function getAll(item: ValidModelNames, currentPage:number,itemsPerPage:number) {
+export async function getAll(
+  item: ValidModelNames,
+  currentPage: number,
+  itemsPerPage: number
+) {
   // Map model names to their corresponding Prisma methods
-const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
-  category: () => prisma.category.findMany({
-    skip: (currentPage - 1) * itemsPerPage, 
-    take: itemsPerPage,
-  }),
-  product: () => prisma.product.findMany({
-    skip: (currentPage - 1) * itemsPerPage, 
-    take: itemsPerPage,
-  }),
-  user: () => prisma.user.findMany({
-    skip: (currentPage - 1) * itemsPerPage, 
-    take: itemsPerPage,
-  }),
-};
+  const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
+    category: () =>
+      prisma.category.findMany({
+        skip: (currentPage - 1) * itemsPerPage,
+        take: itemsPerPage,
+      }),
+    product: () =>
+      prisma.product.findMany({
+        skip: (currentPage - 1) * itemsPerPage,
+        take: itemsPerPage,
+      }),
+    order: () =>
+      prisma.order.findMany({
+        skip: (currentPage - 1) * itemsPerPage,
+        take: itemsPerPage,
+      }),
+    user: () =>
+      prisma.user.findMany({
+        skip: (currentPage - 1) * itemsPerPage,
+        take: itemsPerPage,
+      }),
+  };
 
   try {
     // Retrieve the appropriate 'findManay' method based on 'item'
@@ -39,8 +49,8 @@ const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
     const totalRecords = await (prisma[item] as any).count(); // get total records to count pages
     const totalPages = Math.ceil(totalRecords / itemsPerPage); // count total page
 
-    if(currentPage > totalPages) {
-      currentPage = totalPages
+    if (currentPage > totalPages) {
+      currentPage = totalPages;
     }
 
     // Find and return the unique item using the selected 'findManay' method

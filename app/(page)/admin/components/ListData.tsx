@@ -65,8 +65,12 @@ export function ListData({ data, model, pages }: ListDataProps) {
             {items.map((item, itemIndex) => (
               <tr key={itemIndex} className="border hover:bg-blue-50">
                 {tableHeaders.map((header, index) => (
-                  <td key={index} className="py-2 px-4 whitespace-nowrap">
-                    {item[header]}
+                  <td key={index} className="py-4 px-2 whitespace-nowrap">
+                    {item[header]
+                      ? item[header].length > 20
+                        ? `${item[header].substring(0, 40)}...`
+                        : item[header]
+                      : "Undefined"}
                   </td>
                 ))}
                 <td>

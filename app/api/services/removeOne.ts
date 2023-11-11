@@ -4,12 +4,13 @@ import { sendJsonResponse } from "../utils/sendJsonResponse";
 const prisma = new PrismaClient();
 
 // Define valid model names
-export type ValidModelNames = "category" | "product" | "user";
+export type ValidModelNames = "category" | "product" | "order" | "user";
 
 // Map model names to their corresponding Prisma methods
 const modelMethods: Record<ValidModelNames, (args: any) => Promise<any>> = {
   category: (args) => prisma.category.delete(args),
   product: (args) => prisma.product.delete(args),
+  order: (args) => prisma.order.delete(args),
   user: (args) => prisma.user.delete(args),
 };
 

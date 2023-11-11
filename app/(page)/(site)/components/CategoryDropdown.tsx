@@ -62,7 +62,7 @@ export default function CategoryDropdown() {
       </div>
 
       {isOpen && (
-        <div className="bg-white text-black mt-4 shadow-2xl p-4 absolute w-56">
+        <div className="bg-white text-black mt-4 z-30 shadow-2xl p-4 absolute w-56">
           <div className="py-1">
             {categories.map((item, index) => (
               <Link
