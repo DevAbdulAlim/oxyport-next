@@ -1,5 +1,18 @@
-export default function orders() {
-  const headers = ["Product", "Order", "Date", "Items", "Status", "Amount"];
+import Link from "next/link";
+import { getAll } from "../../services/getAll";
+
+export default async function orders() {
+  type orderType = {
+    [key: string]: any;
+  };
+  const headers = [
+    "Order_ID",
+    "Payment_Method",
+    "Transaction_ID",
+    "Amount",
+    "Status",
+  ];
+  const orders = await getAll("orders", 1, 5);
   return (
     <div>
       <h2 className="text-2xl">Your Orders</h2>
@@ -15,23 +28,30 @@ export default function orders() {
                   {item}
                 </th>
               ))}
+              <th className="py-3 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Actions
+              </th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {[...Array(10)].map((_, index) => (
-              <tr className="hover:bg-teal-100 " key={index}>
+            {orders.data.map((order: orderType) => (
+              <tr className="hover:bg-blue-100 " key={order.id}>
+                <td className="px-6 py-4 whitespace-nowrap">{order.id}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  Haldirams Nagpur Aloo Bhujia
+                  {order.paymentMethod}
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">#14899</td>
-                <td className="px-6 py-4 whitespace-nowrap">March 5, 2023 </td>
-                <td className="px-6 py-4 whitespace-nowrap">1</td>
-                <td className="px-6 py-4 whitespace-nowrap">Processing</td>
-                <td className="px-6 py-4 whitespace-nowrap">$15.00</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <a href="" className="text-blue-600 hover:text-blue-900 mr-2">
+                  {order.transactionId ? order.transactionId : "undefined"}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">${order.total}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{order.status} </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <Link
+                    href={`/orders/${order.id}`}
+                    className="text-blue-600 hover:underline mr-2"
+                  >
                     View
-                  </a>
+                  </Link>
                 </td>
               </tr>
             ))}

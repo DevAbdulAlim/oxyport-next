@@ -1,13 +1,15 @@
 "use client";
-import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FcDoughnutChart } from "react-icons/fc";
 import * as Yup from "yup";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import Link from "next/link";
+import { login } from "../components/login";
+import { useRouter } from "next/navigation";
 
-export default function Login() {
+export default function Page() {
+  const router = useRouter();
   const initialValues = {
     email: "",
     password: "",
@@ -22,8 +24,10 @@ export default function Login() {
       .required("Password is required"),
   });
 
-  const handleSubmit = (values: any) => {
-    console.log("Form submitted with values:", values);
+  const handleSubmit = async (values: any) => {
+    const { email, password } = values;
+    await login(email, password);
+    router.refresh();
   };
 
   return (
