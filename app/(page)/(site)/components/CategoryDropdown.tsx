@@ -49,7 +49,7 @@ export default function CategoryDropdown() {
         <button
           type="button"
           id="options-menu"
-          className="hover:bg-blue-900 p-2 flex rounded-full focus:bg-blue-800"
+          className="hover:bg-blue-900 p-2 mx-2 flex rounded-full focus:bg-blue-800"
           onClick={toggleDropdown}
           aria-haspopup="listbox"
           aria-label="Category"

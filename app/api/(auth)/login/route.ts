@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const token = await new jose.SignJWT({ role: user.role })
+    const token = await new jose.SignJWT({ user: user.id, role: user.role })
       .setProtectedHeader({ alg: "HS256" })
       .setExpirationTime("2h")
       .sign(secret);

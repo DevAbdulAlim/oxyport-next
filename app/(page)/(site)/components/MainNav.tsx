@@ -1,16 +1,23 @@
-"use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Cart from "./Cart";
 import CategoryDropdown from "./CategoryDropdown";
 import { FcSearch, FcDoughnutChart } from "react-icons/fc";
 import Account from "./Account";
+import { cookies } from "next/headers";
+import { authenticate } from "@/lib/authenticate";
 
-export default function MainNav() {
-  const pathname = usePathname();
+export default async function MainNav() {
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
+  let isVerified = false;
+  if (token) {
+    const { verified } = await authenticate(token.value);
+    isVerified = verified;
+  }
+
   return (
     <nav className="flex justify-between">
-      <Link className="m-1 text-xl flex" href="/">
+      <Link className="my-1 text-xl flex" href="/">
         <span className="text-3xl">
           <FcDoughnutChart />
         </span>
@@ -37,7 +44,13 @@ export default function MainNav() {
 
       <Cart />
 
-      <Account />
+      {isVerified ? (
+        <Account />
+      ) : (
+        <Link href="/login" className=" rounded-md px-2 py-2  font-semibold">
+          Login
+        </Link>
+      )}
     </nav>
   );
 }

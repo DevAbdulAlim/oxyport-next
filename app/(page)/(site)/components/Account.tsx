@@ -1,11 +1,12 @@
 import Link from "next/link";
 import React from "react";
 import { FcManager } from "react-icons/fc";
+import Logout from "../../Logout";
 
 export default function Account() {
   return (
     <div className="relative hidden md:block group">
-      <button className="flex m-2 hover:text-blue-500">
+      <button className="flex my-2 hover:text-blue-500">
         <span className="text-2xl mr-1">
           <FcManager />
         </span>
@@ -29,12 +30,7 @@ export default function Account() {
           </li>
         ))}
         <li>
-          <Link
-            href=""
-            className="block border-t-2  hover:bg-gray-200 py-3 px-6"
-          >
-            Logout
-          </Link>
+          <Logout />
         </li>
       </ul>
     </div>
