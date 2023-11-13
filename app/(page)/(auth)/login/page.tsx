@@ -6,10 +6,13 @@ import { BsFacebook } from "react-icons/bs";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import Link from "next/link";
 import { login } from "../components/login";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import { useState } from "react";
 
 export default function Page() {
+  const [error, setError] = useState<string>("");
   const router = useRouter();
+  const pathname = usePathname();
   const initialValues = {
     email: "",
     password: "",
@@ -26,8 +29,15 @@ export default function Page() {
 
   const handleSubmit = async (values: any) => {
     const { email, password } = values;
-    await login(email, password);
-    router.refresh();
+    const isSuccess = await login(email, password);
+    if (isSuccess) {
+      if (pathname === "/login") {
+        router.push("/");
+      }
+      router.refresh();
+    } else {
+      setError("Invalid username or password");
+    }
   };
 
   return (
@@ -42,6 +52,9 @@ export default function Page() {
             </div>
 
             <h1 className="text-2xl mb-6 text-center">Welcome to Oxyport</h1>
+            {error && (
+              <p className="text-red-500 text-sm text-center">{error}</p>
+            )}
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}

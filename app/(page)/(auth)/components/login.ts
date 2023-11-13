@@ -11,10 +11,13 @@ export async function login(email: string, password: string) {
     if (response.ok) {
       const data = await response.json();
       console.log("Login successful");
+      return true;
     } else {
       console.error("Failed to login");
+      return false;
     }
   } catch (error) {
     console.error("Error:", error);
+    return false;
   }
 }
