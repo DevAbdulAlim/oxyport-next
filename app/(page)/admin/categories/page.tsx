@@ -3,10 +3,13 @@ import { ListData } from "../components/ListData";
 import { getAll } from "../services/getAll";
 import Breadcrumb from "../components/Breadcrumb";
 import { FcPlus } from "react-icons/fc";
+import { cookies } from "next/headers";
 
 export default async function Page() {
   const model = "categories";
-  const data = await getAll(model, 1, 5);
+  const cookieStore = cookies()
+  const token = cookieStore.get('token')
+  const data = await getAll(model, 1, 5, token);
   return (
     <>
       <div className="container mx-auto">

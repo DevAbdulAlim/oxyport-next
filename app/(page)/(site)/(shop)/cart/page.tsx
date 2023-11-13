@@ -1,7 +1,12 @@
+"use client";
+import { CartItem } from "@/redux/reducers/cartSlice";
+import { RootState } from "@/redux/store";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
-export default function page() {
+export default function Page() {
+  const cart = useSelector((state: RootState) => state.cart);
   return (
     <section className="h-full px-3 bg-blue-50">
       <div className="container mx-auto py-12">
@@ -11,10 +16,10 @@ export default function page() {
         <div className="grid grid-cols-1 lg:grid-cols-10 gap-8">
           <div className="lg:col-span-6 xl:col-span-7">
             <div className="grid grid-cols-1 gap-6">
-              {[...Array(8)].map((_, index) => (
+              {cart.items.map((item: CartItem) => (
                 <div
                   className="shadow-md bg-white rounded-md flex flex-col md:flex-row w-full relative"
-                  key={index}
+                  key={item.id}
                 >
                   <img
                     src="https://bazaar.ui-lib.com/assets/images/products/Fashion/Clothes/21.YellowCasualSweater.png"

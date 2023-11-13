@@ -1,7 +1,7 @@
 "use client";
 import { addToCart } from "@/redux/reducers/cartSlice";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 export default function ProductPage({ data }: { data: any }) {
   const [product, setProduct] = useState<any>(data);
   console.log(data);
@@ -13,6 +13,10 @@ export default function ProductPage({ data }: { data: any }) {
       dispatch(addToCart({ id, name, price, quantity: 1 }));
     }
   };
+
+  const productInCart = useSelector((state: any) =>
+    state.cart.items.find((item: any) => item.id === product.id)
+  );
   return (
     <section className="h-full px-3 bg-white">
       <div className="container mx-auto py-12">
@@ -48,7 +52,11 @@ export default function ProductPage({ data }: { data: any }) {
                 >
                   -
                 </button>
-                <span className="block mr-3 text-left">25</span>
+                {productInCart && (
+                  <span className="block mr-3 text-left">
+                    {productInCart.quantity}
+                  </span>
+                )}
                 <button
                   type="button"
                   className="border border-blue-300 text-blue-500 rounded-md h-7 w-7 hover:border-blue-500"

@@ -1,10 +1,13 @@
 "use client";
-
+import { CartItem } from "@/redux/reducers/cartSlice";
+import { RootState } from "@/redux/store";
 import Link from "next/link";
 import { useState } from "react";
 import { FcPrevious } from "react-icons/fc";
+import { useSelector } from "react-redux";
 
 export default function Cart() {
+  const cart = useSelector((state: RootState) => state.cart);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -28,10 +31,10 @@ export default function Cart() {
 
         {/* cartItems */}
         <div className="grow overflow-y-auto">
-          {[...Array(5)].map((_, index) => (
+          {cart.items.map((item: CartItem) => (
             <div
               className="flex h-32 justify-between border-y p-2 items-center"
-              key={index}
+              key={item.id}
             >
               <div className="mr-2">
                 <button
