@@ -10,7 +10,6 @@ const model: ValidModelNames = "category";
 export async function GET(req: NextRequest) {
   const currentPageParams = req.nextUrl.searchParams.get('currentPage')
   const itemsPerPageParams = req.nextUrl.searchParams.get('itemsPerPage')
-  console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
 
   let currentPage:number= 1;
   let itemsPerPage:number= 10;

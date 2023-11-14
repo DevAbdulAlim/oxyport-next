@@ -31,7 +31,7 @@ const cartSlice = createSlice({
 
     removeFromCart(state, action:PayloadAction<number>) {
       const idToRemove = action.payload;
-      state.items = state.items.map(item => item.id !== idToRemove)
+      state.items = state.items.filter(item => item.id !== idToRemove)
     },
 
     increaseQuantity(state, action: PayloadAction<number>){

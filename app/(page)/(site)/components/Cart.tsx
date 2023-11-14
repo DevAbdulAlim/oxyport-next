@@ -17,16 +17,16 @@ export default function Cart() {
   };
 
 
-  const handleIncrease = (id) => {
+  const handleIncrease = (id:number) => {
     dispatch(increaseQuantity(id));
   }
 
-  const handleDecrease = (id) => {
+  const handleDecrease = (id:number) => {
     dispatch(decreaseQuantity(id));
   }
 
 
-  const handleRemove = (id) => {
+  const handleRemove = (id:number) => {
     dispatch(removeFromCart(id));
   }
 
@@ -48,6 +48,7 @@ export default function Cart() {
 
         {/* cartItems */}
         <div className="grow overflow-y-auto">
+          
           {cart.items.map((item: CartItem) => (
             <div
               className="flex h-32 justify-between border-y p-2 items-center"
