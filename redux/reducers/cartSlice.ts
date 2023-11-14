@@ -28,9 +28,24 @@ const cartSlice = createSlice({
         state.items.push({ id, name, price, quantity: 1 });
       }
     },
-    // Other reducers like remove from cart, update quantity, etc
+
+    removeFromCart(state, action:PayloadAction<number>) {
+      const idToRemove = action.payload;
+      state.items = state.items.map(item => item.id !== idToRemove)
+    },
+
+    increaseQuantity(state, action: PayloadAction<number>){
+      const idToIncrease = action.payload;
+      state.items = state.items.map(item => item.id === idToIncrease? {...item, quantity: item.quantity + 1}: item);
+    },
+
+    decreaseQuantity(state, action: PayloadAction<number>) {
+      const idToDecrease = action.payload;
+      state.items = state.items.map(item => item.id === idToDecrease? {...item, quantity: item.quantity - 1}: item);
+    },
+
   },
 });
 
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
 export default cartSlice.reducer;

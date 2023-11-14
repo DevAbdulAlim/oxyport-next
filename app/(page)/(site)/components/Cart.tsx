@@ -1,18 +1,35 @@
 "use client";
-import { CartItem } from "@/redux/reducers/cartSlice";
+import { CartItem, decreaseQuantity, increaseQuantity, removeFromCart } from "@/redux/reducers/cartSlice";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcPrevious } from "react-icons/fc";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Cart() {
+  const dispatch = useDispatch()
   const cart = useSelector((state: RootState) => state.cart);
   const [menuOpen, setMenuOpen] = useState(false);
+
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+
+  const handleIncrease = (id) => {
+    dispatch(increaseQuantity(id));
+  }
+
+  const handleDecrease = (id) => {
+    dispatch(decreaseQuantity(id));
+  }
+
+
+  const handleRemove = (id) => {
+    dispatch(removeFromCart(id));
+  }
+
 
   return (
     // Off-canvas menu container
@@ -39,13 +56,15 @@ export default function Cart() {
               <div className="mr-2">
                 <button
                   type="button"
+                  onClick={() => handleIncrease(item.id)}
                   className="border border-red-300 text-red-500 rounded-full h-7 w-7 hover:border-red-500"
                 >
                   +
                 </button>
-                <span className="block text-center my-2">25</span>
+                <span className="block text-center my-2">{item.quantity}</span>
                 <button
                   type="button"
+                  onClick={() => handleDecrease(item.id)}
                   className="border border-red-300  text-red-500  rounded-full h-7 w-7 hover:border-red-500"
                 >
                   -
@@ -64,7 +83,7 @@ export default function Cart() {
                 <small className="text-gray-500">$100 x 1</small>
                 <h6 className="text-red-500">$100</h6>
               </div>
-              <button className="hover:bg-red-100 h-7 w-7 rounded-full">
+              <button className="hover:bg-red-100 h-7 w-7 rounded-full" onClick={()=>handleRemove(item.id)}>
                 X
               </button>
             </div>
