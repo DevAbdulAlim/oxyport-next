@@ -2,7 +2,7 @@
 import { CartItem, decreaseQuantity, increaseQuantity, removeFromCart } from "@/redux/reducers/cartSlice";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FcPrevious } from "react-icons/fc";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,11 +10,16 @@ export default function Cart() {
   const dispatch = useDispatch()
   const cart = useSelector((state: RootState) => state.cart);
   const [menuOpen, setMenuOpen] = useState(false);
+  const cartRef = useRef<HTMLDivElement | null>(null);
 
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
+  const closeCart = () => {
+    setMenuOpen(false)
+  }
 
 
   const handleIncrease = (id:number) => {
@@ -31,10 +36,29 @@ export default function Cart() {
   }
 
 
+  useEffect(() => {
+    const handleDocumentClick = (e: MouseEvent) => {
+      if (
+        cartRef.current &&
+        !cartRef.current.contains(e.target as Node)
+      ) {
+        closeCart();
+      }
+    };
+
+    document.addEventListener("click", handleDocumentClick);
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, []);
+
+
   return (
     // Off-canvas menu container
-    <div className="m-2 hidden md:block">
+    <div   ref={cartRef} className="m-2 hidden md:block">
       <div
+    
         className={`fixed flex flex-col right-0 w-full sm:w-96 bg-white shadow-2xl text-black p-4 inset-y-0 ${
           menuOpen ? "" : "translate-x-full"
         } transition-all duration-500 z-30 ease-in-out `}

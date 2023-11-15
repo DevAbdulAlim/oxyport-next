@@ -22,6 +22,7 @@ export async function middleware(req: NextRequest) {
       if (pathname === "/admin") {
         return NextResponse.rewrite(new URL("/admin/dashboard", req.url));
       }
+      
     } else {
       return NextResponse.rewrite(new URL("/not-found", req.url));
     }

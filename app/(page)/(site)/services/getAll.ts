@@ -5,7 +5,7 @@ export const getAll = async (
 ) => {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/site/${model}?currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`,
+      `${process.env.HOST}api/site/${model}?currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`,
       {
         next: { revalidate: 0 },
       }

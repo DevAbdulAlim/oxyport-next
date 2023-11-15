@@ -1,12 +1,27 @@
 "use client";
-import { CartItem } from "@/redux/reducers/cartSlice";
+import { CartItem, decreaseQuantity, increaseQuantity, removeFromCart } from "@/redux/reducers/cartSlice";
 import { RootState } from "@/redux/store";
 import Link from "next/link";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Page() {
+  const dispatch = useDispatch()
   const cart = useSelector((state: RootState) => state.cart);
+
+  const handleIncrease = (id:number) => {
+    dispatch(increaseQuantity(id));
+  }
+
+  const handleDecrease = (id:number) => {
+    dispatch(decreaseQuantity(id));
+  }
+
+
+  const handleRemove = (id:number) => {
+    dispatch(removeFromCart(id));
+  }
+
   return (
     <section className="h-full px-3 bg-blue-50">
       <div className="container mx-auto py-12">
@@ -36,20 +51,22 @@ export default function Page() {
                     <div className="flex mt-2">
                       <button
                         type="button"
+                        onClick={() => handleDecrease(item.id)}
                         className="border border-red-300 text-red-500 rounded-md h-7 w-7 hover:border-red-500"
                       >
                         -
                       </button>
-                      <span className="block text-center mx-3">25</span>
+                      <span className="block text-center mx-3">{item.quantity}</span>
                       <button
                         type="button"
+                        onClick={() => handleIncrease(item.id)}
                         className="border border-red-300 text-red-500 rounded-md h-7 w-7 hover:border-red-500"
                       >
                         +
                       </button>
                     </div>
                   </div>
-                  <button className="absolute top-2 text-white bg-red-500 h-7 w-7 rounded-md hover:bg-red-700 right-2">
+                  <button onClick={() => handleRemove(item.id)} className="absolute top-2 text-white bg-red-500 h-7 w-7 rounded-md hover:bg-red-700 right-2">
                     X
                   </button>
                 </div>
