@@ -2,12 +2,38 @@
 import { ChangeEvent, useState } from "react";
 import Gateway from "./Gateway";
 import { BsCashCoin, BsCreditCard } from "react-icons/bs";
+import { useRouter } from 'next/navigation';
 export default function Page() {
+  const router = useRouter()
   const [selectedPayment, setSelectedPayment] = useState<string | null>(null);
 
   const handlePaymentChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedPayment(event.target.value);
   };
+  const handleSubmit = async () => {
+    console.log("Order Placed");
+    try {
+      const response = await fetch(`http://localhost:3000/api/payment/stripe`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const { session_url } = await response.json();
+        if (session_url) {
+          console.log(session_url);
+          router.push(session_url)
+        }
+      } else {
+        console.error("Failed");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   return (
     <section className="py-8">
       <div className="container mx-auto">
@@ -229,6 +255,7 @@ export default function Page() {
 
             <button
               type="button"
+              onClick={handleSubmit}
               className="text-white  bg-blue-900 px-4 py-2 rounded-md"
             >
               Place Order
