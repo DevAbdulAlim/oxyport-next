@@ -1,6 +1,6 @@
 const Page = () => {
     return (
-      <div>Change Password</div>
+      <div>Vendor Dashboard</div>
     )
   }
   

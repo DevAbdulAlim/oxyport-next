@@ -1,6 +1,6 @@
 const Page = () => {
     return (
-      <div>Change Password</div>
+      <div>Order Confirmation</div>
     )
   }
   
