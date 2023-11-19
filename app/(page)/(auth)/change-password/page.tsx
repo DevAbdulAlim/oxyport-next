@@ -1,7 +1,5 @@
-const Page = () => {
-    return (
-      <div>Change Password</div>
-    )
-  }
-  
-  export default Page
+export default function page() {
+  return (
+    <div>page</div>
+  )
+}

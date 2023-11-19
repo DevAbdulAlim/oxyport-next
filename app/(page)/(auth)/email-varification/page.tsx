@@ -1,7 +1,5 @@
-const Page = () => {
-    return (
-      <div>Email Verification</div>
-    )
-  }
-  
-  export default Page
+export default function page() {
+  return (
+    <div>Email Verification</div>
+  )
+}

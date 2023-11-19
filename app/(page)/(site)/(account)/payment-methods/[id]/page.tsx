@@ -1,7 +1,5 @@
-const Page = () => {
-    return (
-      <div>Single Payment Method</div>
-    )
-  }
-  
-  export default Page
+export default function page() {
+  return (
+    <div>Single Payment Method</div>
+  )
+}

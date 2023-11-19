@@ -1,7 +1,5 @@
-const Page = () => {
+export default function page() {
   return (
-    <div>Access Denied</div>
+    <div>page</div>
   )
 }
-
-export default Page
