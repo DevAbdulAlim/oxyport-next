@@ -45,25 +45,25 @@ export default function ProductPage({ data }: { data: any }) {
                 </p>
               </div>
 
-              <div className="flex my-6">
-                <button
-                  type="button"
-                  className="border border-blue-300 mr-3 text-blue-500 rounded-md h-7 w-7 hover:border-blue-500"
-                >
-                  -
-                </button>
-                {productInCart && (
+              {productInCart && (
+                <div className="flex my-6">
+                  <button
+                    type="button"
+                    className="border border-blue-300 mr-3 text-blue-500 rounded-md h-7 w-7 hover:border-blue-500"
+                  >
+                    -
+                  </button>
                   <span className="block mr-3 text-left">
                     {productInCart.quantity}
                   </span>
-                )}
-                <button
-                  type="button"
-                  className="border border-blue-300 text-blue-500 rounded-md h-7 w-7 hover:border-blue-500"
-                >
-                  +
-                </button>
-              </div>
+                  <button
+                    type="button"
+                    className="border border-blue-300 text-blue-500 rounded-md h-7 w-7 hover:border-blue-500"
+                  >
+                    +
+                  </button>
+                </div>
+              )}
 
               <button
                 onClick={handleAddtoCart}

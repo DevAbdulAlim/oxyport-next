@@ -1,10 +1,14 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
+import PriceRangeSlider from "../../../components/PriceRangeSlider";
 
 export default function page() {
   // const [currentPage, setCurrentPage] = useState(1)
-  // // const
+
+  const handleRangeChange = (values: number | number[]) => {
+
+  };
   return (
     <section className="py-16">
       <div className="container mx-auto">
@@ -17,6 +21,8 @@ export default function page() {
           <div className="flex justify-end">Filter</div>
         </div>
 
+
+
         {/* products */}
         <div className="grid gap-8 lg:grid-cols-8 ">
           <div className="p-4 shadow-md lg:col-span-2">
@@ -27,23 +33,7 @@ export default function page() {
 
             <hr className="my-4" />
             <h6>Price Range</h6>
-            <form action="">
-              <div className="flex">
-                <input
-                  type="number"
-                  className="w-full p-1 border"
-                  name="minPrice"
-                  placeholder="0"
-                />
-                <span className="self-center mx-2">-</span>
-                <input
-                  type="number"
-                  className="w-full p-1 border"
-                  name="maxPrice"
-                  placeholder="300"
-                />
-              </div>
-            </form>
+              <PriceRangeSlider onRangeChange={handleRangeChange}/>
             <hr className="my-4" />
             <h6>Brands</h6>
             <form action="">
