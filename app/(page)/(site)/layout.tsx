@@ -48,7 +48,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className=" bg-blue-900 px-3 text-blue-50">
+    <footer className=" bg-gray-800 px-3 text-blue-50">
       <div className="container mx-auto">
         <div className="grid grid-cols-1 py-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           <div>
