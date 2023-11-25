@@ -4,6 +4,7 @@ import bcrypt from "bcrypt";
 import * as jose from "jose";
 import { cookies } from "next/headers";
 
+
 const prisma = new PrismaClient();
 
 // encode secret key
@@ -34,6 +35,13 @@ export async function POST(req: NextRequest) {
     if (!passwordMatch) {
       return NextResponse.json(
         { message: "Invalid email or password" },
+        { status: 401 }
+      );
+    }
+
+    if(!user.active) {
+      return NextResponse.json(
+        { message: "Your account is not active" },
         { status: 401 }
       );
     }

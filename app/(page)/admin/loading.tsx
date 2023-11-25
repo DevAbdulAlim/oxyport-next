@@ -1,3 +1,5 @@
+import LoadingSpin from "@/components/common/LoadingSpin";
+
 export default function loading() {
-  return <div>loading...</div>;
+  return <LoadingSpin />;
 }

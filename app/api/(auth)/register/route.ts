@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
     });
 
     if (existingUser) {
-      return sendJsonResponse(400, false, { message: "User already existed" });
+      return sendJsonResponse(409, false, { message: "User already existed" });
     }
 
     const hashedPassword = await hashPassword(password);

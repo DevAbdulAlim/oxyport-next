@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getAll } from "./services/getAll";
 import { addToCart } from '@/redux/reducers/cartSlice';
 import { getHomePageData } from "./services/getHomePageData";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
 
 type ItemType = {
   [key: string]: any;
@@ -21,8 +22,8 @@ export default async function Page() {
           </div>
           <div className="h-full py-8 flex md:order-first flex-col justify-center align-middle">
             <h1 className="text-4xl font-bold text-blue-950">50% Off For Your First Shopping</h1>
-            <p className="my-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convalliss.</p>
-            <Link href="" className="py-2 px-4 w-32 text-center bg-blue-900 text-white" >Shop Now</Link>
+            <p className="my-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convalliss.</p>
+            <PrimaryButton href="/" text="Shop Now" />
           </div>
         </div>
       </div>
@@ -84,7 +85,7 @@ export default async function Page() {
             ))}
           </div>
   
-          <div className="text-center py-8"><Link href="" className="bg-blue-900 py-2 px-5 text-white hover:underline">See more products</Link></div>
+          <div className="text-center py-8"> <PrimaryButton href="/" text="See more products" /></div>
         </div>
       </section>
   

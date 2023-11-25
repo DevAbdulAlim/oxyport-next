@@ -6,10 +6,17 @@ import * as Yup from "yup";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import Link from "next/link";
+import { register } from "@/lib/auth/register";
+import Processing from "@/components/common/Processing";
+import RegistrationSuccessful from '../../../../components/auth/RegistrationSuccessful';
+import RegistrationFailed from "@/components/auth/RegistrationFailed";
 
 export default function Register() {
+  const [isLoading, setIsLoading] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
-
+  const [registrationFailed, setRegistrationFailed] = useState(false);
+  const [registrationSuccessful, setRegistrationSuccessful] = useState(false)
+ 
   const initialValues = {
     name: "",
     email: "",
@@ -29,19 +36,54 @@ export default function Register() {
     confirmPassword: Yup.string()
       .oneOf([Yup.ref("password")], "Passwords must match")
       .required("Confirm Password is required"),
-    agreedToTerms: Yup.boolean().oneOf(
-      [true],
-      "You must agree to the Terms and Conditions"
-    ),
   });
-
-  const handleSubmit = (values: any) => {
-    console.log("Form submitted with values:", values);
-  };
 
   const handleCheckboxChange = () => {
     setAgreedToTerms(!agreedToTerms);
   };
+
+  const handleSubmit = async (values: any) => {
+    if (!agreedToTerms) {
+      console.error("You must agree to the Terms and Conditions");
+      return;
+    }
+    const userData = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    }
+
+    setIsLoading(true)
+
+    const response = await register(userData)
+
+    setIsLoading(false)
+
+    if (response.success) {
+     setRegistrationSuccessful(true)
+    } else {
+     setRegistrationFailed(true)
+    }
+  };
+
+  const resetState = () => {
+    setRegistrationFailed(false);
+  }
+
+  if(isLoading){
+    return <Processing />
+  }
+
+
+  if(registrationFailed) {
+    return <RegistrationFailed resetState={resetState} />
+  }
+
+
+  if(registrationSuccessful) {
+    return <RegistrationSuccessful />
+  }
+
 
   return (
     <section className="mx-3">

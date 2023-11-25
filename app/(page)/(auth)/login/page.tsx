@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import Link from "next/link";
-import { login } from "../components/login";
+import { login } from "@/lib/auth/login";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
 
