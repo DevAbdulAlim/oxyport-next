@@ -55,11 +55,11 @@ export default function Register() {
 
     setIsLoading(true)
 
-    const response = await register(userData)
+    const isRegistered = await register(userData)
 
     setIsLoading(false)
 
-    if (response.success) {
+    if (isRegistered) {
      setRegistrationSuccessful(true)
     } else {
      setRegistrationFailed(true)

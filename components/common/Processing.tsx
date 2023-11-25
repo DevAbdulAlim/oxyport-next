@@ -15,10 +15,10 @@ export default function Processing() {
               cx="12"
               cy="12"
               r="8"
-              stroke-width="4"
+              strokeWidth="4"
               className="opacity-25"
             />
-            <path d="M20.4 12H3.6" stroke-linecap="round" stroke-width="4" />
+            <path d="M20.4 12H3.6" strokeLinecap="round" strokeWidth="4" />
           </svg>
         </div>
         <p className="text-xl">Processing...</p>

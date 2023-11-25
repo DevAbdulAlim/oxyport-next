@@ -1,7 +1,7 @@
 import { hashPassword } from "@/app/api/utils/hashPassword";
 import { validateResetToken } from "@/app/api/utils/resetToken";
 import { sendJsonResponse } from "@/app/api/utils/sendJsonResponse";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest} from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
