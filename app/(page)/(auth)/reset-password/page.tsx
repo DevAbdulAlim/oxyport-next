@@ -9,7 +9,7 @@ import Processing from "@/components/common/Processing";
 import { resetPassword } from "@/lib/auth/resetPassword";
 
 export default function Page() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [failed, setFailed] = useState(false);
 
