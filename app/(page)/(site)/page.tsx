@@ -54,7 +54,7 @@ export default async function Page() {
                 />
               </div>
               <div className="p-4 text-center">
-                <a href={`/products/search`} className="text-lg font-semibold text-gray-800 hover:text-teal-600">
+                <a href={`/products/search?categories=${item.id}`} className="text-lg font-semibold text-gray-800 hover:text-blue-600">
                   {item.name}
                 </a>
               </div>

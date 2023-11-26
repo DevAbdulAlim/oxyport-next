@@ -1,13 +1,71 @@
-"use client";
-import Link from "next/link";
-import { useState } from "react";
+'use client'
+import ProductCard from "@/components/products/ProductCard";
 import PriceRangeSlider from "../../../components/PriceRangeSlider";
 import Rating from "../../../components/RatingFilter";
 
-export default function page() {
-  // const [currentPage, setCurrentPage] = useState(1)
+// Updated getAll function
+const getAllProducts = async (
+  categories?: number[],
+  ratings?: number[],
+  minPrice?: number,
+  maxPrice?: number,
+  page?: number,
+  pageSize?: number
+) => {
+  try {
+    const apiUrl = `http://localhost:3000/api/site/products/search?categories=${
+      categories || ""
+    }&ratings=${ratings || ""}&minPrice=${minPrice || ""}&maxPrice=${
+      maxPrice || ""
+    }&page=${page || ""}&pageSize=${pageSize || ""}`;
 
-  const handleRangeChange = (values: number | number[]) => {};
+    const response = await fetch(apiUrl, {
+      next: { revalidate: 0 },
+    });
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch data (${response.status} ${response.statusText})`
+      );
+    }
+
+    const newData = await response.json();
+    console.log(newData);
+
+    return newData;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export default async function page({
+  searchParams,
+}: {
+  searchParams: {
+    categories?: number[];
+    ratings?: number[];
+    minPrice?: number;
+    maxPrice?: number;
+    page?: number;
+    pageSize?: number;
+  };
+}) {
+  const { categories, ratings, minPrice, maxPrice, page, pageSize } =
+    searchParams;
+
+  const data = await getAllProducts(
+    categories,
+    ratings,
+    minPrice,
+    maxPrice,
+    page,
+    pageSize
+  );
+
+  const handleRangeChange = (values: number | number[]) => {
+    // console.log(values);
+  };
   return (
     <section className="py-16 px-3 bg-blue-50">
       <div className="container mx-auto">
@@ -18,13 +76,14 @@ export default function page() {
             <p>48 results found</p>
           </div>
           <div className="flex justify-between">
-          <form action="">
-              <select name="" id="">
-              <option value="low">Price: Low to High</option>
-            <option value="high">Price: High to Low</option>
+            <form action="your_action_url_here" method="get">
+              <select name="Price" aria-label="Select Price Order">
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
               </select>
-          </form>
-          <div className="md:hidden">Filter</div>
+            </form>
+
+            <div className="md:hidden">Filter</div>
           </div>
         </div>
 
@@ -45,35 +104,22 @@ export default function page() {
             <Rating />
           </div>
           <div className="lg:col-span-6">
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 2xl:grid-cols-3">
-              {[...Array(12)].map((_, index) => (
-                <div
-                  className="shadow-lg  bg-white  overflow-hidden"
-                  key={index}
-                >
-                  <div className="overflow-hidden">
-                  <img
-                    // src={item.image}
-                    src="https://th.bing.com/th/id/OIP.L_IBmQ5JmWqU-k1Ezm9DjgHaFj?rs=1&pid=ImgDetMain"
-                    alt=""
-                    className="h-60 w-full transform transition-transform duration-1000 ease-in-out hover:scale-125"
-                  />
-                  </div>
-                  <div className="p-2">
-                    <a href={`/products/${index}`} className="text-xl">
-                      Demo Product
-                    </a>
-                    <p className="text-red-500 text-xl">$$555</p>
-                  </div>
-                  <button
-                    type="button"
-                    className="bg-gray-100 w-full hover:bg-gray-200 text-gray-500 hover:text-gray-700  py-2 px-8"
-                  >
-                    Add To Cart
-                  </button>
-                </div>
-              ))}
-            </div>
+            {data.products.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2  xl:grid-cols-3 gap-5">
+                {data.products.map((item: any) => (
+                  <ProductCard key={item.id} {...item} />
+                ))}
+              </div>
+            ) : (
+              <div className="h-full flex flex-col items-center justify-center">
+                <p className="text-gray-500 text-2xl font-semibold">
+                  Oops! No products found.
+                </p>
+                <p className="text-gray-500 text-lg">
+                  Maybe try a different search or check back later.
+                </p>
+              </div>
+            )}
           </div>
         </div>
       </div>

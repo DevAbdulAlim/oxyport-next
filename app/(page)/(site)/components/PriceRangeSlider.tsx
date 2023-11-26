@@ -1,55 +1,89 @@
-'use client'
-import Slider from 'rc-slider';
-import React, { useState } from 'react';
-import 'rc-slider/assets/index.css';
+import React from 'react';
+import { Range, getTrackBackground } from 'react-range';
 
 interface PriceRangeSliderProps {
-  onRangeChange: (values: number | number[]) => void;
+  onRangeChange: (values: number[]) => void;
 }
 
-const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({onRangeChange}) => {
-  const [sliderValues, setSliderValues] = useState<number[]>([100, 1000])
-  const handleSliderChange = (values: number | number[]) => {
-    if(Array.isArray(values)) {
-      setSliderValues(values)
-      onRangeChange(values)
-    }
+const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ onRangeChange }) => {
+  const [sliderValues, setSliderValues] = React.useState<number[]>([300, 900]);
 
-  }
+  const handleSliderChange = (values: number[]) => {
+    setSliderValues(values);
+  };
+
+  const handleFinalChange = (values: number[]) => {
+    console.log(values);
+    // You can call the onRangeChange function here if needed
+    // onRangeChange(values);
+  };
 
   const sliderStyle = {
-    trackStyle: { backgroundColor: 'lightblue', height: '8px' },
-    handleStyle: {
-    //   backgroundColor: 'lightblue',
-    //   borderColor: 'lightblue',
-      height: '16px',
-      width: '16px',
-      marginTop: '-4px',
-    //   boxShadow: 'none'
+    track: {
+      background: getTrackBackground({
+        values: sliderValues,
+        colors: ['#FFD3B6', '#FF5E5B', '#C70039'],
+        min: 0,
+        max: 1500,
+      }),
+      height: '10px',
+      borderRadius: '5px',
     },
-    railStyle: { backgroundColor: 'lightgray', height: '8px' },
-
-   
+    thumb: {
+      height: '20px',
+      width: '20px',
+      backgroundColor: '#FF5E5B',
+      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
+      borderRadius: '50%',
+    },
   };
 
   return (
-    <div className='mt-6'>
-      <label htmlFor="" className='block text-sm font-medium text-gray-700'>Price Range</label>
-      <Slider
-      range
-      min={0}
-      max={1500}
-      step={10}
-      defaultValue={[100, 1000]}
-      onChange={handleSliderChange}
-      {...sliderStyle}
+    <div className="mt-6">
+      <label htmlFor="price-range-slider" className="block text-sm font-medium text-gray-700">
+        Price Range
+      </label>
+      <Range
+        id="price-range-slider"
+        values={sliderValues}
+        step={10}
+        min={0}
+        max={1500}
+        onChange={handleSliderChange}
+        onFinalChange={handleFinalChange}
+        renderTrack={({ props, children }) => (
+          <div
+            onMouseDown={props.onMouseDown}
+            onTouchStart={props.onTouchStart}
+            style={props.style}
+          >
+            <div
+              ref={props.ref}
+              style={{
+                ...props.style,
+                ...sliderStyle.track,
+              }}
+            >
+              {children}
+            </div>
+          </div>
+        )}
+        renderThumb={({ props }) => (
+          <div
+            {...props}
+            style={{
+              ...props.style,
+              ...sliderStyle.thumb,
+            }}
+          />
+        )}
       />
-      <div className='flex justify-between mt-2'>
-        <span>Min: {sliderValues[0]}</span>
-        <span>Max: {sliderValues[1]}</span>
+      <div className="flex justify-between mt-2">
+        <span>${sliderValues[0]}</span>
+        <span>${sliderValues[1]}</span>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default PriceRangeSlider
+export default PriceRangeSlider;
