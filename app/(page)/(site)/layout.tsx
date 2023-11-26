@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <CustomProvider>
-      <body className="flex flex-col h-screen">
-        <header className="bg-blue-950 text-blue-50 py-4">
+      <body className="flex flex-col h-screen bg-blue-100">
+        <header className="bg-blue-900 text-white py-4">
           <div className="container mx-auto">
             <MainNav />
           </div>
