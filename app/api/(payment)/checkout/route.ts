@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 const checkProductsExistence = async (cartItems: CartItemType[]) => {
   try {
   // Extract productIds from the cartItems array
-  const productIds = cartItems.map((product) => product.productId);
+  const productIds = cartItems.map((product) => product.id);
   // Use Prisma Client to query the database for existing products
   const existingProducts = await prisma.product.findMany({
     where: {
@@ -30,7 +30,7 @@ const checkProductsExistence = async (cartItems: CartItemType[]) => {
   // Check each requested product
   const productsWithAvailability = cartItems.map((product) => {
     const existingProduct = existingProducts.find(
-      (p) => p.id === product.productId
+      (p) => p.id === product.id
     );
 
     if (existingProduct) {
@@ -39,14 +39,14 @@ const checkProductsExistence = async (cartItems: CartItemType[]) => {
       if (product.quantity <= availableStock) {
         // Sufficient stock
         return {
-          productId: product.productId,
+          id: product.id,
           quantity: product.quantity,
           status: "available",
         };
       } else {
         // Insufficient stock
         return {
-          productId: product.productId,
+          id: product.id,
           quantity: product.quantity,
           status: "insufficientStock",
         };
@@ -55,7 +55,7 @@ const checkProductsExistence = async (cartItems: CartItemType[]) => {
     } else {
       // Product not found
       return {
-        productId: product.productId,
+        id: product.id,
         quantity: product.quantity,
         status: "notFound",
       };
@@ -69,6 +69,6 @@ const checkProductsExistence = async (cartItems: CartItemType[]) => {
 };
 
 interface CartItemType {
-  productId: number;
+  id: number;
   quantity: number;
 }
