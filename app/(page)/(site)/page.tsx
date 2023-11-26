@@ -4,6 +4,7 @@ import { getAll } from "./services/getAll";
 import { addToCart } from '@/redux/reducers/cartSlice';
 import { getHomePageData } from "./services/getHomePageData";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
+import ProductsCardList from "@/components/products/ProductsCardList";
 
 type ItemType = {
   [key: string]: any;
@@ -60,31 +61,7 @@ export default async function Page() {
       <section className="py-12 px-3 bg-blue-50">
         <h3 className="text-center text-4xl mb-8">Featured Products</h3>
         <div className="container mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-            {data.products.map((item: ItemType) => (
-              <div className="shadow-lg rounded-md bg-white  overflow-hidden" key={item.id}>
-                           <img
-                    // src={item.image}
-                    src="https://th.bing.com/th/id/OIP.L_IBmQ5JmWqU-k1Ezm9DjgHaFj?rs=1&pid=ImgDetMain"
-                    alt={item.name}
-                    className="h-60 w-full mb-4"
-                  />
-                <div className="p-2">
-                  <a href={`/products/${item.id}`} className="text-xl">{item.name}</a>
-                  <p className="text-red-500 text-xl">${item.price}</p>
-                  <p className="mb-2">{item.rating}</p>
-                
-                </div>
-                <button type="button"
-                    className="bg-blue-400 w-full hover:bg-blue-600 text-white py-2 px-8"
-                
-                  >
-                    Add To Cart
-                  </button>
-              </div>
-            ))}
-          </div>
-  
+        <ProductsCardList products={data.products} />
           <div className="text-center py-8"> <PrimaryButton href="/" text="See more products" /></div>
         </div>
       </section>
