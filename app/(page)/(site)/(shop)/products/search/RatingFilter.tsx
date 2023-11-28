@@ -21,14 +21,15 @@ interface RatingListProps {
   onRatingChange: (newRating: number) => void;
 }
 
-const RatingList: React.FC<RatingListProps> = ({ onRatingChange }: RatingListProps) => {
+// const RatingList: React.FC<RatingListProps> = ({ onRatingChange }: RatingListProps) => {
+const RatingList = () => {
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
   const handleRatingChange = (newRating: number) => {
-    setSelectedRating((prevRating) =>
-      prevRating === newRating ? null : newRating
-    );
-    onRatingChange(newRating); // Call the prop function with the new rating
+    // setSelectedRating((prevRating) =>
+    //   prevRating === newRating ? null : newRating
+    // );
+    // onRatingChange(newRating); // Call the prop function with the new rating
   };
 
   const handleCheckboxChange = (itemId: number) => {

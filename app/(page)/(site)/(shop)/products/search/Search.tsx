@@ -7,6 +7,7 @@ import RatingList from "./RatingFilter";
 import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import CategoryFilter from "./CategoryFilter";
 import { searchProducts } from "@/lib/services/searchProducts";
+import Processing from "@/components/common/Processing";
 
 interface SearchState {
   categoryFilters: number[];
@@ -37,6 +38,10 @@ interface SearchProps {
   products: any;
 }
 
+interface SearchResponse {
+  products: ProductCardProps[];
+}
+
 export default function Search({ categories, products }: SearchProps) {
   const [searchState, setSearchState] =
     useState<SearchState>(initialSearchState);
@@ -54,23 +59,33 @@ export default function Search({ categories, products }: SearchProps) {
   } = searchState;
 
   useEffect(() => {
-    const applyFilters = async () => {
+    const fetchData = async () => {
       try {
-        setSearchState((prevState) => ({
-          ...prevState,
-          loading: true,
-          error: null,
-        }));
-
-        const response = await searchProducts(
-          categoryFilters,
-          ratingFilters,
-          minPrice,
-          maxPrice,
-          page,
-          pageSize
-        );
-
+        setSearchState((prevState) => ({ ...prevState, loading: true, error: null }));
+  
+        let response: SearchResponse;
+  
+        // Check if filters are applied
+        if (
+          categoryFilters.length > 0 ||
+          ratingFilters.length > 0 ||
+          minPrice !== 0 ||
+          maxPrice !== 10000
+        ) {
+          // If filters are applied, fetch filtered products
+          response = await searchProducts(
+            categoryFilters,
+            ratingFilters,
+            minPrice,
+            maxPrice,
+            page,
+            pageSize
+          );
+        } else {
+          // If no filters, use products from the Search component props
+          response = { products };
+        }
+  
         setSearchState((prevState) => ({
           ...prevState,
           filteredProducts: response.products,
@@ -85,9 +100,10 @@ export default function Search({ categories, products }: SearchProps) {
         setSearchState((prevState) => ({ ...prevState, loading: false }));
       }
     };
-
-    applyFilters();
-  }, [categoryFilters, ratingFilters, minPrice, maxPrice, page, pageSize]);
+  
+    fetchData();
+  }, [categoryFilters, ratingFilters, minPrice, maxPrice, page, pageSize, products]);
+  
 
   const handleCategoryChange = (values: number | number[]) => {
     if (Array.isArray(values)) {
@@ -154,7 +170,7 @@ export default function Search({ categories, products }: SearchProps) {
 
         <div className="grid gap-8 lg:grid-cols-8">
         {/* Filters */}
-        <div className="p-4 bg-white lg:col-span-2">
+        <div className="p-4 bg-white h-screen lg:col-span-2">
           <h6>Categories</h6>
           <CategoryFilter
             categories={categories}
@@ -167,12 +183,13 @@ export default function Search({ categories, products }: SearchProps) {
 
           <hr className="my-4" />
           <h6>Rating</h6>
-          <RatingList onRatingChange={handleRatingChange} />
+          {/* <RatingList onRatingChange={handleRatingChange} /> */}
+          <RatingList />
         </div>
 
         <div className="lg:col-span-6">
         {/* Products */}
-        {loading && <p>Loading...</p>}
+        {loading && <Processing />}
         {error && <p className="text-red-500">{error}</p>}
         {!loading && !error && filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
@@ -193,6 +210,8 @@ export default function Search({ categories, products }: SearchProps) {
             </p>
           </div>
         )}
+
+        
         </div>
 
         </div>
