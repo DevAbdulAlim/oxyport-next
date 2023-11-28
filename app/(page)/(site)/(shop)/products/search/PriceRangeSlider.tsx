@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import { Range, getTrackBackground } from 'react-range';
 
@@ -40,11 +41,8 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ onRangeChange }) =>
 
   return (
     <div className="mt-6">
-      <label htmlFor="price-range-slider" className="block text-sm font-medium text-gray-700">
-        Price Range
-      </label>
       <Range
-        id="price-range-slider"
+
         values={sliderValues}
         step={10}
         min={0}

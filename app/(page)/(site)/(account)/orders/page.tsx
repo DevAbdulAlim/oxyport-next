@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAll } from "../../services/getAll";
+import { getAll } from "../../../../../lib/services/getAll";
 
 export default async function orders() {
   type orderType = {

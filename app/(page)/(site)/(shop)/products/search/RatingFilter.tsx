@@ -17,13 +17,18 @@ const items: Item[] = [
   // Add more items as needed
 ];
 
-const RatingList: React.FC = () => {
+interface RatingListProps {
+  onRatingChange: (newRating: number) => void;
+}
+
+const RatingList: React.FC<RatingListProps> = ({ onRatingChange }: RatingListProps) => {
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
 
   const handleRatingChange = (newRating: number) => {
     setSelectedRating((prevRating) =>
       prevRating === newRating ? null : newRating
     );
+    onRatingChange(newRating); // Call the prop function with the new rating
   };
 
   const handleCheckboxChange = (itemId: number) => {
@@ -57,7 +62,9 @@ const RatingList: React.FC = () => {
             />
             <label htmlFor={`item${item.id}`} className="flex items-center space-x-2">
               {[...Array(5)].map((_, index) => (
-                <span key={index}>{renderStarIcon(index + 1, item.rating)}</span>
+                <span key={index} onClick={() => handleRatingChange(index + 1)}>
+                  {renderStarIcon(index + 1, item.rating)}
+                </span>
               ))}
             </label>
           </li>

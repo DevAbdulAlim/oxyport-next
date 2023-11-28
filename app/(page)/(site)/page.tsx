@@ -1,4 +1,4 @@
-import { getHomePageData } from "./services/getHomePageData";
+import { getHomePageData } from "../../../lib/services/getHomePageData";
 import PrimaryButton from "@/components/buttons/PrimaryButton";
 import ProductsCardList from "@/components/products/ProductsCardList";
 

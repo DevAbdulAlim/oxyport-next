@@ -5,6 +5,7 @@ import { FcSearch, FcDoughnutChart } from "react-icons/fc";
 import Account from "./Account";
 import { cookies } from "next/headers";
 import { authenticate } from "@/lib/authenticate";
+import { getAll } from "@/lib/services/getAll";
 
 export default async function MainNav() {
   const cookieStore = cookies();
@@ -15,6 +16,8 @@ export default async function MainNav() {
     isVerified = verified;
   }
 
+  const categories = await getAll('categories', 1, 8);
+
   return (
     <nav className="flex justify-between bg-blue-900 text-white py-4 px-6">
     <Link className="my-1 text-3xl flex items-center" href="/">
@@ -24,7 +27,7 @@ export default async function MainNav() {
       <span className="ml-2 text-xl font-bold">Oxyport</span>
     </Link>
   
-    <CategoryDropdown />
+    <CategoryDropdown categories={categories.data} />
   
     <form action="" className="relative flex items-center">
       <input
