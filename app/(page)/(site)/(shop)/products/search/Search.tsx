@@ -149,7 +149,7 @@ export default function Search({ categories, products }: SearchProps) {
 
   return (
     <section className="py-16 px-3 bg-blue-50">
-      <div className="container mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* TopBar */}
         <div className="text-center md:text-start md:flex md:justify-between p-4 mb-4 bg-white">
           <div>

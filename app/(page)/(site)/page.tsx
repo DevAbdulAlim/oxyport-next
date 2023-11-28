@@ -12,7 +12,7 @@ export default async function Page() {
     return (
       <>
 <section className="px-3 bg-blue-900 text-white">
-  <div className="container mx-auto flex flex-col items-center">
+  <div className="max-w-7xl mx-auto flex flex-col items-center">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <div className="flex justify-center">
         <img
@@ -38,7 +38,7 @@ export default async function Page() {
   
     <section className="py-16 px-4 bg-gray-100">
       <h3 className="text-center text-gray-800 text-4xl mb-8 font-semibold">Explore Featured Categories</h3>
-      <div className="container mx-auto">
+      <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
           {data.categories.map((item: ItemType) => (
             <div
@@ -66,7 +66,7 @@ export default async function Page() {
   
   
     <section className="py-12 px-4 bg-gray-50">
-      <div className="container mx-auto">
+      <div className="max-w-7xl mx-auto">
         <h3 className="text-center text-3xl mb-6 font-semibold">Featured Products</h3>
         <ProductsCardList products={data.products} />
         <div className="flex justify-center mt-8">
@@ -75,8 +75,8 @@ export default async function Page() {
       </div>
     </section>
   
-    <section className="bg-gray-100 py-12">
-      <div className="container mx-auto flex flex-col items-center">
+    <section className="bg-gray-100 px-3 py-12">
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
         <h2 className="text-3xl font-semibold text-gray-800 mb-4">Subscribe to Our Newsletter</h2>
         <p className="text-gray-600 mb-8">Get exclusive deals and updates on our latest products.</p>
 

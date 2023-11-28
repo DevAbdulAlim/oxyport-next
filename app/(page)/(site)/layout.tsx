@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <CustomProvider>
       <body className="flex flex-col h-screen ">
         <header className="bg-blue-900 text-white">
-          <div className="container mx-auto">
+          <div className="max-w-7xl mx-auto">
             <MainNav />
           </div>
         </header>

@@ -19,7 +19,7 @@ export default function ProductPage({ data }: { data: any }) {
   );
   return (
     <section className="h-full px-3 bg-white">
-      <div className="container mx-auto py-12">
+      <div className="max-w-7xl mx-auto py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
             <img
