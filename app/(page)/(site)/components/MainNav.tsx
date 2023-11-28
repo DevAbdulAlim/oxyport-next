@@ -22,7 +22,7 @@ export default async function MainNav() {
   const categories = await getAll("categories", 1, 8);
 
   return (
-    <nav className="flex justify-between bg-blue-900 text-white py-2 md:py-4  px-6">
+    <nav className="flex   justify-between py-2 md:py-4  px-6">
       <Link className="my-1 text-3xl flex items-center" href="/">
         <span className="text-4xl">
           <FcDoughnutChart />

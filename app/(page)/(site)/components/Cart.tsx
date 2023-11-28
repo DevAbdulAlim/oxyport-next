@@ -164,7 +164,7 @@ export default function Cart() {
 
       <button
         onClick={toggleMenu}
-        className="flex items-center space-x-2 text-white py-1 px-2 rounded-full hover:bg-blue-600 focus:outline-none"
+        className="flex items-center space-x-2  py-1 px-2 rounded-full hover:bg-blue-50 focus:outline-none"
       >
         <span className="text-xl">
           <FaShoppingCart />

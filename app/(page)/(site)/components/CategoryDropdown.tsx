@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FcGrid } from "react-icons/fc";
+import { BiSolidCategory } from "react-icons/bi";
 import Link from "next/link";
 import { CategoryListType, CategoryType } from "@/lib/types/CategoryTypes";
 
@@ -40,13 +40,13 @@ export default function CategoryDropdown({ categories }: CategoryListType) {
         <button
           type="button"
           id="options-menu"
-          className="hover:bg-blue-900 p-2 mx-2 flex rounded-full focus:bg-blue-800"
+          className="hover:bg-blue-50 p-2 mx-2 flex rounded-full focus:bg-blue-200"
           onClick={toggleDropdown}
           aria-haspopup="listbox"
           aria-label="Category"
         >
           <span className="text-2xl">
-            <FcGrid />
+            <BiSolidCategory />
           </span>
           <span>Categories</span>
         </button>

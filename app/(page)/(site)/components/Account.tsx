@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { FcManager } from "react-icons/fc";
+import { MdAccountCircle } from "react-icons/md";
 import Logout from "../../Logout";
 
 export default function Account() {
@@ -8,7 +8,7 @@ export default function Account() {
     <div className="relative hidden md:block group">
       <button className="flex my-2 hover:text-blue-500">
         <span className="text-2xl mr-1">
-          <FcManager />
+          <MdAccountCircle />
         </span>
         Profile
       </button>
@@ -23,7 +23,7 @@ export default function Account() {
           <li key={index}>
             <Link
               href={item.link}
-              className="block hover:bg-gray-200 whitespace-nowrap py-3 px-6"
+              className="block hover:bg-blue-50 whitespace-nowrap py-3 px-6"
             >
               {item.title}
             </Link>

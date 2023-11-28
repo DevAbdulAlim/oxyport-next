@@ -14,11 +14,11 @@ export default function MobileNav() {
     }
 
   return (
-    <nav className="bg-blue-950 py-2 shadow-lg fixed bottom-0 z-40 w-full md:hidden">
-      <ul className="flex justify-evenly w-full space-x-4 text-blue-50">
+    <nav className="bg-blue-100 py-2 shadow-2xl fixed bottom-0 z-40 w-full md:hidden">
+      <ul className="flex justify-evenly w-full space-x-4 text-gray-700">
         <li>
           <Link
-            className={`${pathname === "/" ? "text-blue-200" : ""}`}
+            className={`${pathname === "/" ? "text-blue-500" : ""}`}
             href="/"
           >
             <span className="text-2xl flex justify-center">
@@ -29,7 +29,7 @@ export default function MobileNav() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/products/search" ? "text-blue-200" : ""}`}
+            className={`${pathname === "/products/search" ? "text-blue-500" : ""}`}
             href="/products/search"
           >
             <span className="text-2xl flex justify-center">
@@ -40,7 +40,7 @@ export default function MobileNav() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/categories" ? "text-blue-200" : ""}`}
+            className={`${pathname === "/categories" ? "text-blue-500" : ""}`}
             href="/categories"
           >
             <span className="text-2xl flex justify-center">
@@ -51,7 +51,7 @@ export default function MobileNav() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/cart" ? "text-blue-200" : ""}`}
+            className={`${pathname === "/cart" ? "text-blue-500" : ""}`}
             href="/cart"
           >
             <span className="text-2xl flex justify-center">

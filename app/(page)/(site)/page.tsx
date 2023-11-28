@@ -11,13 +11,13 @@ export default async function Page() {
   if (data) {
     return (
       <>
-<section className="px-3 bg-blue-900 text-white">
+<section className="px-3 bg-blue-950 text-white">
   <div className="max-w-7xl mx-auto flex flex-col items-center">
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <div className="flex justify-center">
         <img
           src="https://thumbs.dreamstime.com/b/girl-bags-15724562.jpg"
-          className="h-[500px]  w-full object-cover rounded-md"
+          className="h-[500px] w-full object-cover"
           alt="Shopping Bags"
         />
       </div>

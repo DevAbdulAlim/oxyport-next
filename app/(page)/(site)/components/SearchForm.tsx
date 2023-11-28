@@ -2,7 +2,6 @@
 
 import { useState } from "react"
 import { FaSearch } from "react-icons/fa"
-import { FcSearch } from "react-icons/fc"
 import Search from "./Search"
 
 export default function SearchForm() {
@@ -21,18 +20,18 @@ export default function SearchForm() {
           placeholder="Search"
         />
         <button
-          className="absolute right-2 text-white top-2 text-2xl"
+          className="absolute right-2  top-2 text-2xl"
           type="submit"
           aria-label="Search"
         >
-          <FcSearch />
+          <FaSearch />
         </button>
       </form>
 
       {/* Mobile Serach Button */}
       <div className="items-center flex md:hidden">
       <button
-        className="text-white top-2 text-xl"
+        className=" top-2 text-xl"
         type="submit"
         aria-label="Search"
         onClick={toggleOpen}
