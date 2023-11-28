@@ -12,7 +12,7 @@ export default function Account() {
         </span>
         Profile
       </button>
-      <ul className="hidden group-hover:block text-gray-600 shadow-lg rounded-sm bg-white absolute  right-0 space-y-2">
+      <ul className="hidden group-hover:block text-gray-600 shadow-lg rounded-sm bg-white absolute z-50 right-0 space-y-2">
         {[
           { title: "Orders", link: "/orders" },
           { title: "Settings", link: "settings" },

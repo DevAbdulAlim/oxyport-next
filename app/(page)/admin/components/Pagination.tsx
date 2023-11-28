@@ -46,57 +46,83 @@ export default function Pagination({
   }
 
   return (
-    <nav className="flex flex-wrap justify-center my-8">
-      {hasFirst && (
-        <button
-          type="button"
-          className="py-2 px-4 border"
-          onClick={handleFirst}
-        >
-          First
-        </button>
-      )}
-      {currentPage > 1 && (
-        <button type="button" className="py-2 px-4 border" onClick={handlePrev}>
-          Prev
-        </button>
-      )}
+<nav className="flex flex-wrap justify-center my-8">
+  {hasFirst && (
+    <button
+      type="button"
+      className="py-2 px-4 border rounded-md mr-2 transition-colors duration-300 hover:bg-blue-900 hover:text-white"
+      onClick={handleFirst}
+    >
+      First
+    </button>
+  )}
+  {currentPage > 1 && (
+    <button
+      type="button"
+      className="py-2 px-4 border rounded-md mr-2 transition-colors duration-300 hover:bg-blue-900 hover:text-white"
+      onClick={handlePrev}
+    >
+      Prev
+    </button>
+  )}
 
-      {startPage > 2 && (
-        <button
-          type="button"
-          className="py-2 px-4 border"
-          onClick={() => onPageChange(1)}
-        >
-          1
-        </button>
-      )}
+  {startPage > 2 && (
+    <button
+      type="button"
+      className="py-2 px-4 border rounded-md mr-2 transition-colors duration-300 hover:bg-blue-900 hover:text-white"
+      onClick={() => onPageChange(1)}
+    >
+      1
+    </button>
+  )}
 
-      {startPage > 3 && <span className="py-2 px-4">...</span>}
+  {startPage > 3 && <span className="py-2 px-4">...</span>}
 
-      {pageNumbers.map((pageNumber) => (
-           <button type="button" className={`py-2 px-4 border${
-            pageNumber === currentPage ? " bg-blue-900 text-white" : ""
-           }`} key={pageNumber}
-           onClick={() => onPageChange(pageNumber)}
-           >{pageNumber}</button>
-      ))}
+  {pageNumbers.map((pageNumber) => (
+    <button
+      type="button"
+      className={`py-2 px-4 border rounded-md mr-2 transition-colors duration-300 ${
+        pageNumber === currentPage
+          ? "bg-blue-900 text-white"
+          : "hover:bg-blue-900 hover:text-white"
+      }`}
+      key={pageNumber}
+      onClick={() => onPageChange(pageNumber)}
+    >
+      {pageNumber}
+    </button>
+  ))}
 
-      {endPage < totalPages -2 && <span className="py-2 px-4">...</span>}
-      {endPage < totalPages -1 && (
-        <button type="button" className="py-2 px-4 border" onClick={() => onPageChange(totalPages)}>{totalPages}</button>
-      )}
+  {endPage < totalPages - 2 && <span className="py-2 px-4">...</span>}
+  {endPage < totalPages - 1 && (
+    <button
+      type="button"
+      className="py-2 px-4 border rounded-md mr-2 transition-colors duration-300 hover:bg-blue-900 hover:text-white"
+      onClick={() => onPageChange(totalPages)}
+    >
+      {totalPages}
+    </button>
+  )}
 
-      {currentPage < totalPages && (
-        <button type="button" className="py-2 px-4 border" onClick={handleNext}>
-          Next
-        </button>
-      )}
-      {hasLast && (
-        <button type="button" className="py-2 px-4 border" onClick={handleLast}>
-          Last
-        </button>
-      )}
-    </nav>
+  {currentPage < totalPages && (
+    <button
+      type="button"
+      className="py-2 px-4 border rounded-md mr-2 transition-colors duration-300 hover:bg-blue-900 hover:text-white"
+      onClick={handleNext}
+    >
+      Next
+    </button>
+  )}
+  {hasLast && (
+    <button
+      type="button"
+      className="py-2 px-4 border rounded-md transition-colors duration-300 hover:bg-blue-900 hover:text-white"
+      onClick={handleLast}
+    >
+      Last
+    </button>
+  )}
+</nav>
+
   );
 }

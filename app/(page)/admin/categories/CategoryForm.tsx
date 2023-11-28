@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
 import { addOne } from "../services/addOne";
@@ -37,12 +37,12 @@ export default function CategoryForm({
         const newData = await editOne("categories", id, values);
         setSuccessMessage("Updated Successfully");
         setFormData({ ...newData.data });
-        actions.resetForm({ values: { ...newData.data } }); //
+        actions.resetForm({ values: { ...newData.data } });
       } else {
         await addOne("categories", values);
         setSuccessMessage("Added Successfully");
         setFormData({ ...initialValues });
-        actions.resetForm({ values: { ...initialValues } }); // Reset th
+        actions.resetForm({ values: { ...initialValues } });
       }
 
       setIsSubmitted(true);
@@ -50,7 +50,7 @@ export default function CategoryForm({
       setTimeout(() => {
         setSuccessMessage("");
         setIsSubmitted(false);
-      }, 1000);
+      }, 3000); // Show the success message for 3 seconds
     } catch (error) {
       console.error("Error:", error);
       setSuccessMessage("Failed to submit");
@@ -59,49 +59,62 @@ export default function CategoryForm({
   };
 
   return (
-    <section>
+    <section className="relative">
       {isSubmitted && (
-        <p className="bg-green-500 absolute text-white inline-block">
-          {successMessage}
-        </p>
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+          <div className="bg-green-500 text-white p-4 rounded-md z-10">
+            {successMessage}
+          </div>
+        </div>
       )}
       <Formik
         initialValues={formData}
         validationSchema={validateSchema}
         onSubmit={onSubmit}
       >
-        <Form className="m-4 shadow-md p-8">
-          <div className="mb-3">
-            <label htmlFor="name" className="mr-4">
+        <Form className="m-4 shadow-md p-8 bg-white rounded-md">
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-sm font-semibold mb-2">
               Category Name
             </label>
-            <Field type="text" id="name" className="border p-1" name="name" />
+            <Field
+              type="text"
+              id="name"
+              className="w-full border p-2 rounded-md"
+              name="name"
+            />
             <ErrorMessage
               name="name"
               component="div"
-              className="text-red-500"
+              className="text-red-500 text-sm mt-1"
             />
           </div>
 
-          <div className="mb-3">
-            <label htmlFor="description" className="mr-4">
+          <div className="mb-4">
+            <label
+              htmlFor="description"
+              className="block text-sm font-semibold mb-2"
+            >
               Category Description
             </label>
             <Field
               type="text"
               id="description"
-              className="border p-1"
+              className="w-full border p-2 rounded-md"
               name="description"
             />
             <ErrorMessage
               name="description"
               component="div"
-              className="text-red-500"
+              className="text-red-500 text-sm mt-1"
             />
           </div>
 
-          <div className="mb-3">
-            <button type="submit" className="bg-blue-500 text-white">
+          <div className="mb-4">
+            <button
+              type="submit"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition-colors duration-300"
+            >
               Submit
             </button>
           </div>
