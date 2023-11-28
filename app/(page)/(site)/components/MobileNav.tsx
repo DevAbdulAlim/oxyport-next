@@ -2,9 +2,16 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FcHome, FcShop, FcGrid, FcPaid, FcManager } from "react-icons/fc";
+import SideNav from "../(account)/SideNav";
+import { useState } from "react";
 
 export default function MobileNav() {
+  const [isOpen, setIsOpen] = useState(false)
   const pathname = usePathname();
+
+    const toggleNav = () => {
+    setIsOpen(!isOpen)
+    }
 
   return (
     <nav className="bg-blue-950 py-2 shadow-lg fixed bottom-0 z-40 w-full md:hidden">
@@ -22,8 +29,8 @@ export default function MobileNav() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/products" ? "text-blue-200" : ""}`}
-            href="/products"
+            className={`${pathname === "/products/search" ? "text-blue-200" : ""}`}
+            href="/products/search"
           >
             <span className="text-2xl flex justify-center">
               <FcShop />
@@ -44,8 +51,8 @@ export default function MobileNav() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/contact" ? "text-blue-200" : ""}`}
-            href="/contact"
+            className={`${pathname === "/cart" ? "text-blue-200" : ""}`}
+            href="/cart"
           >
             <span className="text-2xl flex justify-center">
               <FcPaid />
@@ -54,15 +61,13 @@ export default function MobileNav() {
           </Link>
         </li>
         <li>
-          <Link
-            className={`${pathname === "/contact" ? "text-blue-200" : ""}`}
-            href="/contact"
-          >
+          <button onClick={toggleNav}>
             <span className="text-2xl flex justify-center">
               <FcManager />
             </span>
             <span className="text-sm">Profile</span>
-          </Link>
+            <SideNav isOpen={isOpen} onClick={toggleNav} />
+          </button>
         </li>
       </ul>
     </nav>

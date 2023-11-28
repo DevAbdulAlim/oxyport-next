@@ -39,7 +39,7 @@ export default async function Page() {
     <section className="py-16 px-4 bg-gray-100">
       <h3 className="text-center text-gray-800 text-4xl mb-8 font-semibold">Explore Featured Categories</h3>
       <div className="container mx-auto">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
           {data.categories.map((item: ItemType) => (
             <div
               key={item.id}

@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <CustomProvider>
       <body className="flex flex-col h-screen ">
-        <header className="bg-blue-900 text-white py-4">
+        <header className="bg-blue-900 text-white">
           <div className="container mx-auto">
             <MainNav />
           </div>

@@ -75,7 +75,7 @@ export default function Cart() {
   }, []);
 
   return (
-    <div ref={cartRef} className="m-2 hidden md:block">
+    <div ref={cartRef} className="m-2">
       <div
         className={`fixed flex flex-col right-0 w-full sm:w-[420px] bg-white shadow-2xl text-black p-4 inset-y-0 ${
           menuOpen ? "" : "translate-x-full"
@@ -164,9 +164,9 @@ export default function Cart() {
 
       <button
         onClick={toggleMenu}
-        className="flex items-center space-x-2 bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 focus:outline-none"
+        className="flex items-center space-x-2 text-white py-1 px-2 rounded-full hover:bg-blue-600 focus:outline-none"
       >
-        <span className="text-2xl">
+        <span className="text-xl">
           <FaShoppingCart />
         </span>
         <span> {totalItems}</span>
