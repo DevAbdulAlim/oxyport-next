@@ -1,19 +1,29 @@
 "use client";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decreaseQuantity, increaseQuantity } from "@/redux/reducers/cartSlice";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "@/redux/reducers/cartSlice";
 
 export interface ProductCardProps {
   id: number;
   name: string;
   price: number;
+  image: string;
   // Add any other properties you have in your ItemType
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ id, name, price }) => {
+const ProductCard: React.FC<ProductCardProps> = ({
+  id,
+  name,
+  price,
+  image,
+}) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
-      dispatch(addToCart({ id, name, price, quantity: 1 }));
+    dispatch(addToCart({ id, name, price, quantity: 1 }));
   };
 
   const handleIncrease = () => {
@@ -28,12 +38,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price }) => {
     state.cart.items.find((item: any) => item.id === id)
   );
 
-
   return (
-    <div className="max-w-md mx-auto bg-white rounded-md overflow-hidden shadow-md">
+    <div className=" bg-white rounded-md overflow-hidden shadow-md">
       <div className="relative">
         <img
-          src="https://th.bing.com/th/id/OIP.L_IBmQ5JmWqU-k1Ezm9DjgHaFj?rs=1&pid=ImgDetMain"
+          src={`/images/products/${image}`}
           alt={name}
           className="h-60 w-full object-cover"
         />
@@ -43,9 +52,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price }) => {
           </span>
         )}
         <span className="absolute top-2 left-2 bg-yellow-500 text-white py-1 px-2 rounded-full">
-            Phone
-          </span>
-        
+          Phone
+        </span>
       </div>
       <div className="p-4">
         <h2 className="text-xl font-semibold text-blue-900 hover:underline">
@@ -95,9 +103,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ id, name, price }) => {
       </div>
     </div>
   );
-  
-  
-  
 };
 
 export default ProductCard;
