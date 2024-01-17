@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface CartItem {
@@ -16,14 +16,14 @@ const initialState: CartSate = {
   items: [],
 };
 
-const loadCartFromLocalStorage = ():CartSate => {
-  const storedCart = localStorage.getItem('cart');
+const loadCartFromLocalStorage = (): CartSate => {
+  const storedCart = localStorage.getItem("cart");
   return storedCart ? JSON.parse(storedCart) : initialState;
-}
+};
 
-const saveCartToLocalStorage = (state: CartSate):void => {
-  localStorage.setItem('cart', JSON.stringify(state));
-}
+const saveCartToLocalStorage = (state: CartSate): void => {
+  localStorage.setItem("cart", JSON.stringify(state));
+};
 
 const cartSlice = createSlice({
   name: "cart",
@@ -38,32 +38,40 @@ const cartSlice = createSlice({
         state.items.push({ id, name, price, quantity: 1 });
       }
 
-      saveCartToLocalStorage(state)
+      saveCartToLocalStorage(state);
     },
 
-    removeFromCart(state, action:PayloadAction<number>) {
+    removeFromCart(state, action: PayloadAction<number>) {
       const idToRemove = action.payload;
-      state.items = state.items.filter(item => item.id !== idToRemove)
+      state.items = state.items.filter((item) => item.id !== idToRemove);
 
-      saveCartToLocalStorage(state)
+      saveCartToLocalStorage(state);
     },
 
-    increaseQuantity(state, action: PayloadAction<number>){
+    increaseQuantity(state, action: PayloadAction<number>) {
       const idToIncrease = action.payload;
-      state.items = state.items.map(item => item.id === idToIncrease? {...item, quantity: item.quantity + 1}: item);
+      state.items = state.items.map((item) =>
+        item.id === idToIncrease
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
 
-      saveCartToLocalStorage(state)
+      saveCartToLocalStorage(state);
     },
 
     decreaseQuantity(state, action: PayloadAction<number>) {
       const idToDecrease = action.payload;
-      state.items = state.items.map(item => item.id === idToDecrease? {...item, quantity: item.quantity - 1}: item);
+      state.items = state.items.map((item) =>
+        item.id === idToDecrease
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      );
 
-      saveCartToLocalStorage(state)
+      saveCartToLocalStorage(state);
     },
-
   },
 });
 
-export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } = cartSlice.actions;
+export const { addToCart, removeFromCart, increaseQuantity, decreaseQuantity } =
+  cartSlice.actions;
 export default cartSlice.reducer;

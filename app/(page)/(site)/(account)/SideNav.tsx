@@ -15,9 +15,9 @@ export default function SideNav({isOpen, onClick}: {isOpen?: boolean, onClick?: 
   ];
 
   return (
-    <nav  className={`fixed flex flex-col right-0 w-64 sm:w-[420px] bg-white shadow-2xl text-black p-4 inset-y-0 ${
-      isOpen ? "" : "translate-x-full"
-    } transition-all duration-500 z-30 ease-in-out `}>
+    <nav  className={`fixed md:static flex flex-col right-0 w-64 md:w-full bg-white  text-black p-4 inset-y-0 ${
+      isOpen ? "shadow-2xl" : "translate-x-full md:translate-x-0"
+    } transition-all duration-500 z-30 md:z-0 ease-in-out `}>
       <div className="text-center mb-6">
         <img
           src="https://silicon.createx.studio/assets/img/avatar/18.jpg"

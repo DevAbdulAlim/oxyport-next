@@ -77,8 +77,8 @@ export default function Cart() {
   return (
     <div ref={cartRef} className="m-2">
       <div
-        className={`fixed flex flex-col right-0 w-full sm:w-[420px] bg-white shadow-2xl text-black p-4 inset-y-0 ${
-          menuOpen ? "" : "translate-x-full"
+        className={`fixed flex flex-col right-0 w-full sm:w-[420px] bg-white  text-black p-4 inset-y-0 ${
+          menuOpen ? "shadow-2xl" : "translate-x-full"
         } transition-all duration-500 z-30 ease-in-out `}
       >
         {/* topbar */}

@@ -42,8 +42,8 @@ const UserSettingsPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="max-w-md w-full p-6 bg-white rounded-md shadow-md">
+    <div className="min-h-screen flex  justify-center">
+      <div className="w-full p-6 bg-white rounded-md shadow-md">
         <h2 className="text-3xl font-semibold mb-6 text-center">User Settings</h2>
 
         <form onSubmit={handleSubmit} className="space-y-4">

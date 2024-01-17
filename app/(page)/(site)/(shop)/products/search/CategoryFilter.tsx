@@ -1,5 +1,5 @@
-'use client'
-import React, { useState } from 'react';
+"use client";
+import React, { useState } from "react";
 import { CategoryListType, CategoryType } from "@/lib/types/CategoryTypes";
 
 interface CategoryFilterProps {
@@ -7,12 +7,15 @@ interface CategoryFilterProps {
   onChange: (values: number[]) => void;
 }
 
-export default function CategoryFilter({ categories, onChange }: CategoryFilterProps) {
+export default function CategoryFilter({
+  categories,
+  onChange,
+}: CategoryFilterProps) {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 
   const handleCheckboxChange = (categoryId: number) => {
     const updatedSelection = selectedCategories.includes(categoryId)
-      ? selectedCategories.filter(id => id !== categoryId)
+      ? selectedCategories.filter((id) => id !== categoryId)
       : [...selectedCategories, categoryId];
 
     setSelectedCategories(updatedSelection);
