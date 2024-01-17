@@ -23,18 +23,16 @@ export default async function MainNav() {
 
   return (
     <nav className="flex   justify-between py-2 md:py-4  px-6">
-      <Link className="my-1 text-3xl flex items-center" href="/">
+      <Link className="mb-2 mr-4 text-3xl flex items-center" href="/">
         <span className="text-4xl">
           <FcDoughnutChart />
         </span>
-        <span className="ml-2 text-xl font-bold">Oxyport</span>
+        <span className="ml-1 text-xl font-bold">Oxyport</span>
       </Link>
 
       <CategoryDropdown categories={categories.data} />
 
-     
       <SearchForm />
-
 
       <Cart />
 
@@ -43,7 +41,7 @@ export default async function MainNav() {
       ) : (
         <Link
           href="/login"
-          className="rounded-md px-4 my-2 flex items-center justify-center font-semibold bg-blue-800 hover:bg-blue-700"
+          className="rounded-md px-4 my-2 flex items-center justify-center font-semibold bg-blue-800 text-white hover:bg-blue-700"
         >
           Login
         </Link>

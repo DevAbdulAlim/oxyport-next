@@ -44,11 +44,11 @@ export default async function Page() {
 
         <ShopByBrandSection />
 
-        <section className="py-12 px-4 bg-gray-50">
+        <section className="py-20 px-4 bg-gray-50">
           <div className="max-w-7xl mx-auto">
-            <h3 className="text-center text-3xl mb-6 font-semibold">
+            <h2 className="text-4xl font-extrabold mb-8 text-center">
               Featured Products
-            </h3>
+            </h2>
             <ProductsCardList products={data.products} />
             <div className="flex justify-center mt-8">
               <PrimaryButton href="/" text="See More Products" />

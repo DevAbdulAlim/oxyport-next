@@ -1,26 +1,31 @@
-'use client'
+"use client";
 
-import { useState } from "react"
-import { FaSearch } from "react-icons/fa"
-import Search from "./Search"
+import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
+import Search from "./Search";
 
 export default function SearchForm() {
-    const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-    const toggleOpen = () => {
-        setIsOpen(!isOpen)
-    }
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
-    <form action="" className="relative hidden md:flex items-center">
+      {/* Desktop Search */}
+      <form
+        action=""
+        className="relative hidden grow md:flex items-center bg-white rounded-full px-2 shadow-md"
+      >
         <input
-          className="h-full w-full focus:text-blue-200 rounded-full p-2 focus:outline-none focus:ring focus:ring-blue-800"
+          className="h-full w-full focus:text-blue-200 rounded-full p-2 focus:outline-none"
           type="text"
           name="search"
           placeholder="Search"
         />
         <button
-          className="absolute right-2  top-2 text-2xl"
+          className="absolute right-2 top-3 text-2xl text-gray-500"
           type="submit"
           aria-label="Search"
         >
@@ -28,19 +33,20 @@ export default function SearchForm() {
         </button>
       </form>
 
-      {/* Mobile Serach Button */}
-      <div className="items-center flex md:hidden">
-      <button
-        className=" top-2 text-xl"
-        type="submit"
-        aria-label="Search"
-        onClick={toggleOpen}
-      >
-        <FaSearch />
-      </button>
+      {/* Mobile Search */}
+      <div className="flex items-center md:hidden">
+        <button
+          className="text-xl text-gray-500"
+          type="button"
+          aria-label="Search"
+          onClick={toggleOpen}
+        >
+          <FaSearch />
+        </button>
 
-      <Search isOpen={isOpen} onClick={toggleOpen} />
+        {/* Mobile Search Overlay */}
+        <Search isOpen={isOpen} onClick={toggleOpen} />
       </div>
     </>
-  )
+  );
 }

@@ -53,7 +53,7 @@ const brands: Brand[] = [
 
 const ShopByBrandSection: React.FC = () => {
   return (
-    <section className="bg-gray-100 py-16">
+    <section className="bg-blue-100 py-20">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-extrabold mb-8 text-center">
           Shop by Brand
