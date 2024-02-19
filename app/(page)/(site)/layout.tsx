@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <TopNavbar />
 
         {/* Header */}
-        <header className="bg-blue-100 sticky top-0 z-30">
+        <header className="bg-blue-200 sticky shadow-md top-0 z-30">
           <div className="max-w-7xl mx-auto text-gray-700">
             <MainNav />
           </div>

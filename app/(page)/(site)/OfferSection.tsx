@@ -41,7 +41,7 @@ const PromotionSection: React.FC = () => {
               className="bg-cover bg-center bg-no-repeat h-80 rounded-md overflow-hidden transform hover:scale-105 transition-transform shadow-md duration-300 flex flex-col"
               style={{ backgroundImage: `url(${promo.imageUrl})` }}
             >
-              <div className="flex-1 p-6 flex flex-col justify-between bg-gradient-to-b from-transparent to-gray-800">
+              <div className="flex-1 p-6 flex flex-col justify-between bg-gradient-to-t from-transparent to-gray-800">
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-white">
                     {promo.title}
