@@ -37,45 +37,42 @@ export default function Navbar() {
 
   return (
     <>
-      <SideNav
-        isOpen={isOpen}
-        toggleOpen={toggleOpen}
-        sideNavRef={sideNavRef}
-      />
-
-      <nav className="md:ms-56 bg-blue-100 px-2 flex py-2 shadow-md justify-between">
+    <SideNav isOpen={isOpen} toggleOpen={toggleOpen} sideNavRef={sideNavRef} />
+  
+    <nav className="md:ms-56 bg-blue-200 px-4 py-2 flex items-center justify-between shadow-md">
+      <button
+        className="md:hidden m-2 text-2xl text-white"
+        onClick={toggleOpen}
+        aria-label="Menu"
+        ref={navButtonRef}
+      >
+        <FcMenu />
+      </button>
+  
+      <form action="" className="relative flex">
+        <input
+          className="h-full focus:text-blue-900 rounded-full p-2 focus:outline-none focus:ring focus:ring-blue-800"
+          type="text"
+          name="search"
+          placeholder="Search"
+        />
         <button
-          className="md:hidden m-2 text-2xl"
-          onClick={toggleOpen}
-          aria-label="Menu"
-          ref={navButtonRef}
+          className="absolute right-2 text-white top-2 text-2xl"
+          type="submit"
+          aria-label="Search"
         >
-          <FcMenu />
+          <FcSearch />
         </button>
-
-        <form action="" className="relative flex">
-          <input
-            className="h-full focus:text-blue-950  rounded-full p-2 focus:outline-none focus:ring focus:ring-blue-800"
-            type="text"
-            name="search"
-            placeholder="Search"
-          />
-          <button
-            className="absolute  right-2 text-black top-2 text-2xl"
-            type="submit"
-            aria-label="Search"
-          >
-            <FcSearch />
-          </button>
-        </form>
-
-        <button className=" m-2 flex">
-          <span className="text-2xl mr-1">
-            <FcManager />
-          </span>
-          Profile
-        </button>
-      </nav>
-    </>
+      </form>
+  
+      <button className="m-2 flex items-center text-gray-700">
+        <span className="text-2xl mr-1">
+          <FcManager />
+        </span>
+        Profile
+      </button>
+    </nav>
+  </>
+  
   );
 }

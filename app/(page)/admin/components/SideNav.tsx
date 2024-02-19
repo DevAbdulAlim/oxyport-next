@@ -23,29 +23,29 @@ type SideNavProps = {
 export function SideNav({ isOpen, toggleOpen, sideNavRef }: SideNavProps) {
   return (
     <div
-      className={`fixed left-0 top-0 h-full w-56 bg-blue-950 text-blue-50 ${
-        isOpen ? "shadow-2xl" : "-translate-x-full"
-      } transition-all duration-300 ease-in-out md:-translate-x-0 z-30  md:shadow-none `}
-      ref={sideNavRef}
-    >
-      <div className="flex p-4 justify-between mb-2">
-        <Link href="/dashboard" className="flex text-2xl">
-          <span className="text-4xl">
-            <FcDoughnutChart />
-          </span>
-          Oxyport
-        </Link>
-        <button
-          className="text-2xl md:hidden"
-          type="button"
-          onClick={toggleOpen}
-          aria-label="Delete Item"
-        >
-          <FcPrevious />
-        </button>
-      </div>
+    className={`fixed left-0 top-0 h-full w-56 bg-blue-950 text-blue-50 ${
+      isOpen ? "shadow-2xl" : "-translate-x-full"
+    } transition-all duration-300 ease-in-out md:-translate-x-0 z-30  md:shadow-none `}
+    ref={sideNavRef}
+  >
+    <div className="flex p-4 justify-between mb-2">
+      <Link href="/dashboard" className="flex text-2xl items-center">
+        <span className="text-4xl mr-2">
+          <FcDoughnutChart />
+        </span>
+        Oxyport
+      </Link>
+      <button
+        className="text-2xl md:hidden focus:outline-none"
+        type="button"
+        onClick={toggleOpen}
+        aria-label="Toggle Navigation"
+      >
+        <FcPrevious />
+      </button>
+    </div>
 
-      <hr className="mb-3" />
+      <hr className=" border-blue-500 my-2" />
 
       <ul className="p-2">
         <li className="mb-1">

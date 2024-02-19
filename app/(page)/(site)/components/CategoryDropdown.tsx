@@ -1,20 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { FcGrid } from "react-icons/fc";
+import { BiSolidCategory } from "react-icons/bi";
 import Link from "next/link";
+import { CategoryListType, CategoryType } from "@/lib/types/CategoryTypes";
 
-const categories = [
-  "Category 1",
-  "Category 2",
-  "Category 3",
-  "Category 4",
-  "Category 5",
-  "Category 6",
-  "Category 7",
-];
-
-export default function CategoryDropdown() {
+export default function CategoryDropdown({ categories }: CategoryListType) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
 
@@ -49,13 +40,13 @@ export default function CategoryDropdown() {
         <button
           type="button"
           id="options-menu"
-          className="hover:bg-blue-900 p-2 mx-2 flex rounded-full focus:bg-blue-800"
+          className="hover:bg-blue-50 p-2 mx-2 flex rounded-full focus:bg-blue-200"
           onClick={toggleDropdown}
           aria-haspopup="listbox"
           aria-label="Category"
         >
           <span className="text-2xl">
-            <FcGrid />
+            <BiSolidCategory />
           </span>
           <span>Categories</span>
         </button>
@@ -64,13 +55,13 @@ export default function CategoryDropdown() {
       {isOpen && (
         <div className="bg-white text-black mt-4 z-30 shadow-2xl p-4 absolute w-56">
           <div className="py-1">
-            {categories.map((item, index) => (
+            {categories.map((item:CategoryType) => (
               <Link
                 className="block hover:bg-gray-100 py-2 px-4 text-gray-700 text-sm"
-                href="/products"
-                key={index}
+                href={`/products/search?categories=${item.id}`}
+                key={item.id}
               >
-                {item}
+                {item.name}
               </Link>
             ))}
           </div>

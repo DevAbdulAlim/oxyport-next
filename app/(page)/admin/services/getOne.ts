@@ -1,9 +1,12 @@
-export default async function addOne(model: string, id: number) {
+export default async function addOne(model: string, id: number, token:string) {
   try {
     const response = await fetch(
       `http://localhost:3000/api/admin/${model}/${id}`,
       {
         next: { revalidate: 0 },
+        headers: {
+          Cookie: `token=${token}`
+        }
       }
     );
 

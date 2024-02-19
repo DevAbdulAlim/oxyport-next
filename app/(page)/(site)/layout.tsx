@@ -2,29 +2,34 @@ import type { Metadata } from "next";
 import MainNav from "./components/MainNav";
 import MobileNav from "./components/MobileNav";
 import CustomProvider from "./CustomProvider";
+import Footer from "./Footer";
+import TopNavbar from "./components/TopNavbar";
 
 export const metadata: Metadata = {
   title: "Home",
   description: "Ecommerce Site",
 };
 
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <CustomProvider>
-      <body className="flex flex-col h-screen">
-        <header className="bg-blue-950 text-blue-50 py-4">
-          <div className="container mx-auto">
+      <body className="flex flex-col min-h-screen">
+        <TopNavbar />
+
+        {/* Header */}
+        <header className="bg-blue-200 sticky shadow-md top-0 z-30">
+          <div className="max-w-7xl mx-auto text-gray-700">
             <MainNav />
           </div>
         </header>
-        <main className="grow">{children}</main>
-        <footer className="py-16 bg-blue-900 text-blue-50 text-center">
-          <p>&copy; 2023 Abdul Alim | All Rights Reserved</p>
-        </footer>
+
+        {/* Main Content */}
+        <main className="flex-grow">{children}</main>
+
+        {/* Footer */}
+        <Footer />
+
+        {/* MobileNav */}
         <MobileNav />
       </body>
     </CustomProvider>

@@ -1,13 +1,16 @@
 "use client";
-import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FcDoughnutChart } from "react-icons/fc";
 import * as Yup from "yup";
-import { BsFacebook } from "react-icons/bs";
-import { AiFillGoogleCircle } from "react-icons/ai";
 import Link from "next/link";
+import { forgotPassword } from "@/lib/auth/forgotPassword";
+import PrimaryButton from "@/components/buttons/PrimaryButton";
+import { useState } from "react";
+import Processing from "@/components/common/Processing";
 
-export default function ForgotPassword() {
+export default function Page() {
+  const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
   const initialValues = {
     email: "",
   };
@@ -18,9 +21,38 @@ export default function ForgotPassword() {
       .required("Email is required"),
   });
 
-  const handleSubmit = (values: any) => {
-    console.log("Form submitted with values:", values);
+  const SuccessMessage = () => {
+    return (
+      <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+      <div className="bg-white p-8 rounded-md mx-3 shadow-lg">
+        <h1 className="text-4xl font-bold mb-4">Request Accepted!</h1>
+        <p className="text-lg text-gray-700 mb-4">
+        A password reset link has been sent to your email. Please check your inbox and follow the instructions to reset your password.
+        </p>
+        <PrimaryButton href="/" text="Back to Home" />
+      </div>
+    </div>
+    );
+  }
+
+  const handleSubmit = async (values: any) => {
+    setLoading(true);
+    const response = await forgotPassword(values)
+    setLoading(false);
+    if(response) {
+      console.log("Form submitted with values:", values);
+      setSuccess(true);
+    } else {
+    }
   };
+
+  if(loading) {
+    return <Processing />
+  }
+
+  if(success) {
+    return <SuccessMessage />
+  }
 
   return (
     <section className="mx-3">
@@ -86,3 +118,4 @@ export default function ForgotPassword() {
     </section>
   );
 }
+

@@ -2,9 +2,13 @@ import Link from "next/link";
 import Cart from "./Cart";
 import CategoryDropdown from "./CategoryDropdown";
 import { FcSearch, FcDoughnutChart } from "react-icons/fc";
+import { FaSearch } from "react-icons/fa";
 import Account from "./Account";
 import { cookies } from "next/headers";
 import { authenticate } from "@/lib/authenticate";
+import { getAll } from "@/lib/services/getAll";
+import Search from "./Search";
+import SearchForm from "./SearchForm";
 
 export default async function MainNav() {
   const cookieStore = cookies();
@@ -15,39 +19,30 @@ export default async function MainNav() {
     isVerified = verified;
   }
 
+  const categories = await getAll("categories", 1, 8);
+
   return (
-    <nav className="flex justify-between">
-      <Link className="my-1 text-xl flex" href="/">
-        <span className="text-3xl">
+    <nav className="flex   justify-between py-2 md:py-4  px-6">
+      <Link className="mb-2 mr-4 text-3xl flex items-center" href="/">
+        <span className="text-4xl">
           <FcDoughnutChart />
         </span>
-        Oxyport
+        <span className="ml-1 text-xl font-bold">Oxyport</span>
       </Link>
 
-      <CategoryDropdown />
+      <CategoryDropdown categories={categories.data} />
 
-      <form action="" className="relative grow mx-8 flex">
-        <input
-          className="h-full w-full focus:text-blue-950  rounded-full p-2 focus:outline-none focus:ring focus:ring-blue-800"
-          type="text"
-          name="search"
-          placeholder="Search"
-        />
-        <button
-          className="absolute  right-2 text-black top-2 text-2xl"
-          type="submit"
-          aria-label="Search"
-        >
-          <FcSearch />
-        </button>
-      </form>
+      <SearchForm />
 
       <Cart />
 
       {isVerified ? (
         <Account />
       ) : (
-        <Link href="/login" className=" rounded-md px-2 py-2  font-semibold">
+        <Link
+          href="/login"
+          className="rounded-md px-4 my-2 flex items-center justify-center font-semibold bg-blue-800 text-white hover:bg-blue-700"
+        >
           Login
         </Link>
       )}
