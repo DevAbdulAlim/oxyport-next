@@ -30,7 +30,7 @@ export default async function MainNav() {
         <span className="ml-1 text-xl font-bold">Oxyport</span>
       </Link>
 
-      <CategoryDropdown categories={categories.data} />
+      {categories && <CategoryDropdown categories={categories.data} />}
 
       <SearchForm />
 

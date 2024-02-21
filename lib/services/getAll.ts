@@ -9,13 +9,13 @@ export const getAll = async (
       next: { revalidate: 0 },
     });
 
-    if (!response.ok) {
-      // Handle non-200 HTTP status codes
-      throw new Error(`Failed to fetch data (${response.status} ${response.statusText}) from ${apiUrl}`);
+    if (response.ok) {
+      const newData = await response.json();
+      return newData;
+    } else {
+      console.error("Failed to fetch");
+      return null;
     }
-
-    const newData = await response.json();
-    return newData;
   } catch (error) {
     // Handle network or parsing errors
     console.error("Oh no, an error occurred while fetching data:", error);

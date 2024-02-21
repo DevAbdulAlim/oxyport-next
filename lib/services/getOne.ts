@@ -7,15 +7,13 @@ export default async function addOne(model: string, id: number) {
       }
     );
 
-    if (!response.ok) {
-      // Handle non-200 HTTP status codes
-      throw new Error(
-        `Failed to fetch data (${response.status} ${response.statusText})`
-      );
+    if (response.ok) {
+      const newData = await response.json();
+      return newData;
+    } else {
+      console.error("Error fetch");
+      return null;
     }
-
-    const newData = await response.json();
-    return newData;
   } catch (error) {
     // Handle network or parsing errors
     console.error("Error fetching data:", error);
