@@ -6,12 +6,12 @@ import SideNav from "../(account)/SideNav";
 import { useState } from "react";
 
 export default function MobileNav() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
-    const toggleNav = () => {
-    setIsOpen(!isOpen)
-    }
+  const toggleNav = () => {
+    setIsOpen(!isOpen);
+  };
 
   return (
     <nav className="bg-blue-100 py-2 shadow-2xl fixed bottom-0 z-40 w-full md:hidden">
@@ -29,7 +29,9 @@ export default function MobileNav() {
         </li>
         <li>
           <Link
-            className={`${pathname === "/products/search" ? "text-blue-500" : ""}`}
+            className={`${
+              pathname === "/products/search" ? "text-blue-500" : ""
+            }`}
             href="/products/search"
           >
             <span className="text-2xl flex justify-center">
@@ -61,13 +63,13 @@ export default function MobileNav() {
           </Link>
         </li>
         <li>
-          <button onClick={toggleNav}>
+          <button onClick={toggleNav} type="button" aria-label="Profile">
             <span className="text-2xl flex justify-center">
               <FcManager />
             </span>
             <span className="text-sm">Profile</span>
-            <SideNav isOpen={isOpen} onClick={toggleNav} />
           </button>
+          <SideNav isOpen={isOpen} onClick={toggleNav} />
         </li>
       </ul>
     </nav>

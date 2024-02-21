@@ -1,5 +1,5 @@
-'use client'
-import React, { useState, useEffect } from 'react';
+"use client";
+import React, { useState, useEffect } from "react";
 
 interface PaymentMethod {
   id: string;
@@ -11,7 +11,8 @@ interface UserProfileProps {
   userId: string;
 }
 
-const UserProfile: React.FC<UserProfileProps> = ({ userId }) => {
+const UserProfile: React.FC = () => {
+  const userId = "1"; //dummy user id
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [selectedMethod, setSelectedMethod] = useState<string | null>(null);
 
@@ -26,7 +27,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ userId }) => {
 
         setPaymentMethods(data);
       } catch (error) {
-        console.error('Error fetching payment methods:', error);
+        console.error("Error fetching payment methods:", error);
       }
     };
 
@@ -39,10 +40,14 @@ const UserProfile: React.FC<UserProfileProps> = ({ userId }) => {
 
   return (
     <div className="max-w-full mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
-      <h2 className="text-3xl font-semibold mb-6 text-center">Saved Payment Methods</h2>
+      <h2 className="text-3xl font-semibold mb-6 text-center">
+        Saved Payment Methods
+      </h2>
 
       {paymentMethods.length === 0 ? (
-        <p className="text-gray-500 text-center">No saved payment methods found.</p>
+        <p className="text-gray-500 text-center">
+          No saved payment methods found.
+        </p>
       ) : (
         <div>
           {paymentMethods.map((method) => (
