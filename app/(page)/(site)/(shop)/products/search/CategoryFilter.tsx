@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import { CategoryListType, CategoryType } from "@/lib/types/CategoryTypes";
 
-interface CategoryFilterProps {
-  categories: CategoryListType;
+interface CategoryFilterProps extends CategoryListType {
   onChange: (values: number[]) => void;
 }
 
