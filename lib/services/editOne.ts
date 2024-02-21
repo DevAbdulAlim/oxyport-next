@@ -25,5 +25,6 @@ export async function editOne(model: string, id: number, data: dataObject) {
     }
   } catch (error) {
     console.error("Error:", error);
+    return null;
   }
 }
