@@ -15,22 +15,22 @@ export async function getAll(
   const modelMethods: Record<ValidModelNames, () => Promise<any>> = {
     category: () =>
       prisma.category.findMany({
-        skip: (currentPage - 1) * itemsPerPage,
+        skip: Math.max((currentPage - 1) * itemsPerPage, 0),
         take: itemsPerPage,
       }),
     product: () =>
       prisma.product.findMany({
-        skip: (currentPage - 1) * itemsPerPage,
+        skip: Math.max((currentPage - 1) * itemsPerPage, 0),
         take: itemsPerPage,
       }),
     order: () =>
       prisma.order.findMany({
-        skip: (currentPage - 1) * itemsPerPage,
+        skip: Math.max((currentPage - 1) * itemsPerPage, 0),
         take: itemsPerPage,
       }),
     user: () =>
       prisma.user.findMany({
-        skip: (currentPage - 1) * itemsPerPage,
+        skip: Math.max((currentPage - 1) * itemsPerPage, 0),
         take: itemsPerPage,
       }),
   };
@@ -57,8 +57,9 @@ export async function getAll(
     const foundItems = await findMany();
 
     // Check if the item is not found
-    if (!foundItems) {
-      return sendJsonResponse(404, false, { message: `${item} not found` });
+    // Check if the item is not found
+    if (foundItems.length === 0) {
+      return sendJsonResponse(200, true, { message: `${item} not found` });
     }
 
     // Send a successful response with the found item

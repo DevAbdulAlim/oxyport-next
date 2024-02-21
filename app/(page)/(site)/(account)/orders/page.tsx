@@ -34,27 +34,32 @@ export default async function orders() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {orders.data.map((order: orderType) => (
-              <tr className="hover:bg-blue-100 " key={order.id}>
-                <td className="px-6 py-4 whitespace-nowrap">{order.id}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.paymentMethod}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {order.transactionId ? order.transactionId : "undefined"}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">${order.total}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{order.status} </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <Link
-                    href={`/orders/${order.id}`}
-                    className="text-blue-600 hover:underline mr-2"
-                  >
-                    View
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {orders &&
+              orders.data.map((order: orderType) => (
+                <tr className="hover:bg-blue-100 " key={order.id}>
+                  <td className="px-6 py-4 whitespace-nowrap">{order.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {order.paymentMethod}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {order.transactionId ? order.transactionId : "undefined"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    ${order.total}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {order.status}{" "}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <Link
+                      href={`/orders/${order.id}`}
+                      className="text-blue-600 hover:underline mr-2"
+                    >
+                      View
+                    </Link>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
