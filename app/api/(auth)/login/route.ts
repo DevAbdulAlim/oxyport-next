@@ -4,11 +4,10 @@ import bcrypt from "bcrypt";
 import * as jose from "jose";
 import { cookies } from "next/headers";
 
-
 const prisma = new PrismaClient();
 
 // encode secret key
-const SECRET_KEY = process.env.NEXT_PUBLIC_JWT_SECRET;
+const SECRET_KEY = process.env.JWT_SECRET;
 const secret = new TextEncoder().encode(SECRET_KEY);
 
 export async function POST(req: NextRequest) {
@@ -39,7 +38,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    if(!user.active) {
+    if (!user.active) {
       return NextResponse.json(
         { message: "Your account is not active" },
         { status: 401 }

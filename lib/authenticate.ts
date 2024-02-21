@@ -1,7 +1,7 @@
 import * as jose from "jose";
 
 export async function authenticate(token: string) {
-  const secret = process.env.NEXT_PUBLIC_JWT_SECRET;
+  const secret = process.env.JWT_SECRET;
   const encodedSecret = new TextEncoder().encode(secret);
   const encodedToken = new TextEncoder().encode(token);
   try {
