@@ -19,6 +19,6 @@ export const getAll = async (
   } catch (error) {
     // Handle network or parsing errors
     console.error("Oh no, an error occurred while fetching data:", error);
-    throw error; // Re-throw the error for the caller to handle, if needed
+    return null;
   }
 };

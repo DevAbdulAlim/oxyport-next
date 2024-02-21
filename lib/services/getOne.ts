@@ -17,6 +17,6 @@ export default async function addOne(model: string, id: number) {
   } catch (error) {
     // Handle network or parsing errors
     console.error("Error fetching data:", error);
-    throw error; // Re-throw the error for the caller to handle, if needed
+    return null;
   }
 }
