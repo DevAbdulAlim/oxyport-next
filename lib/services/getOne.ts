@@ -1,7 +1,7 @@
 export default async function addOne(model: string, id: number) {
   try {
     const response = await fetch(
-      `http://localhost:3000/api/admin/${model}/${id}`,
+      `${process.env.HOST}/api/admin/${model}/${id}`,
       {
         next: { revalidate: 0 },
       }

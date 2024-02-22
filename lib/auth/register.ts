@@ -5,7 +5,7 @@ interface userDataProps {
 }
 export async function register(userData: userDataProps) {
   try {
-    const response = await fetch(`http://localhost:3000/api/register`, {
+    const response = await fetch(`${process.env.HOST}api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

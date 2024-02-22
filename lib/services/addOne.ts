@@ -4,7 +4,7 @@ type dataObject = {
 
 export async function addOne(model: string, data: dataObject) {
   try {
-    const response = await fetch(`http://localhost:3000/api/admin/${model}`, {
+    const response = await fetch(`${process.env.HOST}api/admin/${model}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

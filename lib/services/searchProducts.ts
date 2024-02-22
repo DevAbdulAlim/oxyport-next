@@ -7,7 +7,7 @@ export const searchProducts = async (
   pageSize?: number
 ) => {
   try {
-    const apiUrl = `http://localhost:3000/api/site/products/search?categories=${
+    const apiUrl = `${process.env.HOST}/api/site/products/search?categories=${
       categories || ""
     }&ratings=${ratings || ""}&minPrice=${minPrice || ""}&maxPrice=${
       maxPrice || ""
