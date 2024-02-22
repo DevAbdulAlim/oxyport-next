@@ -1,6 +1,6 @@
 export const getHomePageData = async () => {
   try {
-    const response = await fetch(`${process.env.HOST}api/site`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/site`, {
       next: { revalidate: 0 },
     });
 

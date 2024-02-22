@@ -4,7 +4,7 @@ export const getAll = async (
   itemsPerPage: number
 ) => {
   try {
-    const apiUrl = `${process.env.HOST}api/site/${model}?currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_HOST}api/site/${model}?currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`;
     const response = await fetch(apiUrl, {
       next: { revalidate: 0 },
     });

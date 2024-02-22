@@ -6,7 +6,9 @@ export async function verifyEmail(token: string): Promise<boolean> {
     }
 
     const response = await fetch(
-      `${process.env.HOST}api/email-verification?token=${token}`,
+
+      `${process.env.NEXT_PUBLIC_HOST}api/email-verification?token=${token}`,
+
       {
         method: "PUT",
         headers: {

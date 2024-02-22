@@ -1,7 +1,8 @@
 export default async function addOne(model: string, id: number) {
   try {
-    const response = await fetch(
-      `${process.env.HOST}/api/admin/${model}/${id}`,
+
+      `${process.env.NEXT_PUBLIC_HOST}/api/admin/${model}/${id}`,
+
       {
         next: { revalidate: 0 },
       }

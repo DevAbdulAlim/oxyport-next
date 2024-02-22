@@ -3,13 +3,16 @@ interface userDataProps {
 }
 export async function forgotPassword(userData: userDataProps) {
   try {
-    const response = await fetch(`${process.env.HOST}api/forgot-password`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST}api/forgot-password`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
 
     if (response.ok) {
       console.log("Registration successful");

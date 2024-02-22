@@ -1,6 +1,6 @@
 export async function login(email: string, password: string) {
   try {
-    const response = await fetch(`${process.env.HOST}api/login`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_HOST}api/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
