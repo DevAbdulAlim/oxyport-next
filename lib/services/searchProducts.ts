@@ -9,8 +9,8 @@ export const searchProducts = async (
   try {
 
     const apiUrl = `${
-      process.env.NEXT_PUBLIC_HOST
-    }/api/site/products/search?categories=${categories || ""}&ratings=${
+      process.env.NEXT_PUBLIC_HOST}api/site/products/search?categories=${categories || ""}&ratings=${
+
       ratings || ""
     }&minPrice=${minPrice || ""}&maxPrice=${maxPrice || ""}&page=${
       page || ""
