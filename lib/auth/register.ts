@@ -5,13 +5,16 @@ interface userDataProps {
 }
 export async function register(userData: userDataProps) {
   try {
-    const response = await fetch(`${process.env.HOST}api/register`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOST}api/register`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      }
+    );
 
     if (response.ok) {
       console.log("Registration successful");

@@ -14,7 +14,7 @@ export async function resetPassword({
     }
 
     const response = await fetch(
-      `${process.env.HOST}api/reset-password?token=${token}`,
+      `${process.env.NEXT_PUBLIC_HOST}api/reset-password?token=${token}`,
       {
         method: "PUT",
         headers: {
