@@ -1,7 +1,7 @@
 export async function removeOne(model: string, itemId: number) {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_HOST}/api/admin/${model}/${itemId}`,
+      `${process.env.NEXT_PUBLIC_HOST}api/admin/${model}/${itemId}`,
       {
         method: "DELETE",
       }
