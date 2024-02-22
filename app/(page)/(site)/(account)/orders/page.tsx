@@ -35,7 +35,9 @@ export default async function orders() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {orders &&
-              orders.data.map((order: orderType) => (
+              orders.data &&
+              Array.isArray(orders.data) &&
+              orders.data.map((order: any) => (
                 <tr className="hover:bg-blue-100 " key={order.id}>
                   <td className="px-6 py-4 whitespace-nowrap">{order.id}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
