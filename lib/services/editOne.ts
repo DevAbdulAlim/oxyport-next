@@ -5,7 +5,9 @@ type dataObject = {
 export async function editOne(model: string, id: number, data: dataObject) {
   try {
     const response = await fetch(
+
       `${process.env.NEXT_PUBLIC_HOST}api/admin/${model}/${id}`,
+
       {
         method: "PUT",
         headers: {

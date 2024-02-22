@@ -4,6 +4,7 @@ type dataObject = {
 
 export async function addOne(model: string, data: dataObject) {
   try {
+
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}api/admin/${model}`,
       {
@@ -14,6 +15,7 @@ export async function addOne(model: string, data: dataObject) {
         body: JSON.stringify(data),
       }
     );
+
 
     if (response.ok) {
       console.log(`Successfully added ${model}`);

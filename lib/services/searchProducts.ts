@@ -7,6 +7,7 @@ export const searchProducts = async (
   pageSize?: number
 ) => {
   try {
+
     const apiUrl = `${
       process.env.NEXT_PUBLIC_HOST
     }api/site/products/search?categories=${categories || ""}&ratings=${
@@ -14,6 +15,7 @@ export const searchProducts = async (
     }&minPrice=${minPrice || ""}&maxPrice=${maxPrice || ""}&page=${
       page || ""
     }&pageSize=${pageSize || ""}`;
+
 
     const response = await fetch(apiUrl, {
       next: { revalidate: 0 },
