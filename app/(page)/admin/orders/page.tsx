@@ -1,23 +1,25 @@
 import Link from "next/link";
-import { ListData } from "../components/ListData";
-import { getAll } from "../services/getAll";
-import Breadcrumb from "../components/Breadcrumb";
 import { FcPlus } from "react-icons/fc";
 import { cookies } from "next/headers";
+import Breadcrumb from "@/components/Breadcrumb";
+import { getAll } from "@/lib/actions/getAll";
+import { ListData } from "@/components/ListData";
 
 export default async function Page() {
   const model = "orders";
-  const cookieStore = cookies()
-  const token = cookieStore.get('token');
+  const cookieStore = cookies();
+  const token = cookieStore.get("token");
   if (!token) {
     return (
       <div className="container mx-auto">
         <Breadcrumb />
-        <h1 className="text-red-500 text-3xl font-bold mt-8">Oops! Authentication Failed</h1>
+        <h1 className="text-red-500 text-3xl font-bold mt-8">
+          Oops! Authentication Failed
+        </h1>
       </div>
     );
   }
-  const data = await getAll(model, 1, 5, token.value);
+  const data = await getAll(model, 1, 5);
   return (
     <>
       <div className="container mx-auto">
@@ -34,7 +36,12 @@ export default async function Page() {
             Add Order
           </Link>
         </div>
-        <ListData data={data.data} model={model} pages={data.totalPages} token={token.value} />
+        <ListData
+          data={data.data}
+          model={model}
+          pages={data.totalPages}
+          token={token.value}
+        />
       </div>
     </>
   );

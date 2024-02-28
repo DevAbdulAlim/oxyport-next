@@ -5,14 +5,20 @@ import * as Yup from "yup";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import Link from "next/link";
-import { login } from "@/lib/auth/login";
 import { useRouter, usePathname } from "next/navigation";
 import { useState } from "react";
+import { login } from "@/lib/actions/auth/login";
+import LoginSuccessPage from "./LoginSuccessful";
+import LoginFailurePage from "./loginFail";
 
 export default function Page() {
-  const [error, setError] = useState<string>("");
+  const [processing, setProcessing] = useState<boolean>(false);
+  const [LoginSuccess, setLoginSuccess] = useState<boolean>(false);
+  const [LoginFailure, setLoginFailure] = useState<boolean>(false);
+
   const router = useRouter();
   const pathname = usePathname();
+
   const initialValues = {
     email: "",
     password: "",
@@ -28,17 +34,28 @@ export default function Page() {
   });
 
   const handleSubmit = async (values: any) => {
+    setProcessing(true);
     const { email, password } = values;
-    const isSuccess = await login(email, password);
-    if (isSuccess) {
+    const { success } = await login(email, password);
+    setProcessing(false);
+
+    if (success) {
+      setLoginSuccess(true);
       if (pathname === "/login") {
         router.push("/");
       }
       router.refresh();
     } else {
-      setError("Invalid username or password");
+      setLoginFailure(true);
     }
   };
+
+  const resetState = () => {
+    setLoginFailure(false);
+  };
+
+  if (LoginSuccess) return <LoginSuccessPage />;
+  if (LoginFailure) return <LoginFailurePage onClick={resetState} />;
 
   return (
     <section className="mx-3">
@@ -54,6 +71,7 @@ export default function Page() {
             <h1 className="text-3xl font-semibold mb-6 text-center text-blue-900">
               Welcome to Oxyport
             </h1>
+
             <Formik
               initialValues={initialValues}
               validationSchema={validationSchema}
@@ -106,7 +124,7 @@ export default function Page() {
                     type="submit"
                     className="bg-blue-900 text-white w-full py-2 px-4 rounded-md hover:bg-blue-800 focus:outline-none focus:ring focus:border-blue-300"
                   >
-                    Login
+                    {processing ? "Processing" : "Login"}
                   </button>
                 </div>
               </Form>
@@ -138,13 +156,19 @@ export default function Page() {
             </button>
             <p className="text-center my-4">
               {"Don't Have an Account?"}{" "}
-              <Link href="/register" className="underline font-semibold text-blue-900">
+              <Link
+                href="/register"
+                className="underline font-semibold text-blue-900"
+              >
                 Register
               </Link>
             </p>
             <p className="text-center bg-gray-100 px-4 py-3 my-4 rounded-md">
               Forgot your password{" "}
-              <Link href="/forgot-password" className="underline font-semibold text-blue-900">
+              <Link
+                href="/forgot-password"
+                className="underline font-semibold text-blue-900"
+              >
                 Reset It
               </Link>
             </p>
@@ -152,6 +176,5 @@ export default function Page() {
         </div>
       </div>
     </section>
-  
   );
 }

@@ -1,7 +1,3 @@
-// ShopByBrandSection.tsx
-
-import React from "react";
-
 interface Brand {
   name: string;
   logoUrl: string;

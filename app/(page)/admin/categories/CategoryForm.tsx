@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
 import * as Yup from "yup";
-import { addOne } from "../services/addOne";
 import { useState } from "react";
-import { editOne } from "../services/editOne";
+import { editOne } from "@/lib/actions/editOne";
+import { addOne } from "@/lib/actions/addOne";
 
 const validateSchema = Yup.object({
   name: Yup.string().required("Name is required"),

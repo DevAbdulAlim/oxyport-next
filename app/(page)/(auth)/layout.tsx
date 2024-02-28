@@ -1,14 +1,5 @@
-import type { Metadata } from "next";
+import React from "react";
 
-export const metadata: Metadata = {
-  title: "Auth",
-  description: "Ecommerce Site",
-};
-
-export default function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return <body>{children}</body>;
+export default function layout({ children }: { children: React.ReactNode }) {
+  return children;
 }

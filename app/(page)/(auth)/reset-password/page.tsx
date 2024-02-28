@@ -1,12 +1,12 @@
-'use client'
+"use client";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useSearchParams } from "next/navigation";
 import { FcDoughnutChart } from "react-icons/fc";
 import * as Yup from "yup";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
 import { useState, useEffect } from "react";
-import Processing from "@/components/common/Processing";
-import { resetPassword } from "@/lib/auth/resetPassword";
+import Link from "@/components/ui/link";
+import { resetPassword } from "@/lib/actions/auth/resetPassword";
+import Processing from "@/components/processing";
 
 export default function Page() {
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ export default function Page() {
           <h1 className="text-4xl font-bold mb-4">
             Password reset successfully!
           </h1>
-          <PrimaryButton href="/login" text="Login" />
+          <Link to="/auth/login">Login</Link>
         </div>
       </div>
     );
@@ -46,7 +46,7 @@ export default function Page() {
             Please make sure the provided token is valid and try again. If the
             problem persists, you can contact support.
           </p>
-          <PrimaryButton href="/" text="Go back to Home" />
+          <Link to="/">Back to home</Link>
         </div>
       </div>
     );
@@ -60,7 +60,10 @@ export default function Page() {
         throw new Error("Invalid token");
       }
 
-      const response = await resetPassword({ password: values.password, token });
+      const response = await resetPassword({
+        password: values.password,
+        token,
+      });
 
       if (!response) {
         console.error("Password reset failed");

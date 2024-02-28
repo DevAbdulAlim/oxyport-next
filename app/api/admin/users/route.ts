@@ -1,11 +1,10 @@
-import { getAll, ValidModelNames } from "@/app/api/services/getAll";
+import { ModelNames } from "@/app/api/utils/types";
 import { addOne } from "@/app/api/services/addOne";
+import { getAll } from "@/app/api/services/getAll";
 import { NextRequest } from "next/server";
 
-// Define the model
-const model: ValidModelNames = "user";
+const model: ModelNames = "user";
 
-// GET CATEGORY
 export async function GET(req: NextRequest) {
   const currentPageParams = req.nextUrl.searchParams.get("currentPage");
   const itemsPerPageParams = req.nextUrl.searchParams.get("itemsPerPage");
@@ -20,15 +19,11 @@ export async function GET(req: NextRequest) {
     itemsPerPage = parseInt(itemsPerPageParams);
   }
 
-  // Call the 'getAll' function to retrieve all Items
   return getAll(model, currentPage, itemsPerPage);
 }
 
-// ADD CATEGORY
 export async function POST(req: NextRequest) {
-  // Retrieve data from the request
   const data = await req.json();
 
-  // Call the 'addOne' function to retrieve the item based on the model and ID
   return addOne(model, data);
 }

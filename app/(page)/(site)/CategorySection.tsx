@@ -78,7 +78,7 @@ export default function CategorySection() {
               </div>
               <div className="p-4 text-center">
                 <a
-                  href={`/products/search?categories=${item.id}`}
+                  href={`/product/search?categories=${item.id}`}
                   className="text-lg font-semibold text-gray-800 hover:text-blue-600"
                 >
                   {item.name}

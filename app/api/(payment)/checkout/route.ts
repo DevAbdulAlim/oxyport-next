@@ -1,6 +1,6 @@
-import prisma from "@/prisma";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { sendJsonResponse } from "../../utils/sendJsonResponse";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   const { cartItems } = await req.json();
@@ -9,62 +9,51 @@ export async function POST(req: NextRequest) {
 
 const checkProductsExistence = async (cartItems: CartItemType[]) => {
   try {
-  // Extract productIds from the cartItems array
-  const productIds = cartItems.map((product) => product.id);
-  // Use Prisma Client to query the database for existing products
-  const existingProducts = await prisma.product.findMany({
-    where: {
-      id: {
-        in: productIds,
+    const productIds = cartItems.map((product) => product.id);
+
+    const existingProducts = await prisma.product.findMany({
+      where: {
+        id: {
+          in: productIds,
+        },
       },
-    },
-  });
+    });
 
-  // Create a map to store the stock for each product
-  const stockMap = new Map(
-    existingProducts.map((product) => [product.id, product.stock])
-  );
-
-
-
-  // Check each requested product
-  const productsWithAvailability = cartItems.map((product) => {
-    const existingProduct = existingProducts.find(
-      (p) => p.id === product.id
+    const stockMap = new Map(
+      existingProducts.map((product) => [product.id, product.stock])
     );
 
-    if (existingProduct) {
-      const availableStock = stockMap.get(existingProduct.id) || 0;
+    const productsWithAvailability = cartItems.map((product) => {
+      const existingProduct = existingProducts.find((p) => p.id === product.id);
 
-      if (product.quantity <= availableStock) {
-        // Sufficient stock
-        return {
-          id: product.id,
-          quantity: product.quantity,
-          status: "available",
-        };
+      if (existingProduct) {
+        const availableStock = stockMap.get(existingProduct.id) || 0;
+
+        if (product.quantity <= availableStock) {
+          return {
+            id: product.id,
+            quantity: product.quantity,
+            status: "available",
+          };
+        } else {
+          return {
+            id: product.id,
+            quantity: product.quantity,
+            status: "insufficientStock",
+          };
+        }
       } else {
-        // Insufficient stock
         return {
           id: product.id,
           quantity: product.quantity,
-          status: "insufficientStock",
+          status: "notFound",
         };
       }
-
-    } else {
-      // Product not found
-      return {
-        id: product.id,
-        quantity: product.quantity,
-        status: "notFound",
-      };
-    }
-  });
-  return sendJsonResponse(200, true, { productsWithAvailability });
+    });
+    return sendJsonResponse(200, true, { productsWithAvailability });
   } catch (error) {
     console.error("Error checking product existence:", error);
-    return sendJsonResponse(500,false, {message: "Internal Sever Error"});
+    return sendJsonResponse(500, false, { message: "Internal Sever Error" });
   }
 };
 

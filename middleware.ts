@@ -1,41 +1,42 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { authenticate } from "./lib/authenticate";
+import { authenticate } from "./app/api/utils/authenticate";
 
-const adminRoutes = ["/admin", "/api/admin"];
+const adminRoutes = ["/api/admin"];
 const privateRoutes = ["/orders", "/address"];
 
 export async function middleware(req: NextRequest) {
-  const token = req.cookies.get("token");
   const pathname = req.nextUrl.pathname;
+  const token = req.cookies.get("token")?.value || req.headers.get("token");
 
   // Admin Site & API authentication
   if (adminRoutes.some((route) => pathname.startsWith(route))) {
-    if (token) {
-      const { verified, payload } = await authenticate(token.value);
-      if (!verified) {
-        return NextResponse.rewrite(new URL("/not-found", req.url));
-      }
-      if (payload?.role !== "admin") {
-        return NextResponse.rewrite(new URL("/not-found", req.url));
-      }
-      if (pathname === "/admin") {
-        return NextResponse.rewrite(new URL("/admin/dashboard", req.url));
-      }
-      
-    } else {
+    if (!token) {
+      return NextResponse.next();
+    }
+
+    const { success, role } = await authenticate(token);
+    if (!success) {
       return NextResponse.rewrite(new URL("/not-found", req.url));
+    }
+
+    if (role !== "admin") {
+      return NextResponse.rewrite(new URL("/not-found", req.url));
+    }
+
+    if (pathname === "/admin") {
+      return NextResponse.rewrite(new URL("/admin/dashboard", req.url));
     }
   }
 
   // Site Private route authentication
   if (privateRoutes.some((route) => pathname.startsWith(route))) {
-    if (token) {
-      const { verified } = await authenticate(token.value);
-      if (!verified) {
-        return NextResponse.rewrite(new URL("/login", req.url));
-      }
-    } else {
+    if (!token) {
+      return NextResponse.next();
+    }
+
+    const { success } = await authenticate(token);
+    if (!success) {
       return NextResponse.rewrite(new URL("/login", req.url));
     }
   }
@@ -44,5 +45,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/:path*"],
+  matcher: ["/api/:path*"],
 };
