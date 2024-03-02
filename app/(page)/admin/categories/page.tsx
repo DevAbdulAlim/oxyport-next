@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FcPlus } from "react-icons/fc";
 import Breadcrumb from "@/components/Breadcrumb";
 import { getAll } from "@/lib/actions/getAll";
-import CategoryTable from "./categoryTable";
+import CategoryTable from "./table";
 import Pagination from "@/components/Pagination";
 
 export default async function Page({
