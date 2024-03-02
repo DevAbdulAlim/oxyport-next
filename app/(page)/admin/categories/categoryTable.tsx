@@ -48,10 +48,16 @@ const CategoryTable: React.FC<CategoryTableProps> = ({ categories }) => {
                 {category.updatedAt}
               </td>
               <td className="border flex space-x-4 border-gray-300 px-4 py-2">
-                <Link to={`/admin/categories/${category.id}/edit`}>
+                <Link
+                  variant="warning"
+                  to={`/admin/categories/${category.id}/edit`}
+                >
                   <FaEdit />
                 </Link>
-                <Link to={`/admin/categories/${category.id}/view`}>
+                <Link
+                  variant="success"
+                  to={`/admin/categories/${category.id}/view`}
+                >
                   <BiSolidShow />
                 </Link>
 

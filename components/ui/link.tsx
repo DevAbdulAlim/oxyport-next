@@ -13,7 +13,7 @@ const linkVariants = cva(
         secondary:
           "text-gray-500 hover:text-gray-600 focus:text-gray-600 focus:ring-gray-400",
         success:
-          "bg-green-500 text-white hover:bg-green-600 focus:ring-green-400",
+          "text-green-500 hover:text-green-600 focus:text-green-600 focus:ring-green-400",
         danger:
           "text-red-500 hover:text-red-600 focus:text-red-600 focus:ring-red-400",
         warning:

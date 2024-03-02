@@ -3,26 +3,13 @@ import { FcPlus } from "react-icons/fc";
 import { cookies } from "next/headers";
 import Breadcrumb from "@/components/Breadcrumb";
 import { getAll } from "@/lib/actions/getAll";
-// import { ListData } from "@/components/ListData";
 import CategoryTable from "./categoryTable";
 import Pagination from "@/components/Pagination";
 
 export default async function Page() {
-  const model = "product/categories";
-  const cookieStore = cookies();
-  const token = cookieStore.get("token");
-  if (!token) {
-    return (
-      <div className="container mx-auto">
-        <Breadcrumb />
-        <h1 className="text-red-500 text-3xl font-bold mt-8">
-          Oops! Authentication Failed
-        </h1>
-      </div>
-    );
-  }
-  const data = await getAll(model, 1, 5);
-  console.log(data);
+  const data = await getAll("admin/categories", 1, 5);
+  const totalPages = data.data.length / 5;
+  console.log(data.data.length);
   return (
     <>
       <div className="container mx-auto">
@@ -34,7 +21,7 @@ export default async function Page() {
           </h1>
 
           <Link
-            href="/admin/categories/new"
+            href="/admin/categories/create"
             className="flex items-center bg-blue-900 text-white py-2 px-3 rounded-md hover:bg-blue-800 transition-colors duration-300"
           >
             <span className="text-2xl mr-2">
@@ -45,7 +32,7 @@ export default async function Page() {
         </div>
 
         <CategoryTable categories={data.data} />
-        <Pagination totalPages={5} />
+        <Pagination totalPages={totalPages} />
       </div>
     </>
   );

@@ -12,7 +12,7 @@ const initialState = {
 function DeleteButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" isLoading={pending}>
+    <Button type="submit" variant="dangerIcon" isLoading={pending}>
       <MdDelete />
     </Button>
   );

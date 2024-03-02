@@ -14,6 +14,8 @@ const buttonVariants = cva(
         success:
           "bg-green-500 text-white hover:bg-green-600 focus:ring-green-400",
         danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-400",
+        dangerIcon:
+          "text-red-500 hover:text-red-600 focus:text-red-600 focus:ring-red-400",
         warning:
           "bg-yellow-500 text-white hover:bg-yellow-600 focus:ring-yellow-400",
         info: "bg-teal-500 text-white hover:bg-teal-600 focus:ring-teal-400",

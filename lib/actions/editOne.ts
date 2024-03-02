@@ -1,4 +1,4 @@
-"user server";
+"use server";
 
 type dataObject = {
   [key: string]: any;
