@@ -4,17 +4,16 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 interface PaginationProps {
   totalPages: number;
+  pageSize: number;
 }
 
-export default function Pagination({ totalPages }: PaginationProps) {
+export default function Pagination({ totalPages, pageSize }: PaginationProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const params = new URLSearchParams(searchParams.toString());
   const currentPage = parseInt(params.get("page") || "1");
-
-  const pagesToShow = 5;
 
   const handleFirst = () => {
     const queryParams = new URLSearchParams(searchParams.toString());
@@ -51,10 +50,10 @@ export default function Pagination({ totalPages }: PaginationProps) {
 
   if (startPage < 1) {
     startPage = 1;
-    endPage = Math.min(totalPages, startPage + pagesToShow - 1);
+    endPage = Math.min(totalPages, startPage + pageSize - 1);
   } else if (endPage > totalPages) {
     endPage = totalPages;
-    startPage = Math.max(1, endPage - pagesToShow + 1);
+    startPage = Math.max(1, endPage - pageSize + 1);
   }
 
   const pageNumbers = [];

@@ -9,7 +9,7 @@ export const getAll = async (
 ) => {
   const token = cookies().get("token")?.value;
   try {
-    const apiUrl = `${process.env.API_HOST}/api/${model}?currentPage=${currentPage}&itemsPerPage=${itemsPerPage}`;
+    const apiUrl = `${process.env.API_HOST}/api/${model}?page=${currentPage}&pageSize=${itemsPerPage}`;
     const response = await fetch(apiUrl, {
       next: { revalidate: 0 },
       headers: {

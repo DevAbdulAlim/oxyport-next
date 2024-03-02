@@ -6,8 +6,8 @@ import { NextRequest } from "next/server";
 const model: ModelNames = "category";
 
 export async function GET(req: NextRequest) {
-  const currentPageParams = req.nextUrl.searchParams.get("currentPage");
-  const itemsPerPageParams = req.nextUrl.searchParams.get("itemsPerPage");
+  const currentPageParams = req.nextUrl.searchParams.get("page");
+  const itemsPerPageParams = req.nextUrl.searchParams.get("pageSize");
 
   let currentPage: number = 1;
   let itemsPerPage: number = 10;

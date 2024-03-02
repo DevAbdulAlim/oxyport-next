@@ -3,7 +3,6 @@
 import { useFormState, useFormStatus } from "react-dom";
 import { createCategory } from "@/lib/actions/admin/categoryAction";
 import Button from "@/components/ui/button";
-import { useState } from "react";
 
 const initialState = {
   message: "",

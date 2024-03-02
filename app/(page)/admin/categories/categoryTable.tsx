@@ -30,41 +30,42 @@ const CategoryTable: React.FC<CategoryTableProps> = ({ categories }) => {
           </tr>
         </thead>
         <tbody>
-          {categories.map((category) => (
-            <tr key={category.id} className="hover:bg-gray-100">
-              <td className="border  border-gray-300 px-4 py-2">
-                {category.id}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {category.name}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {category.description}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {category.createdAt}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {category.updatedAt}
-              </td>
-              <td className="border flex space-x-4 border-gray-300 px-4 py-2">
-                <Link
-                  variant="warning"
-                  to={`/admin/categories/${category.id}/edit`}
-                >
-                  <FaEdit />
-                </Link>
-                <Link
-                  variant="success"
-                  to={`/admin/categories/${category.id}/view`}
-                >
-                  <BiSolidShow />
-                </Link>
+          {Array.isArray(categories) &&
+            categories.map((category) => (
+              <tr key={category.id} className="hover:bg-gray-100">
+                <td className="border  border-gray-300 px-4 py-2">
+                  {category.id}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {category.name}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {category.description}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {category.createdAt}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {category.updatedAt}
+                </td>
+                <td className="border flex space-x-4 border-gray-300 px-4 py-2">
+                  <Link
+                    variant="warning"
+                    to={`/admin/categories/${category.id}/edit`}
+                  >
+                    <FaEdit />
+                  </Link>
+                  <Link
+                    variant="success"
+                    to={`/admin/categories/${category.id}/view`}
+                  >
+                    <BiSolidShow />
+                  </Link>
 
-                <DeleteForm id={category.id} name={category.name} />
-              </td>
-            </tr>
-          ))}
+                  <DeleteForm id={category.id} name={category.name} />
+                </td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>

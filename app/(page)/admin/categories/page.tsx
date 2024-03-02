@@ -1,15 +1,21 @@
 import Link from "next/link";
 import { FcPlus } from "react-icons/fc";
-import { cookies } from "next/headers";
 import Breadcrumb from "@/components/Breadcrumb";
 import { getAll } from "@/lib/actions/getAll";
 import CategoryTable from "./categoryTable";
 import Pagination from "@/components/Pagination";
 
-export default async function Page() {
-  const data = await getAll("admin/categories", 1, 5);
-  const totalPages = data.data.length / 5;
-  console.log(data.data.length);
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: number;
+    pageSize?: number;
+  };
+}) {
+  const page = searchParams?.page || 1;
+  const pageSize = searchParams?.pageSize || 10;
+  const response = await getAll("admin/categories", page, pageSize);
   return (
     <>
       <div className="container mx-auto">
@@ -31,8 +37,8 @@ export default async function Page() {
           </Link>
         </div>
 
-        <CategoryTable categories={data.data} />
-        <Pagination totalPages={totalPages} />
+        <CategoryTable categories={response.data} />
+        <Pagination totalPages={response.totalPages} pageSize={pageSize} />
       </div>
     </>
   );
