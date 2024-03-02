@@ -1,30 +1,45 @@
 "use client";
 
-export default function Pagination({
-  currentPage,
-  totalPages,
-  onPageChange,
-}: {
-  currentPage: number;
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
+
+interface PaginationProps {
   totalPages: number;
-  onPageChange: (page: number) => void;
-}) {
-  const pagesToShow = 5; // Number of pages to show (including current page)
+}
+
+export default function Pagination({ totalPages }: PaginationProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const params = new URLSearchParams(searchParams.toString());
+  const currentPage = parseInt(params.get("page") || "1");
+
+  const pagesToShow = 5;
 
   const handleFirst = () => {
-    onPageChange(1);
+    const queryParams = new URLSearchParams(searchParams.toString());
+    queryParams.set("page", "1");
+    router.push(`${pathname}?${queryParams.toString()}`);
   };
 
   const handleLast = () => {
-    onPageChange(totalPages);
+    const queryParams = new URLSearchParams(searchParams.toString());
+    queryParams.set("page", totalPages.toString());
+    router.push(`${pathname}?${queryParams.toString()}`);
   };
 
   const handlePrev = () => {
-    onPageChange(currentPage - 1);
+    const queryParams = new URLSearchParams(searchParams.toString());
+    const prevPage = currentPage - 1;
+    queryParams.set("page", prevPage.toString());
+    router.push(`${pathname}?${queryParams.toString()}`);
   };
 
   const handleNext = () => {
-    onPageChange(currentPage + 1);
+    const queryParams = new URLSearchParams(searchParams.toString());
+    const nextPage = currentPage + 1;
+    queryParams.set("page", nextPage.toString());
+    router.push(`${pathname}?${queryParams.toString()}`);
   };
 
   const hasFirst = currentPage > 3;
@@ -72,7 +87,7 @@ export default function Pagination({
         <button
           type="button"
           className="py-2 px-4 border rounded-md mr-2 transition-colors duration-300 hover:bg-blue-900 hover:text-white"
-          onClick={() => onPageChange(1)}
+          onClick={() => router.push(`${pathname}?page=1`)}
         >
           1
         </button>
@@ -89,7 +104,11 @@ export default function Pagination({
               : "hover:bg-blue-900 hover:text-white"
           }`}
           key={pageNumber}
-          onClick={() => onPageChange(pageNumber)}
+          onClick={() => {
+            const queryParams = new URLSearchParams(searchParams.toString());
+            queryParams.set("page", pageNumber.toString());
+            router.push(`${pathname}?${queryParams.toString()}`);
+          }}
         >
           {pageNumber}
         </button>
@@ -100,7 +119,7 @@ export default function Pagination({
         <button
           type="button"
           className="py-2 px-4 border rounded-md mr-2 transition-colors duration-300 hover:bg-blue-900 hover:text-white"
-          onClick={() => onPageChange(totalPages)}
+          onClick={() => router.push(`${pathname}?page=${totalPages}`)}
         >
           {totalPages}
         </button>

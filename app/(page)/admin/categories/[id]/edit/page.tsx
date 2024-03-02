@@ -27,11 +27,11 @@ export default async function page({
     <div className="container mx-auto">
       <Breadcrumb />
       <h1>Edit Category</h1>
-      <CategoryForm
+      {/* <CategoryForm
         initialValues={initialValues.data}
         id={objectId}
         update={true}
-      />
+      /> */}
     </div>
   );
 }

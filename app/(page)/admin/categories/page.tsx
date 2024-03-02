@@ -3,7 +3,9 @@ import { FcPlus } from "react-icons/fc";
 import { cookies } from "next/headers";
 import Breadcrumb from "@/components/Breadcrumb";
 import { getAll } from "@/lib/actions/getAll";
-import { ListData } from "@/components/ListData";
+// import { ListData } from "@/components/ListData";
+import CategoryTable from "./categoryTable";
+import Pagination from "@/components/Pagination";
 
 export default async function Page() {
   const model = "product/categories";
@@ -26,7 +28,7 @@ export default async function Page() {
       <div className="container mx-auto">
         <Breadcrumb />
 
-        <div className="flex items-center mt-4 justify-between">
+        <div className="flex items-center my-4 justify-between">
           <h1 className="text-blue-950 font-semibold text-2xl">
             Category List
           </h1>
@@ -42,12 +44,8 @@ export default async function Page() {
           </Link>
         </div>
 
-        <ListData
-          data={data.data}
-          model={model}
-          pages={data.totalPages}
-          token={token.value}
-        />
+        <CategoryTable categories={data.data} />
+        <Pagination totalPages={5} />
       </div>
     </>
   );

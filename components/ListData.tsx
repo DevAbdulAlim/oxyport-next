@@ -16,7 +16,7 @@ type ListDataProps = {
   token: string;
 };
 
-export function ListData({ data, model, pages, token }: ListDataProps) {
+export function ,ListData({ data, model, pages, token }: ListDataProps) {
   const [items, setItems] = useState<ItemType[]>(data);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
@@ -105,11 +105,7 @@ export function ListData({ data, model, pages, token }: ListDataProps) {
         </table>
       </div>
 
-      <Pagination
-        currentPage={currentPage}
-        totalPages={totalPages}
-        onPageChange={onPageChange}
-      />
+      <Pagination totalPages={totalPages} />
     </>
   );
 }

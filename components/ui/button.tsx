@@ -55,10 +55,7 @@ const Button: FC<ButtonProps> = ({
       disabled={isLoading}
       {...props}
     >
-      {isLoading ? (
-        <BiLoaderCircle className="w-4 h-4 mr-2 animate-spin" />
-      ) : null}
-      {children}
+      {isLoading ? <BiLoaderCircle className=" animate-spin" /> : children}
     </button>
   );
 };

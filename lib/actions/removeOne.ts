@@ -1,6 +1,13 @@
 "use server";
 
-export async function removeOne(model: string, itemId: number) {
+import { revalidatePath } from "next/cache";
+
+export async function removeOne(
+  prevState: { message: string },
+  formData: FormData
+) {
+  const itemId = formData.get("id");
+  const model = formData.get("name");
   try {
     const response = await fetch(
       `${process.env.API_HOST}/api/admin/${model}/${itemId}`,
@@ -10,11 +17,12 @@ export async function removeOne(model: string, itemId: number) {
     );
 
     if (response.ok) {
-      console.log(`Successfully Deleted ${model}`);
+      revalidatePath("/");
+      return { success: true, message: `Successfully Deleted ${model}` };
     } else {
-      console.error("Failed to delete item");
+      return { success: false, message: `Failed to delete item` };
     }
   } catch (error) {
-    console.error("Error:", error);
+    return { success: false, message: `Error deleting item` };
   }
 }
