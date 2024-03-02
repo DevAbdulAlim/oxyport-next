@@ -1,16 +1,16 @@
 "use client";
-
 import { useFormState, useFormStatus } from "react-dom";
-import { createCategory } from "@/lib/actions/admin/categoryAction";
+import { createProduct } from "@/lib/actions/admin/productAction";
 import Button from "@/components/ui/button";
 
 const initialState = {
   message: "",
 };
 
-export default function CreateForm() {
-  const [state, formAction] = useFormState(createCategory, initialState);
+export default function ProductCreateForm() {
+  const [state, formAction] = useFormState(createProduct, initialState);
   const { pending } = useFormStatus();
+
   return (
     <section className="relative">
       {state.message && (
@@ -26,7 +26,7 @@ export default function CreateForm() {
       >
         <div className="mb-4">
           <label htmlFor="name" className="block text-sm font-semibold mb-2">
-            Category Name
+            Product Name
           </label>
           <input
             type="text"
@@ -41,12 +41,75 @@ export default function CreateForm() {
             htmlFor="description"
             className="block text-sm font-semibold mb-2"
           >
-            Category Description
+            Product Description
           </label>
           <input
             type="text"
             name="description"
             id="description"
+            className="w-full border p-2 rounded-md"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="price" className="block text-sm font-semibold mb-2">
+            Product Price
+          </label>
+          <input
+            type="text"
+            name="price"
+            id="price"
+            className="w-full border p-2 rounded-md"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="image" className="block text-sm font-semibold mb-2">
+            Product Image URL
+          </label>
+          <input
+            type="text"
+            name="image"
+            id="image"
+            className="w-full border p-2 rounded-md"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="stock" className="block text-sm font-semibold mb-2">
+            Product Stock
+          </label>
+          <input
+            type="text"
+            name="stock"
+            id="stock"
+            className="w-full border p-2 rounded-md"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label
+            htmlFor="categoryId"
+            className="block text-sm font-semibold mb-2"
+          >
+            Category ID
+          </label>
+          <input
+            type="text"
+            name="categoryId"
+            id="categoryId"
+            className="w-full border p-2 rounded-md"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label htmlFor="userId" className="block text-sm font-semibold mb-2">
+            User ID
+          </label>
+          <input
+            type="text"
+            name="userId"
+            id="userId"
             className="w-full border p-2 rounded-md"
           />
         </div>

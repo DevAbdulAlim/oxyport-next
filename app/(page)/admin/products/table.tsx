@@ -3,19 +3,22 @@ import DeleteForm from "./deleteForm";
 import { FaEdit } from "react-icons/fa";
 import { BiSolidShow } from "react-icons/bi";
 
-interface Category {
+interface Product {
   id: number;
   name: string;
   description?: string;
+  price: number;
+  image: string;
+  stock: number;
   createdAt: string;
   updatedAt: string;
 }
 
-interface CategoryTableProps {
-  categories: Category[];
+interface ProductTableProps {
+  products: Product[];
 }
 
-const CategoryTable: React.FC<CategoryTableProps> = ({ categories }) => {
+const ProductTable: React.FC<ProductTableProps> = ({ products }) => {
   return (
     <div className="overflow-x-auto">
       <table className="min-w-full border-collapse">
@@ -24,34 +27,38 @@ const CategoryTable: React.FC<CategoryTableProps> = ({ categories }) => {
             <th className="px-4 py-2">ID</th>
             <th className="px-4 py-2">Name</th>
             <th className="px-4 py-2">Description</th>
+            <th className="px-4 py-2">Price</th>
+            <th className="px-4 py-2">Stock</th>
             <th className="px-4 py-2">Created At</th>
             <th className="px-4 py-2">Updated At</th>
             <th className="px-4 py-2">Actions</th>
           </tr>
         </thead>
         <tbody>
-          {Array.isArray(categories) &&
-            categories.map((category) => (
-              <tr key={category.id} className="hover:bg-gray-100">
-                <td className="px-4 py-2">{category.id}</td>
-                <td className="px-4 py-2">{category.name}</td>
-                <td className="px-4 py-2">{category.description}</td>
-                <td className="px-4 py-2">{category.createdAt}</td>
-                <td className="px-4 py-2">{category.updatedAt}</td>
+          {Array.isArray(products) &&
+            products.map((product) => (
+              <tr key={product.id} className="hover:bg-gray-100">
+                <td className="px-4 py-2">{product.id}</td>
+                <td className="px-4 py-2">{product.name}</td>
+                <td className="px-4 py-2">{product.description}</td>
+                <td className="px-4 py-2">{product.price}</td>
+                <td className="px-4 py-2">{product.stock}</td>
+                <td className="px-4 py-2">{product.createdAt}</td>
+                <td className="px-4 py-2">{product.updatedAt}</td>
                 <td className="flex space-x-4 px-4 py-2">
                   <Link
                     variant="warning"
-                    to={`/admin/categories/${category.id}/edit`}
+                    to={`/admin/products/${product.id}/edit`}
                   >
                     <FaEdit />
                   </Link>
                   <Link
                     variant="success"
-                    to={`/admin/categories/${category.id}/show`}
+                    to={`/admin/products/${product.id}/show`}
                   >
                     <BiSolidShow />
                   </Link>
-                  <DeleteForm id={category.id} name={category.name} />
+                  <DeleteForm id={product.id} name={product.name} />
                 </td>
               </tr>
             ))}
@@ -61,4 +68,4 @@ const CategoryTable: React.FC<CategoryTableProps> = ({ categories }) => {
   );
 };
 
-export default CategoryTable;
+export default ProductTable;

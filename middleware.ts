@@ -7,7 +7,7 @@ const privateRoutes = ["/orders", "/address"];
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
-  const token = req.cookies.get("token")?.value || req.headers.get("token");
+  const token = req.cookies.get("token")?.value || req.headers.get("token"); // if the server action/component doesn't provide cookies
 
   // Admin Site & API authentication
   if (adminRoutes.some((route) => pathname.startsWith(route))) {

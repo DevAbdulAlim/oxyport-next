@@ -4,6 +4,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { getAll } from "@/lib/actions/getAll";
 import CategoryTable from "./table";
 import Pagination from "@/components/Pagination";
+import InternalServerError from "@/components/error500";
 
 export default async function Page({
   searchParams,
@@ -16,6 +17,10 @@ export default async function Page({
   const page = searchParams?.page || 1;
   const pageSize = searchParams?.pageSize || 10;
   const response = await getAll("admin/categories", page, pageSize);
+
+  if (!response) {
+    return <InternalServerError />;
+  }
   return (
     <>
       <div className="container mx-auto">

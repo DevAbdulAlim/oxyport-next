@@ -2,8 +2,9 @@ import Link from "next/link";
 import { FcPlus } from "react-icons/fc";
 import Breadcrumb from "@/components/Breadcrumb";
 import { getAll } from "@/lib/actions/getAll";
-import OrderTable from "./table"; // Updated import
+import OrderTable from "./table";
 import Pagination from "@/components/Pagination";
+import InternalServerError from "@/components/error500";
 
 export default async function Page({
   searchParams,
@@ -16,8 +17,11 @@ export default async function Page({
   const page = searchParams?.page || 1;
   const pageSize = searchParams?.pageSize || 10;
 
-  // Changed "admin/orders" to "order"
   const response = await getAll("admin/orders", page, pageSize);
+
+  if (!response) {
+    return <InternalServerError />;
+  }
 
   return (
     <>
