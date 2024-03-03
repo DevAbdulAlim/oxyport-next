@@ -22,10 +22,19 @@ export default function DeleteForm({ id }: { id: number }) {
   const [state, formAction] = useFormState(deleteCategory, initialState);
 
   return (
-    <form action={formAction}>
-      <input type="hidden" name="id" value={id} />
-      <input type="hidden" name="name" value="categories" />
-      <DeleteButton />
-    </form>
+    <>
+      {state.message && (
+        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 flex items-center justify-center">
+          <div className="bg-blue-500 text-white p-4 rounded-md z-10">
+            {state.message}
+          </div>
+        </div>
+      )}
+      <form action={formAction}>
+        <input type="hidden" name="id" value={id} />
+        <input type="hidden" name="name" value="categories" />
+        <DeleteButton />
+      </form>
+    </>
   );
 }

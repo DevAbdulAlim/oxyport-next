@@ -33,9 +33,6 @@ const UserTable: React.FC<UserTableProps> = ({ users }) => {
                 <td className="px-4 py-2">{user.role}</td>
                 <td className="px-4 py-2">{user.active ? "Yes" : "No"}</td>
                 <td className="flex space-x-4 px-4 py-2">
-                  <Link variant="warning" to={`/admin/users/${user.id}/edit`}>
-                    <FaEdit />
-                  </Link>
                   <Link variant="success" to={`/admin/users/${user.id}/show`}>
                     <BiSolidShow />
                   </Link>

@@ -26,7 +26,6 @@ export default async function Page({
   return (
     <>
       <div className="container mx-auto">
-        <Breadcrumb />
         <div className="flex items-center my-4 justify-between">
           <h1 className="text-blue-950 font-semibold text-2xl">
             Product List {/* Updated heading */}

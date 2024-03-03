@@ -12,7 +12,6 @@ export default async function page({
   const initialValues = await getOne("products", objectId);
   return (
     <div className="container mx-auto">
-      <Breadcrumb />
       <h1>Edit Category</h1>
       <EditForm product={initialValues.data} />
     </div>
