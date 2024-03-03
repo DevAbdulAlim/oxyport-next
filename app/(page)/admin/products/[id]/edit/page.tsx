@@ -9,12 +9,12 @@ export default async function page({
 }) {
   const objectId = parseInt(id);
 
-  const initialValues = await getOne("categories", objectId);
+  const initialValues = await getOne("products", objectId);
   return (
     <div className="container mx-auto">
       <Breadcrumb />
       <h1>Edit Category</h1>
-      <EditForm category={initialValues.data} />
+      <EditForm product={initialValues.data} />
     </div>
   );
 }

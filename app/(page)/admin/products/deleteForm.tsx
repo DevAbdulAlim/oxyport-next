@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/ui/button";
-import { removeOne } from "@/lib/actions/removeOne";
+import { deleteProduct } from "@/lib/actions/admin/productAction";
 import { useFormState, useFormStatus } from "react-dom";
 import { MdDelete } from "react-icons/md";
 
@@ -18,8 +18,8 @@ function DeleteButton() {
   );
 }
 
-export default function DeleteForm({ id, name }: { id: number; name: string }) {
-  const [state, formAction] = useFormState(removeOne, initialState);
+export default function DeleteForm({ id }: { id: number }) {
+  const [state, formAction] = useFormState(deleteProduct, initialState);
 
   return (
     <form action={formAction}>
