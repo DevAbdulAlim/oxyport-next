@@ -1,78 +1,63 @@
-'use client'
-import React, { useState } from 'react';
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+"use client";
+import React, { useState } from "react";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
-interface Item {
+interface Rating {
   id: number;
   name: string;
   rating: number;
 }
 
-const items: Item[] = [
-  { id: 1, name: 'Item 1', rating: 1 },
-  { id: 2, name: 'Item 2', rating: 2 },
-  { id: 3, name: 'Item 3', rating: 3 },
-  { id: 4, name: 'Item 4', rating: 4 },
-  { id: 5, name: 'Item 5', rating: 5 },
-  // Add more items as needed
+const ratings: Rating[] = [
+  { id: 1, name: "Item 1", rating: 1 },
+  { id: 2, name: "Item 2", rating: 2 },
+  { id: 3, name: "Item 3", rating: 3 },
+  { id: 4, name: "Item 4", rating: 4 },
+  { id: 5, name: "Item 5", rating: 5 },
 ];
 
-interface RatingListProps {
-  onRatingChange: (newRating: number) => void;
-}
-
-// const RatingList: React.FC<RatingListProps> = ({ onRatingChange }: RatingListProps) => {
-const RatingList = () => {
-  const [selectedRating, setSelectedRating] = useState<number | null>(null);
-
-  const handleRatingChange = (newRating: number) => {
-    // setSelectedRating((prevRating) =>
-    //   prevRating === newRating ? null : newRating
-    // );
-    // onRatingChange(newRating); // Call the prop function with the new rating
-  };
-
-  const handleCheckboxChange = (itemId: number) => {
-    // Handle checkbox change logic here if needed
-    console.log(`Checkbox for item ${itemId} clicked`);
-  };
-
-  const renderStarIcon = (star: number, rating: number) => {
-    if (star <= rating) {
-      return <FaStar className="text-yellow-500" />;
-    } else if (star - 0.5 === rating) {
-      return <FaStarHalfAlt className="text-yellow-500" />;
-    } else {
-      return <FaStar className="text-gray-300" />;
-    }
-  };
-
-  const filteredItems = selectedRating
-    ? items.filter((item) => item.rating === selectedRating)
-    : items;
-
-  return (
-    <div>
-      <ul>
-        {filteredItems.map((item) => (
-          <li key={item.id} className='flex items-center space-x-2'>
-            <input
-              type="checkbox"
-              id={`item${item.id}`}
-              onChange={() => handleCheckboxChange(item.id)}
-            />
-            <label htmlFor={`item${item.id}`} className="flex items-center space-x-2">
-              {[...Array(5)].map((_, index) => (
-                <span key={index} onClick={() => handleRatingChange(index + 1)}>
-                  {renderStarIcon(index + 1, item.rating)}
-                </span>
-              ))}
-            </label>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+const renderRatingIcon = (star: number, rating: number) => {
+  if (star <= rating) {
+    return <FaStar className="text-yellow-500" />;
+  } else if (star - 0.5 === rating) {
+    return <FaStar className="text-yellow-500" />;
+  } else {
+    return <FaStar className="text-gray-300" />;
+  }
 };
 
-export default RatingList;
+export default function RatingFilter() {
+  const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
+
+  const toggleRating = (rating: number) => {
+    const updatedRatings = selectedRatings.includes(rating)
+      ? selectedRatings.filter((rating) => rating !== rating)
+      : [...selectedRatings, rating];
+    setSelectedRatings(updatedRatings);
+  };
+  return (
+    <div>
+      {ratings.map((rating) => (
+        <div key={rating.id} className="flex items-center space-x-2 space-y-2">
+          <span
+            className={`h-5 w-5 ${
+              selectedRatings.includes(rating.rating)
+                ? "bg-blue-500"
+                : "bg-gray-300"
+            } rounded-full`}
+          ></span>
+          <button
+            className="flex items-center space-x-2"
+            onClick={() => toggleRating(rating.rating)}
+          >
+            {[...Array(5)].map((_, index) => (
+              <span key={index}>
+                {renderRatingIcon(index + 1, rating.rating)}
+              </span>
+            ))}
+          </button>
+        </div>
+      ))}
+    </div>
+  );
+}
