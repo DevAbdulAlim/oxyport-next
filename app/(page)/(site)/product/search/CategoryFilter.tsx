@@ -1,4 +1,5 @@
 "use client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 
 type CategoryType = {
@@ -14,11 +15,12 @@ interface CategoryFilterProps extends CategoryListType {
   onChange: (values: number[]) => void;
 }
 
-export default function CategoryFilter({
-  categories,
-  onChange,
-}: CategoryFilterProps) {
+export default function CategoryFilter({ categories }: CategoryFilterProps) {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
 
   const handleCheckboxChange = (categoryId: number) => {
     const updatedSelection = selectedCategories.includes(categoryId)
@@ -26,7 +28,9 @@ export default function CategoryFilter({
       : [...selectedCategories, categoryId];
 
     setSelectedCategories(updatedSelection);
-    onChange(updatedSelection);
+
+    params.set("categorie", updatedSelection.join(", "));
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (

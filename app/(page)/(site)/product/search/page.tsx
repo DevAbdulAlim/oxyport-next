@@ -17,6 +17,8 @@ export default async function page({
   const { categories, ratings, minPrice, maxPrice, page, pageSize } =
     searchParams;
 
+  console.log(ratings);
+
   const data = await searchProducts(
     categories,
     ratings,

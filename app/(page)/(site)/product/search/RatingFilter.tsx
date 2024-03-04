@@ -1,26 +1,29 @@
 "use client";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 
 interface Rating {
-  id: number;
-  name: string;
   rating: number;
 }
 
 const ratings: Rating[] = [
-  { id: 1, name: "Item 1", rating: 1 },
-  { id: 2, name: "Item 2", rating: 2 },
-  { id: 3, name: "Item 3", rating: 3 },
-  { id: 4, name: "Item 4", rating: 4 },
-  { id: 5, name: "Item 5", rating: 5 },
+  { rating: 1 },
+  { rating: 1.5 },
+  { rating: 2 },
+  { rating: 2.5 },
+  { rating: 3 },
+  { rating: 3.5 },
+  { rating: 4 },
+  { rating: 4.5 },
+  { rating: 5 },
 ];
 
 const renderRatingIcon = (star: number, rating: number) => {
   if (star <= rating) {
     return <FaStar className="text-yellow-500" />;
   } else if (star - 0.5 === rating) {
-    return <FaStar className="text-yellow-500" />;
+    return <FaStarHalfAlt className="text-yellow-500" />;
   } else {
     return <FaStar className="text-gray-300" />;
   }
@@ -28,20 +31,27 @@ const renderRatingIcon = (star: number, rating: number) => {
 
 export default function RatingFilter() {
   const [selectedRatings, setSelectedRatings] = useState<number[]>([]);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
 
   const toggleRating = (rating: number) => {
     const updatedRatings = selectedRatings.includes(rating)
       ? selectedRatings.filter((item) => item !== rating)
       : [...selectedRatings, rating];
     setSelectedRatings(updatedRatings);
+
+    params.set("ratings", updatedRatings.join(","));
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
     <div className="space-y-2">
-      {ratings.map((rating) => (
+      {ratings.map((rating, index) => (
         <button
           type="button"
-          key={rating.id}
+          key={index}
           className="flex items-center space-x-2"
           onClick={() => toggleRating(rating.rating)}
         >
