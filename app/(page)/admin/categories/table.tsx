@@ -51,7 +51,7 @@ const CategoryTable: React.FC<CategoryTableProps> = ({ categories }) => {
                   >
                     <BiSolidShow />
                   </Link>
-                  <DeleteForm id={category.id} name={category.name} />
+                  <DeleteForm id={category.id} />
                 </td>
               </tr>
             ))}

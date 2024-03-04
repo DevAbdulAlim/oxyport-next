@@ -32,7 +32,6 @@ export default function DeleteForm({ id }: { id: number }) {
       )}
       <form action={formAction}>
         <input type="hidden" name="id" value={id} />
-        <input type="hidden" name="name" value="categories" />
         <DeleteButton />
       </form>
     </>

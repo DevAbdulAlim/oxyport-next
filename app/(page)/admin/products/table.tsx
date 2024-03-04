@@ -58,7 +58,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ products }) => {
                   >
                     <BiSolidShow />
                   </Link>
-                  <DeleteForm id={product.id} name={product.name} />
+                  <DeleteForm id={product.id} />
                 </td>
               </tr>
             ))}

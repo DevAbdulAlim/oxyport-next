@@ -1,7 +1,15 @@
 import { getAll } from "@/lib/actions/getAll";
+import { genParams } from "@/lib/utils";
 import Link from "next/link";
 
-export default async function orders() {
+export default async function orders({
+  searchParams,
+}: {
+  searchParams: {
+    page?: number;
+    pageSize?: number;
+  };
+}) {
   type orderType = {
     [key: string]: any;
   };
@@ -12,7 +20,7 @@ export default async function orders() {
     "Amount",
     "Status",
   ];
-  const orders = await getAll("orders", 1, 5);
+  const orders = await getAll("orders", genParams(searchParams));
   return (
     <div>
       <h2 className="text-2xl">Your Orders</h2>

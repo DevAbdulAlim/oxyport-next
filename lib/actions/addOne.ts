@@ -1,17 +1,18 @@
 "use server";
 
-import {z} from "zod";
+import { z } from "zod";
 
 const schema = z.object({
-  name: z.string().min(1,  "Name is required"),
-  description: z.string().optional()
+  name: z.string().min(1, "Name is required"),
+  description: z.string().optional(),
+});
 
-})
+export async function addOne(
+  prevState: { message: string },
+  formData: FormData
+) {
+  const model = formData.get("model");
 
-export async function addOne(prevState: {message: string}, formData: FormData) {
-  const model = formData.get('model')
-
-  const parse = schema.
   try {
     const response = await fetch(`${process.env.API_HOST}/api/admin/${model}`, {
       method: "POST",

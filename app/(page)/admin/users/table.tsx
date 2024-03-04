@@ -36,7 +36,7 @@ const UserTable: React.FC<UserTableProps> = ({ users }) => {
                   <Link variant="success" to={`/admin/users/${user.id}/show`}>
                     <BiSolidShow />
                   </Link>
-                  <DeleteForm id={user.id} name={user.name} />
+                  <DeleteForm id={user.id} />
                 </td>
               </tr>
             ))}

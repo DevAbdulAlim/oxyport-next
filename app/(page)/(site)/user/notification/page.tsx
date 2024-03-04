@@ -91,7 +91,7 @@ const NotificationSettings: React.FC = () => {
                 Call Before Checkout
               </label>
               <p className="text-gray-500 text-sm">
-                We'll only call if there are pending changes.
+                We&apos;ll only call if there are pending changes.
               </p>
             </div>
             <div className="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">

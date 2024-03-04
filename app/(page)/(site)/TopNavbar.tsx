@@ -8,7 +8,7 @@ import {
 const TopNavbar = () => {
   return (
     <div className="bg-blue-300 text-white py-2">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between">
         {/* Contact Information */}
         <div className="flex items-center space-x-4">
           <div className="flex items-center">
