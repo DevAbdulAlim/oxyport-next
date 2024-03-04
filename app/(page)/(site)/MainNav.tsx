@@ -20,7 +20,7 @@ export default async function MainNav() {
     isVerified = success;
   }
 
-  const categories = await getAll("product/categories", 1, 8);
+  const categories = await getAll("product/categories", `page=1&pageSize=5`);
 
   return (
     <nav className="flex   justify-between py-2 md:py-4  px-6">

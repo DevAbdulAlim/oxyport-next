@@ -12,3 +12,10 @@ export function truncateName(name: string, maxLength: number) {
     return name.slice(0, maxLength) + "...";
   }
 }
+
+export function genParams(params: {}) {
+  return Object.entries(params)
+    .filter(([_, value]) => value !== undefined)
+    .map(([key, value]) => `${key}=${encodeURIComponent(value as string)}`)
+    .join("&");
+}

@@ -1,5 +1,4 @@
 import { FcPlus } from "react-icons/fc";
-import Breadcrumb from "@/components/Breadcrumb";
 import { getAll } from "@/lib/actions/getAll";
 import CategoryTable from "./table";
 import Pagination from "@/components/Pagination";
@@ -16,7 +15,10 @@ export default async function Page({
 }) {
   const page = searchParams?.page || 1;
   const pageSize = searchParams?.pageSize || 10;
-  const response = await getAll("admin/categories", page, pageSize);
+  const response = await getAll(
+    "admin/categories",
+    `page=${page}&pageSize=${pageSize}`
+  );
 
   if (!response) {
     return <InternalServerError />;

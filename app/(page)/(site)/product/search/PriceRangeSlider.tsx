@@ -1,31 +1,31 @@
 "use client";
-import React from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { Range, getTrackBackground } from "react-range";
 
-interface PriceRangeSliderProps {
-  onRangeChange: (values: number[]) => void;
-}
+const PriceRangeSlider: React.FC = () => {
+  const [sliderValues, setSliderValues] = useState<number[]>([300, 900]);
 
-const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
-  onRangeChange,
-}) => {
-  const [sliderValues, setSliderValues] = React.useState<number[]>([300, 900]);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const params = new URLSearchParams(searchParams.toString());
 
   const handleSliderChange = (values: number[]) => {
     setSliderValues(values);
   };
 
-  const handleFinalChange = (values: number[]) => {
-    console.log(values);
-    // You can call the onRangeChange function here if needed
-    onRangeChange(values);
+  const handleFinalChange = () => {
+    params.set("price", sliderValues.join(","));
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   const sliderStyle = {
     track: {
       background: getTrackBackground({
         values: sliderValues,
-        colors: ["#BFE6FF", "#007BFF", "#BFE6FF"], // Adjusted for blue theme
+        colors: ["#BFE6FF", "#007BFF", "#BFE6FF"],
         min: 0,
         max: 1500,
       }),
@@ -35,7 +35,7 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
     thumb: {
       height: "20px",
       width: "20px",
-      backgroundColor: "#007BFF", // Adjusted for blue theme
+      backgroundColor: "#007BFF",
       boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
       borderRadius: "50%",
     },

@@ -17,7 +17,10 @@ export default async function Page({
   const page = searchParams?.page || 1;
   const pageSize = searchParams?.pageSize || 10;
 
-  const response = await getAll("admin/orders", page, pageSize);
+  const response = await getAll(
+    "admin/orders",
+    `page=${page}&pageSize=${pageSize}`
+  );
 
   if (!response) {
     return <InternalServerError />;

@@ -11,9 +11,7 @@ type CategoryListType = {
   categories: CategoryType[];
 };
 
-interface CategoryFilterProps extends CategoryListType {
-  onChange: (values: number[]) => void;
-}
+interface CategoryFilterProps extends CategoryListType {}
 
 export default function CategoryFilter({ categories }: CategoryFilterProps) {
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
@@ -29,7 +27,7 @@ export default function CategoryFilter({ categories }: CategoryFilterProps) {
 
     setSelectedCategories(updatedSelection);
 
-    params.set("categorie", updatedSelection.join(", "));
+    params.set("categories", updatedSelection.join(", "));
     router.push(`${pathname}?${params.toString()}`);
   };
 

@@ -2,14 +2,13 @@
 
 import { cookies } from "next/headers";
 
-export const getAll = async (
-  model: string,
-  currentPage: number,
-  itemsPerPage: number
-) => {
+export const getAll = async (path: string, params?: string) => {
   const token = cookies().get("token")?.value;
   try {
-    const apiUrl = `${process.env.API_HOST}/api/${model}?page=${currentPage}&pageSize=${itemsPerPage}`;
+    const apiUrl = `${process.env.API_HOST}/api/${path}${
+      params ? `?${params}` : ""
+    }`;
+
     const response = await fetch(apiUrl, {
       next: { revalidate: 0 },
       headers: {

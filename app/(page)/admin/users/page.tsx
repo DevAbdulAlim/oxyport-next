@@ -17,7 +17,10 @@ interface PageProps {
 const Page: React.FC<PageProps> = async ({ searchParams }) => {
   const page = searchParams?.page || 1;
   const pageSize = searchParams?.pageSize || 10;
-  const response = await getAll("admin/users", page, pageSize);
+  const response = await getAll(
+    "admin/users",
+    `page=${page}&pageSize=${pageSize}`
+  );
 
   return (
     <>

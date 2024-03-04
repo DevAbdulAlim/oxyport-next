@@ -19,24 +19,36 @@ export async function GET(req: NextRequest) {
   const page = parseInt(searchParams.get("page") || "1", 10);
   const pageSize = parseInt(searchParams.get("pageSize") || "10", 10);
 
-  try {
-    const products = await prisma.product.findMany({
-      where: {
-        price: {
-          gte: minPrice,
-          lte: maxPrice,
-        },
-        reviews:
-          ratings.length > 0
-            ? { every: { OR: ratings.map((rating) => ({ rating })) } }
-            : undefined,
-        categoryId: categories.length > 0 ? { in: categories } : undefined,
-      },
-      take: pageSize,
-      skip: (page - 1) * pageSize,
-    });
+  const where = {
+    price: {
+      gte: minPrice,
+      lte: maxPrice,
+    },
+    reviews:
+      ratings.length > 0
+        ? { every: { OR: ratings.map((rating) => ({ rating })) } }
+        : undefined,
+    categoryId: categories.length > 0 ? { in: categories } : undefined,
+  };
 
-    return NextResponse.json({ products }, { status: 200 });
+  try {
+    const [products, totalItems] = await prisma.$transaction([
+      prisma.product.findMany({
+        where: where,
+        take: pageSize,
+        skip: (page - 1) * pageSize,
+      }),
+      prisma.product.count({
+        where: where,
+      }),
+    ]);
+
+    const totalPages = Math.ceil((totalItems as number) / pageSize);
+
+    return NextResponse.json(
+      { products, totalPages, pageSize },
+      { status: 200 }
+    );
   } catch (error) {
     console.error(error);
     return NextResponse.json(
