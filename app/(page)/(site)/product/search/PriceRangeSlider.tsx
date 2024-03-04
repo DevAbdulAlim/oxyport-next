@@ -1,12 +1,14 @@
-'use client'
-import React from 'react';
-import { Range, getTrackBackground } from 'react-range';
+"use client";
+import React from "react";
+import { Range, getTrackBackground } from "react-range";
 
 interface PriceRangeSliderProps {
   onRangeChange: (values: number[]) => void;
 }
 
-const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ onRangeChange }) => {
+const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({
+  onRangeChange,
+}) => {
   const [sliderValues, setSliderValues] = React.useState<number[]>([300, 900]);
 
   const handleSliderChange = (values: number[]) => {
@@ -23,26 +25,25 @@ const PriceRangeSlider: React.FC<PriceRangeSliderProps> = ({ onRangeChange }) =>
     track: {
       background: getTrackBackground({
         values: sliderValues,
-        colors: ['#FFD3B6', '#FF5E5B', '#C70039'],
+        colors: ["#BFE6FF", "#007BFF", "#BFE6FF"], // Adjusted for blue theme
         min: 0,
         max: 1500,
       }),
-      height: '10px',
-      borderRadius: '5px',
+      height: "10px",
+      borderRadius: "5px",
     },
     thumb: {
-      height: '20px',
-      width: '20px',
-      backgroundColor: '#FF5E5B',
-      boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)',
-      borderRadius: '50%',
+      height: "20px",
+      width: "20px",
+      backgroundColor: "#007BFF", // Adjusted for blue theme
+      boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.2)",
+      borderRadius: "50%",
     },
   };
 
   return (
     <div className="mt-6">
       <Range
-
         values={sliderValues}
         step={10}
         min={0}

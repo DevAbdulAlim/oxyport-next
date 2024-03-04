@@ -32,17 +32,23 @@ export default function CategoryFilter({
   return (
     <div>
       {categories.map((category: CategoryType) => (
-        <div key={category.id} className="flex items-center">
-          <input
-            type="checkbox"
-            id={`category-${category.id}`}
-            checked={selectedCategories.includes(category.id)}
-            onChange={() => handleCheckboxChange(category.id)}
-          />
+        <button
+          type="button"
+          key={category.id}
+          className="flex items-center"
+          onClick={() => handleCheckboxChange(category.id)}
+        >
+          <span
+            className={`h-4 w-4 ${
+              selectedCategories.includes(category.id)
+                ? "bg-blue-500"
+                : "bg-gray-300"
+            } rounded-full`}
+          ></span>
           <label htmlFor={`category-${category.id}`} className="ml-2">
             {category.name}
           </label>
-        </div>
+        </button>
       ))}
     </div>
   );

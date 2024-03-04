@@ -31,32 +31,35 @@ export default function RatingFilter() {
 
   const toggleRating = (rating: number) => {
     const updatedRatings = selectedRatings.includes(rating)
-      ? selectedRatings.filter((rating) => rating !== rating)
+      ? selectedRatings.filter((item) => item !== rating)
       : [...selectedRatings, rating];
     setSelectedRatings(updatedRatings);
   };
+
   return (
-    <div>
+    <div className="space-y-2">
       {ratings.map((rating) => (
-        <div key={rating.id} className="flex items-center space-x-2 space-y-2">
+        <button
+          type="button"
+          key={rating.id}
+          className="flex items-center space-x-2"
+          onClick={() => toggleRating(rating.rating)}
+        >
           <span
-            className={`h-5 w-5 ${
+            className={`h-4 w-4 ${
               selectedRatings.includes(rating.rating)
-                ? "bg-blue-500"
+                ? "bg-yellow-500"
                 : "bg-gray-300"
             } rounded-full`}
           ></span>
-          <button
-            className="flex items-center space-x-2"
-            onClick={() => toggleRating(rating.rating)}
-          >
+          <div className="flex items-center justify-center space-x-2">
             {[...Array(5)].map((_, index) => (
               <span key={index}>
                 {renderRatingIcon(index + 1, rating.rating)}
               </span>
             ))}
-          </button>
-        </div>
+          </div>
+        </button>
       ))}
     </div>
   );
