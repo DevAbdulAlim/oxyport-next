@@ -1,4 +1,3 @@
-import ReduxProvider from "@/redux/provider";
 import ProductCard, { ProductCardProps } from "./ProductCard";
 
 interface ProductsCardListProps {
@@ -8,11 +7,9 @@ interface ProductsCardListProps {
 const ProductsCardList: React.FC<ProductsCardListProps> = ({ products }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-5">
-      <ReduxProvider>
-        {products.map((item) => (
-          <ProductCard key={item.id} {...item} />
-        ))}
-      </ReduxProvider>
+      {products.map((item) => (
+        <ProductCard key={item.id} {...item} />
+      ))}
     </div>
   );
 };

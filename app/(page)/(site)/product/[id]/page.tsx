@@ -30,11 +30,7 @@ export default async function page({ params }: { params: { id: number } }) {
   try {
     const product = await getSingleItem(id);
 
-    return (
-      <ReduxProvider>
-        <ProductPage data={product} />
-      </ReduxProvider>
-    );
+    return <ProductPage data={product} />;
   } catch (error: any) {
     return (
       <>

@@ -10,9 +10,7 @@ export default function Page() {
             <Checkout />
           </div>
           <div className=" lg:col-span-4 my-8">
-            <ReduxProvider>
-              <OrderSummary />
-            </ReduxProvider>
+            <OrderSummary />
           </div>
         </div>
       </div>

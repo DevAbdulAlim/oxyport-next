@@ -34,9 +34,7 @@ export default async function MainNav() {
       <CategoryDropdown categories={categories?.data ? categories.data : []} />
       <SearchForm />
 
-      <ReduxProvider>
-        <Cart />
-      </ReduxProvider>
+      <Cart />
 
       {isVerified ? (
         <Account />
