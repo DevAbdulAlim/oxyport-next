@@ -2,15 +2,15 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { FcDoughnutChart } from "react-icons/fc";
 import * as Yup from "yup";
-import Link from "next/link";
-import { forgotPassword } from "@/lib/auth/forgotPassword";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
+
 import { useState } from "react";
-import Processing from "@/components/common/Processing";
+import Link from "@/components/ui/link";
+import { forgotPassword } from "@/lib/actions/auth/forgotPassword";
+import Processing from "@/components/processing";
 
 export default function Page() {
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
   const initialValues = {
     email: "",
   };
@@ -24,34 +24,35 @@ export default function Page() {
   const SuccessMessage = () => {
     return (
       <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
-      <div className="bg-white p-8 rounded-md mx-3 shadow-lg">
-        <h1 className="text-4xl font-bold mb-4">Request Accepted!</h1>
-        <p className="text-lg text-gray-700 mb-4">
-        A password reset link has been sent to your email. Please check your inbox and follow the instructions to reset your password.
-        </p>
-        <PrimaryButton href="/" text="Back to Home" />
+        <div className="bg-white p-8 rounded-md mx-3 shadow-lg">
+          <h1 className="text-4xl font-bold mb-4">Request Accepted!</h1>
+          <p className="text-lg text-gray-700 mb-4">
+            A password reset link has been sent to your email. Please check your
+            inbox and follow the instructions to reset your password.
+          </p>
+          <Link to="/">Back To home</Link>
+        </div>
       </div>
-    </div>
     );
-  }
+  };
 
   const handleSubmit = async (values: any) => {
     setLoading(true);
-    const response = await forgotPassword(values)
+    const response = await forgotPassword(values);
     setLoading(false);
-    if(response) {
+    if (response) {
       console.log("Form submitted with values:", values);
       setSuccess(true);
     } else {
     }
   };
 
-  if(loading) {
-    return <Processing />
+  if (loading) {
+    return <Processing />;
   }
 
-  if(success) {
-    return <SuccessMessage />
+  if (success) {
+    return <SuccessMessage />;
   }
 
   return (
@@ -108,7 +109,7 @@ export default function Page() {
 
             <p className="text-center my-2">
               {"< "}
-              <Link href="/login" className="hover:underline">
+              <Link to="/login" variant="link">
                 Return to sign in
               </Link>
             </p>
@@ -118,4 +119,3 @@ export default function Page() {
     </section>
   );
 }
-

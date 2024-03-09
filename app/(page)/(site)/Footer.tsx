@@ -32,7 +32,7 @@ const socialMediaLinks = [
 const Footer = () => {
   return (
     <>
-      <footer className="bg-blue-900 px-3 py-20 text-blue-50">
+      <footer className="bg-blue-900  px-3 py-20 text-blue-50">
         <div className="max-w-7xl mx-auto py-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             <div>
@@ -113,8 +113,8 @@ const Footer = () => {
         </div>
       </footer>
 
-      <div className=" bg-blue-950 text-white py-6">
-        <div className="max-w-7xl  flex justify-between  mx-auto">
+      <div className=" bg-blue-950 mb-16 md:mb-0 text-white py-6">
+        <div className="max-w-7xl  flex flex-wrap justify-between  mx-auto">
           <p>
             All Rights Reserved | Copyrighted by ©2023{" "}
             <span className="font-semibold">Abdul Alim</span>

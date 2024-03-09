@@ -1,9 +1,9 @@
-import { getHomePageData } from "../../../lib/services/getHomePageData";
-import PrimaryButton from "@/components/buttons/PrimaryButton";
-import ProductsCardList from "@/components/products/ProductsCardList";
+import Link from "@/components/ui/link";
+import { getHomePageData } from "@/lib/actions/getHomePageData";
+import CategorySection from "./CategorySection";
 import OfferSection from "./OfferSection";
 import ShopByBrandSection from "./ShopByBrandSection";
-import CategorySection from "./CategorySection";
+import ProductsCardList from "./ProductsCardList";
 
 type ItemType = {
   [key: string]: any;
@@ -32,7 +32,7 @@ export default async function Page() {
                 Elevate your style with our exclusive collection. Limited-time
                 offer! Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </p>
-              <PrimaryButton href="/" text="Shop Now" />
+              <Link to="/">Shop Now</Link>
             </div>
           </div>
         </div>
@@ -50,7 +50,7 @@ export default async function Page() {
           </h2>
           {data && <ProductsCardList products={data.products} />}
           <div className="flex justify-center mt-8">
-            <PrimaryButton href="/" text="See More Products" />
+            <Link to="/">See More Products</Link>
           </div>
         </div>
       </section>

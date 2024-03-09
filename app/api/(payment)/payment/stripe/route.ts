@@ -1,5 +1,5 @@
 import { sendJsonResponse } from "@/app/api/utils/sendJsonResponse";
-import stripe from "@/config/stripe";
+import stripe from "@/app/api/utils/stripe";
 import { NextRequest, NextResponse } from "next/server";
 export async function POST(req: NextRequest) {
   const line_items = [
@@ -31,13 +31,13 @@ export async function POST(req: NextRequest) {
       payment_method_types: ["card"],
       line_items: line_items,
       mode: "payment",
-      success_url: "http://localhost:300/success",
-      cancel_url: "http://localhost:300/failed",
+      success_url: `${process.env.NEXT_HOST}/success`,
+      cancel_url: `${process.env.NEXT_HOST}/failed`,
     });
     if (session.url === null) {
       return sendJsonResponse(500, false, { session_url: session.url });
     }
-    return NextResponse.json({session_url: session.url}, {status: 200})
+    return NextResponse.json({ session_url: session.url }, { status: 200 });
   } catch (error) {
     console.error(error);
     return sendJsonResponse(500, false, { message: "Internal Server Error" });

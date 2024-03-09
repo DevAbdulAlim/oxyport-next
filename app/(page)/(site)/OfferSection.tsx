@@ -1,15 +1,11 @@
-// PromotionSection.tsx
-
-import React from "react";
-
-interface Promotion {
+interface Offer {
   title: string;
   description: string;
   imageUrl: string;
   discountInfo: string; // New property for discount information
 }
 
-const promotions: Promotion[] = [
+const offers: Offer[] = [
   {
     title: "Exclusive Offer",
     description: "Unlock special discounts on our premium products.",
@@ -27,7 +23,7 @@ const promotions: Promotion[] = [
   // Add more promotions as needed
 ];
 
-const PromotionSection: React.FC = () => {
+const OfferSection: React.FC = () => {
   return (
     <section className="bg-gray-100 py-20">
       <div className="max-w-7xl mx-auto">
@@ -35,20 +31,20 @@ const PromotionSection: React.FC = () => {
           Explore Our Latest Offers
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {promotions.map((promo, index) => (
+          {offers.map((offer, index) => (
             <div
               key={index}
               className="bg-cover bg-center bg-no-repeat h-80 rounded-md overflow-hidden transform hover:scale-105 transition-transform shadow-md duration-300 flex flex-col"
-              style={{ backgroundImage: `url(${promo.imageUrl})` }}
+              style={{ backgroundImage: `url(${offer.imageUrl})` }}
             >
               <div className="flex-1 p-6 flex flex-col justify-between bg-gradient-to-t from-transparent to-gray-800">
                 <div>
                   <h3 className="text-xl font-bold mb-4 text-white">
-                    {promo.title}
+                    {offer.title}
                   </h3>
-                  <p className="text-gray-300 text-lg">{promo.description}</p>
+                  <p className="text-gray-300 text-lg">{offer.description}</p>
                   <p className="text-gray-300 text-4xl font-bold mt-2">
-                    {promo.discountInfo}
+                    {offer.discountInfo}
                   </p>
                 </div>
                 <button className="mt-4 bg-blue-800 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
@@ -63,4 +59,4 @@ const PromotionSection: React.FC = () => {
   );
 };
 
-export default PromotionSection;
+export default OfferSection;

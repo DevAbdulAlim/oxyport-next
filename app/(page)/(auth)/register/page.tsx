@@ -6,17 +6,17 @@ import * as Yup from "yup";
 import { BsFacebook } from "react-icons/bs";
 import { AiFillGoogleCircle } from "react-icons/ai";
 import Link from "next/link";
-import { register } from "@/lib/auth/register";
-import Processing from "@/components/common/Processing";
-import RegistrationSuccessful from '../../../../components/auth/RegistrationSuccessful';
-import RegistrationFailed from "@/components/auth/RegistrationFailed";
+import { register } from "@/lib/actions/auth/register";
+import Processing from "@/components/processing";
+import RegistrationFailed from "./RegistrationFailed";
+import RegistrationSuccessful from "./RegistrationSuccessful";
 
 export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [registrationFailed, setRegistrationFailed] = useState(false);
-  const [registrationSuccessful, setRegistrationSuccessful] = useState(false)
- 
+  const [registrationSuccessful, setRegistrationSuccessful] = useState(false);
+
   const initialValues = {
     name: "",
     email: "",
@@ -51,39 +51,36 @@ export default function Register() {
       name: values.name,
       email: values.email,
       password: values.password,
-    }
+    };
 
-    setIsLoading(true)
+    setIsLoading(true);
 
-    const isRegistered = await register(userData)
+    const isRegistered = await register(userData);
 
-    setIsLoading(false)
+    setIsLoading(false);
 
     if (isRegistered) {
-     setRegistrationSuccessful(true)
+      setRegistrationSuccessful(true);
     } else {
-     setRegistrationFailed(true)
+      setRegistrationFailed(true);
     }
   };
 
   const resetState = () => {
     setRegistrationFailed(false);
+  };
+
+  if (isLoading) {
+    return <Processing />;
   }
 
-  if(isLoading){
-    return <Processing />
+  if (registrationFailed) {
+    return <RegistrationFailed resetState={resetState} />;
   }
 
-
-  if(registrationFailed) {
-    return <RegistrationFailed resetState={resetState} />
+  if (registrationSuccessful) {
+    return <RegistrationSuccessful />;
   }
-
-
-  if(registrationSuccessful) {
-    return <RegistrationSuccessful />
-  }
-
 
   return (
     <section className="mx-3">

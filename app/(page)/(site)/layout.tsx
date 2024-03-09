@@ -1,19 +1,13 @@
-import type { Metadata } from "next";
-import MainNav from "./components/MainNav";
-import MobileNav from "./components/MobileNav";
-import CustomProvider from "./CustomProvider";
+import ReduxProvider from "@/redux/provider";
 import Footer from "./Footer";
-import TopNavbar from "./components/TopNavbar";
+import MainNav from "./MainNav";
+import MobileNav from "./MobileNav";
+import TopNavbar from "./TopNavbar";
 
-export const metadata: Metadata = {
-  title: "Home",
-  description: "Ecommerce Site",
-};
-
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function layout({ children }: { children: React.ReactNode }) {
   return (
-    <CustomProvider>
-      <body className="flex flex-col min-h-screen">
+    <ReduxProvider>
+      <div className="flex flex-col min-h-screen">
         <TopNavbar />
 
         {/* Header */}
@@ -31,7 +25,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* MobileNav */}
         <MobileNav />
-      </body>
-    </CustomProvider>
+      </div>
+    </ReduxProvider>
   );
 }

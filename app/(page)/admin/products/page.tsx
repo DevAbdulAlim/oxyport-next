@@ -1,42 +1,52 @@
 import Link from "next/link";
-import { ListData } from "../components/ListData";
-import { getAll } from "../services/getAll";
-import Breadcrumb from "../components/Breadcrumb";
 import { FcPlus } from "react-icons/fc";
-import { cookies } from "next/headers";
+import Breadcrumb from "@/components/Breadcrumb";
+import { getAll } from "@/lib/actions/getAll";
+import ProductTable from "./table"; // Updated import
+import Pagination from "@/components/Pagination";
+import InternalServerError from "@/components/error500";
 
-export default async function Page() {
-  const model = "products";
-  const cookieStore = cookies()
-  const token = cookieStore.get('token');
-  if (!token) {
-    return (
-      <div className="container mx-auto">
-        <Breadcrumb />
-        <h1 className="text-red-500 text-3xl font-bold mt-8">Oops! Authentication Failed</h1>
-      </div>
-    );
+export default async function Page({
+  searchParams,
+}: {
+  searchParams?: {
+    page?: number;
+    pageSize?: number;
+  };
+}) {
+  const page = searchParams?.page || 1;
+  const pageSize = searchParams?.pageSize || 10;
+
+  const response = await getAll(
+    "admin/products",
+    `page=${page}&pageSize=${pageSize}`
+  );
+
+  if (!response) {
+    return <InternalServerError />;
   }
-  const data = await getAll(model, 1, 5, token.value);
+
   return (
     <>
       <div className="container mx-auto">
-        <Breadcrumb />
-        <div className="flex mt-4 justify-between">
+        <div className="flex items-center my-4 justify-between">
           <h1 className="text-blue-950 font-semibold text-2xl">
-            Product List
+            Product List {/* Updated heading */}
           </h1>
+
           <Link
-            href="/admin/categories/new"
+            href="/admin/products/create" // Updated href
             className="flex items-center bg-blue-900 text-white py-2 px-3 rounded-md hover:bg-blue-800 transition-colors duration-300"
           >
             <span className="text-2xl mr-2">
               <FcPlus />
             </span>
-            Add Product
+            Add Product {/* Updated text */}
           </Link>
         </div>
-        <ListData data={data.data} model={model} pages={data.totalPages} token={token.value} />
+
+        <ProductTable products={response.data} />
+        <Pagination totalPages={response.totalPages} pageSize={pageSize} />
       </div>
     </>
   );

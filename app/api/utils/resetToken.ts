@@ -1,18 +1,12 @@
-import { PrismaClient } from "@prisma/client";
 import crypto from "crypto";
 import { sendJsonResponse } from "./sendJsonResponse";
+import prisma from "../../../lib/prisma";
 
-// Define the maximum token age in minutes (e.g., 24 hours)
 const MAX_TOKEN_AGE = 24 * 60;
 
-const prisma = new PrismaClient();
-
-// Reset token generator
 export async function generateResetToken(email: string) {
-  // Generate reset token
-  const resetToken = await crypto.randomBytes(32).toString("hex");
+  const resetToken = crypto.randomBytes(32).toString("hex");
 
-  // Update user token
   const updatedUser = await prisma.user.update({
     where: { email },
     data: {
